@@ -18,9 +18,9 @@
 ///////////////////
 // IO definition //
 ///////////////////
-int ioOut;
-int ioLed;
-int ioIn;
+int outAux;
+int outLed;
+int inAux;
 
 ///////////
 // Wi-Fi //
@@ -71,11 +71,15 @@ char* deviceName = DEVICENAME;
 // Http server //
 /////////////////
 ESP8266WebServer httpServer(HTTP_PORT);
-
-String outState = "OFF";
-String inState = "OFF";
-
 int httpStatus;
+
+//////////
+// Time //
+//////////
+unsigned long timeTick = 0;
+int timeSec = 0;
+int timeMin = 0;
+int timeHour = 0;
 
 //////////
 // Gyro //
@@ -95,7 +99,7 @@ Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 void setup(void)
 { 
   // IO setup
-  _IOSetup();
+  _PINSetup();
 
   // Gyro setup
   _GyroSetup();
@@ -114,44 +118,63 @@ void setup(void)
 
   // Http setup
   _HttpSetup();
+
+  // Time Setup
+  _TimeSetup();
 }
 
-//////////////
-// IO steup //
-//////////////
-void _IOSetup(void)
+///////////////
+// PIN setup //
+///////////////
+void _PINSetup(void)
 { 
-  pinMode(DI_LED, OUTPUT);
-  digitalWrite(DI_LED, DI_OFF);
-  ioLed = IO_OFF;
+  //------//
+  // OUTS //
+  //------//
+  
+  pinMode(PIN_LED, OUTPUT);
+  digitalWrite(PIN_LED, PIN_OUT_OFF);
+  outLed = IO_OFF;
 
-  pinMode(DI_OUT, OUTPUT);
-  digitalWrite(DI_OUT, DI_OFF);
-  ioOut = IO_OFF;
+  pinMode(PIN_OUT, OUTPUT);
+  digitalWrite(PIN_OUT, PIN_OUT_OFF);
+  outAux = IO_OFF;
 
-  pinMode(DI_IN, INPUT);
-  ioIn = IO_OFF;
+  //-----//
+  // INS //
+  //-----//
+  
+  pinMode(PIN_IN, INPUT);
+  inAux = IO_OFF;
 }
 
-//////////////////////
-// IO state machine //
-//////////////////////
-void _IOLoop()
+///////////////////////
+// PIN state machine //
+///////////////////////
+void _PINLoop()
 {
-  if (ioLed == IO_OFF)
-    digitalWrite(DI_LED, DI_OFF);
+  //------//
+  // OUTS //
+  //------//
+  
+  if (outLed == IO_OFF)
+    digitalWrite(PIN_LED, PIN_OUT_OFF);
   else
-    digitalWrite(DI_LED, DI_ON);
+    digitalWrite(PIN_LED, PIN_OUT_ON);
  
-  if (ioOut == IO_OFF)
-    digitalWrite(DI_OUT, DI_OFF);
+  if (outAux == IO_OFF)
+    digitalWrite(PIN_OUT, PIN_OUT_OFF);
   else
-    digitalWrite(DI_OUT, DI_ON);
+    digitalWrite(PIN_OUT, PIN_OUT_ON);
 
-  if (digitalRead(DI_IN))
-    ioIn = IO_OFF;
+  //-----//
+  // INS //
+  //-----//
+
+  if (digitalRead(PIN_IN) == PIN_IN_OFF)
+    inAux = IO_OFF;
   else
-    ioIn = IO_ON;
+    inAux = IO_ON;
 }
 
 //===========//
@@ -159,15 +182,48 @@ void _IOLoop()
 //===========//
 void loop()
 {
-  _IOLoop();
+  int i;
+  #if (_MAIN_SERIAL_DEBUG_ == 1)
+  i = 1;
+  Serial.println("Start");
+  #endif
+  
+  _PINLoop();
+  #if (_MAIN_SERIAL_DEBUG_ == 1)
+  Serial.println(i);
+  i++;
+  #endif
+  
   _GyroLoop();
+  #if (_MAIN_SERIAL_DEBUG_ == 1)
+  Serial.println(i);
+  i++;
+  #endif
   
   _WifiLoop();
+  #if (_MAIN_SERIAL_DEBUG_ == 1)
+  Serial.println(i);
+  i++;
+  #endif
   _WifiLedLoop();
+    #if (_MAIN_SERIAL_DEBUG_ == 1)
+  Serial.println(i);
+  i++;
+  #endif
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
   {
     _HttpLoop();
+    #if (v == 1)
+    Serial.println(i);
+    i++;
+    #endif
   }
+  
+  _TimeLoop();
+  
+  #if (_MAIN_SERIAL_DEBUG_ == 1)
+  Serial.println("End");
+  #endif
 }

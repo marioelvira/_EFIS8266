@@ -39,9 +39,9 @@ void _readCONFIG (void)
     #if (_EEPROM_SERIAL_DEBUG_ == 1)
     Serial.println("Config NOK");
     #endif
-  
+   
     EEPROM.write(EEPROM_ADD_OK,      EEPROM_VAL_OK);
-
+   
     // IP Mode
     EEPROM.write(EEPROM_ADD_IP_MODE, EEPROM_VAL_IP_MODE);
     EEPROM.write(EEPROM_ADD_IP1,     EEPROM_VAL_IP1);
@@ -77,7 +77,7 @@ void _readCONFIG (void)
     for (i = 0; i < j; i++)
       EEPROM.write(EEPROM_ADD_WIFI_PSWD + i, passwordSt[i]);
     #endif
-
+    
     // Gyro
     EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL);
     for (i = 0; i < EEPROM_GYRO_MAX; i++)
@@ -91,7 +91,7 @@ void _readCONFIG (void)
     Serial.println("Config OK");
     #endif
   }
-  
+
   // IP Mode
   ipMode = EEPROM.read(EEPROM_ADD_IP_MODE);
   

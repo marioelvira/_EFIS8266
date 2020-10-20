@@ -58,9 +58,9 @@ void _WifiLoop()
       else
       {
         wifiAPTick = millis();
-      }      
+      }   
       break;
-    
+
     case WIFI_START_STATION:
     
       WiFi.begin(ssid, password);
@@ -161,16 +161,16 @@ void _WifiLedLoop()
   {
     case WIFI_START_ACCESSPOINT:
       wifiLEDTick = millis();
-      ioLed = IO_OFF;
+      outLed = IO_OFF;
       break;
 
     case WIFI_ON_ACCESSPOINT:
       if (millis() - wifiLEDTick >= WIFI_BLINK_ACCESSPOINT)
       {
-        if (ioLed == IO_OFF)
-          ioLed = IO_ON;
+        if (outLed == IO_OFF)
+          outLed = IO_ON;
         else
-          ioLed = IO_OFF;
+          outLed = IO_OFF;
 
         wifiLEDTick = millis();
 
@@ -188,10 +188,10 @@ void _WifiLedLoop()
     case WIFI_STATION_CONNECTING:
       if (millis() - wifiLEDTick >= WIFI_BLINK_CONNECTING)
       {
-        if (ioLed == IO_OFF)
-          ioLed = IO_ON;
+        if (outLed == IO_OFF)
+          outLed = IO_ON;
         else
-          ioLed = IO_OFF;
+          outLed = IO_OFF;
 
         wifiLEDTick = millis();
       } 
@@ -207,7 +207,7 @@ void _WifiLedLoop()
         wifiLEDTick = millis();
       } 
     
-      ioLed = IO_ON;
+      outLed = IO_ON;
       break;
   }
 }

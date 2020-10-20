@@ -5,8 +5,6 @@ extern "C" {
 #ifndef _GYRO_H_
 #define _GYRO_H_
 
-
-
 typedef struct
 {
   int dataStored;

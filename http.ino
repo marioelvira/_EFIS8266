@@ -25,35 +25,48 @@ void _serveMAIN()
   html = "<!DOCTYPE HTML><html>";
   html = html + "<title>Status</title>";
   html = html + "<head>";
+  html = html + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>";
   html = html + "<link rel=\"icon\" href=\"data:,\">";
   html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
   html = html + "</head>";
 
   html = html + "<body>";
   html = html + "<div class=\"myform\">";
-  html = html + "<h1>ESP8266+ #Status<span>EFIS project</span></h1>";
+  html = html + "<h1>EFIS+ #Status<span>ESP8266 tech</span></h1>";
 
-  html = html + "<p>IN Status <span id=\"INValue\">...</span></p>";
-  html = html + "<p>OUT Status <span id=\"OUTValue\">...</span></p>";
-  html = html + "  <p><input type=\"button\" value=\"Change\" onclick=\"sendOUT(2)\"><p>";
-  html = html + "  <p><a href=\"settings.htm\"><input type=\"button\" value=\"Settings\"></a><p>";
+  html = html + "<div class=\"section\"><span>1</span>Time Alive</div>";
+  html = html + "<p class=\"sansserif\" id=\"TIMEid\">...</p>";
+  
+  html = html + "<div class=\"section\"><span>1</span>Digital INs</div>";
+  html = html + "<p class=\"sansserif\" id=\"INValue\">...</p>";
+  
+  html = html + "<div class=\"section\"><span>2</span>Digital OUTs</div>";
+  html = html + "<p class=\"sansserif\" id=\"OUTValue\">...</p>";
+  
+  html = html + "<div class=\"section\"><span>3</span>Control</div>";
+  html = html + "<p>";
+  html = html + "  <input type=\"button\" value=\"Change\" onclick=\"sendOUT(2)\">";
+  html = html + "</p>";
+  html = html + "<div class=\"section\"><span>4</span>Configuration</div>";
+  html = html + "<p>";  
+  html = html + "  <a href=\"network.htm\"><input type=\"button\" value=\"Network\"></a>";
+  html = html + "</p>";
   html = html + "</div>";
 
   html = html + "<script>";
+  
   html = html + "function sendOUT(out) {";
   html = html + "  var xhttp = new XMLHttpRequest();";
-  html = html + "  xhttp.onreadystatechange = function() {";
-  html = html + "    if (this.readyState == 4 && this.status == 200) {";
-  html = html + "      document.getElementById(\"OUTState\").innerHTML = this.responseText;";
-  html = html + "   }";
-  html = html + "  };";
   html = html + "  xhttp.open(\"GET\", \"setOUT?OUTstate=\"+out, true);";
   html = html +  "  xhttp.send();";
   html = html + "}";
+  
   html = html + "setInterval(function() {";
   html = html + "  getOUT();";
   html = html + "  getIN();";
+  html = html + "  getTIME();";
   html = html +  "}, 1000);";
+  
   html = html +  "function getOUT() {";
   html = html +  "  var xhttp = new XMLHttpRequest();";
   html = html + "  xhttp.onreadystatechange = function() {";
@@ -64,6 +77,7 @@ void _serveMAIN()
   html = html + "  xhttp.open(\"GET\", \"readOUT\", true);";
   html = html + "  xhttp.send();";
   html = html + "}";
+  
   html = html + "function getIN() {";
   html = html + "  var xhttp = new XMLHttpRequest();";
   html = html + "  xhttp.onreadystatechange = function() {";
@@ -74,6 +88,18 @@ void _serveMAIN()
   html = html + "  xhttp.open(\"GET\", \"readIN\", true);";
   html = html +  "  xhttp.send();";
   html = html + "}";
+
+  html = html + "function getTIME() {";
+  html = html + "  var xhttp = new XMLHttpRequest();";
+  html = html + "  xhttp.onreadystatechange = function() {";
+  html = html + "    if (this.readyState == 4 && this.status == 200) {";
+  html = html + "      document.getElementById(\"TIMEid\").innerHTML = this.responseText;";
+  html = html + "   }";
+  html = html + "  };";
+  html = html + "  xhttp.open(\"GET\", \"readTIME\", true);";
+  html = html + "  xhttp.send();";
+  html = html + "}";
+  
   html = html + "</script>";
 
   html = html + "</form>";
@@ -85,25 +111,25 @@ void _serveMAIN()
   httpServer.send (200, "text/html", html);
 }
 
-void _serveSETTINGS()
+///////////////////
+// Configuration //
+///////////////////
+void _serveNETWORK()
 {
-  //int mobile = 0;
   String html = "";
 
-  int n = WiFi.scanNetworks();
+  //int n = WiFi.scanNetworks();
   
   html = "<!DOCTYPE HTML><html>";
   html = html + "<title>Network Settings</title>";
   html = html + "<head>";
   html = html + "<link rel=\"icon\" href=\"data:,\">";
   html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
-  //html = html + "<meta name='apple-mobile-web-app-capable' content='yes' />";
-  //html = html + "<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />";
   html = html + "</head>";
 
   html = html + "<body>";
   html = html + "<div class=\"myform\">";
-  html = html + "<h1>ESP8266+ #Network settings<span>EFIS project</span></h1>";
+  html = html + "<h1>ESP8266+ #Network settings<span>myWEB project</span></h1>";
   //html = html + "<form method=\"post\">";
   html = html + "<form method='get' action='networSettings'>";
 
@@ -171,10 +197,9 @@ void _serveSETTINGS()
   html = html + "</html>";
 
   httpServer.send (200, "text/html", html);
-  
 }
 
-void _setSETTINGS()
+void _setNETWORK()
 {
   String rwmode = httpServer.arg("wifimode");
   String rssid = httpServer.arg("ssid");
@@ -235,7 +260,7 @@ void _setSETTINGS()
      /////////////////////////
      // Wi-Fi configuration //
      /////////////////////////
-     #if (_HTTP_SERIAL_DEBUG_ == 1)
+     #if (_SERIAL_DEBUG_ == 1)
      Serial.println("Wi-Fi 2 eeprom:");
      #endif
      
@@ -263,7 +288,7 @@ void _setSETTINGS()
        /////////////
        // IP Mpde //
        /////////////
-       #if (_HTTP_SERIAL_DEBUG_ == 1)
+       #if (_SERIAL_DEBUG_ == 1)
        Serial.println("IP 2 eeprom:");
        #endif
        // mode
@@ -366,7 +391,7 @@ void _setSETTINGS()
 
      }
      
-     #if (_HTTP_SERIAL_DEBUG_ == 1)
+     #if (_SERIAL_DEBUG_ == 1)
      // Wi-Fi configuration
      Serial.print("---->Wi-Fi mode: ");
      Serial.println(rwmode);
@@ -400,7 +425,7 @@ void _setSETTINGS()
    }
    else
    {
-     #if (_HTTP_SERIAL_DEBUG_ == 1)
+     #if (_SERIAL_DEBUG_ == 1)
      Serial.println("Sending 404");
      #endif
 
@@ -413,14 +438,12 @@ void _setSETTINGS()
   html = html + "<head>";
   html = html + "<link rel=\"icon\" href=\"data:,\">";
   html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
-  //html = html + "<meta name='apple-mobile-web-app-capable' content='yes' />";
-  //html = html + "<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />";
   html = html + "</head>";
 
   html = html + "<body>";
 
   html = html + "<div class=\"myform\">";
-  html = html + "<h1>ESP8266+ #Network settings<span>EFIS project</span></h1>";
+  html = html + "<h1>ESP8266+ #Network settings<span>myWEB project</span></h1>";
   
   if (i == 200)
     html += "<p>Settings OK: Saved</p>";
@@ -439,116 +462,105 @@ void _setSETTINGS()
   httpServer.send (200, "text/html", html);
 }
 
-void _serveINST()
-{
-  String html = "";
-  
-  html = "<!DOCTYPE HTML><html>";
-  html = html + "<title>Status</title>";
-  html = html + "<head>";
-  html = html + "<link rel=\"icon\" href=\"data:,\">";
-  html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
-  html = html + "</head>";
-
-  html = html + "<body>";
-  html = html + "<div class=\"myform\">";
-  html = html + "<h1>ESP8266+ #Instruments<span>EFIS project</span></h1>";
-
-  html = html + "<p>GYRO Status <span id=\"GYROValue\">...</span></p>";
-
-  html = html + "<div class=\"button-section\">";
-  html = html + "  <a href=\"index.htm\"><input type=\"button\" value=\"Back\"></a>";
-  html = html + "</div>";
-  
-  html = html + "</div>"; // "<div class=\"myform\">";
-  
-  html = html + "<script>";
-  
-  html = html + "setInterval(function() {";
-  html = html + "  getGYRO();";
-  html = html + "}, 1000);";
-  
-  html = html + "function getGYRO() {";
-  html = html + "  var xhttp = new XMLHttpRequest();";
-  html = html + "  xhttp.onreadystatechange = function() {";
-  html = html + "    if (this.readyState == 4 && this.status == 200) {";
-  html = html + "      document.getElementById(\"GYROValue\").innerHTML = this.responseText;";
-  html = html + "   }";
-  html = html +  "  };";
-  html = html + "  xhttp.open(\"GET\", \"readGYRO\", true);";
-  html = html + "  xhttp.send();";
-  html = html + "}";
-  
-  html = html + "</script>";
-
-  html = html + "</form>";
-  html = html + "</div>";
-  
-  html = html + "</body> ";
-  html = html + "</html>";
-
-  httpServer.send (200, "text/html", html);
-}
-
 /////////////
 // Actions //
 /////////////
 void _readIN()
 {
-  if (ioIn == IO_ON)
-   inState = "ON";
-  else
-   inState = "OFF";
+  String html = "";
+
+  html = "<table style=\"width:100%\">";
    
-  httpServer.send(200, "text/plane", inState);
+  html = html + "<tr>";
+  html = html + "<td>Alarma </td>";
+  if (inAux == IO_ON)
+   html = html + "<td><font style=\"color:red\">Activa</font></td>";
+  else
+   html = html + "<td><font style=\"color:grey\">OFF</font></td>";
+  html = html + "</tr>";
+  
+  html = html + "</table>";
+  
+  httpServer.send(200, "text/plane", html);
 }
 
 void _readOUT()
 {
-  if (ioOut == IO_ON)
-   outState = "ON";
-  else
-   outState = "OFF";
+  String html = "";
+
+  html = "<table style=\"width:100%\">";
    
-  httpServer.send(200, "text/plane", outState);
+  html = html + "<tr>";
+  html = html + "<td>Aviso Alarma</td>";
+  if (outAux == IO_ON)
+   html = html + "<td><font style=\"color:red\">Activado</font></td>";
+  else
+   html = html + "<td><font style=\"color:grey\">Desactivado</font></td>";
+  html = html + "</tr>";
+    
+  html = html + "</table>";
+  
+  httpServer.send(200, "text/plane", html);
 }
  
 void _setOUT()
 {
  String t_state = httpServer.arg("OUTstate");
+ String html = "";
  
  #if (_HTTP_SERIAL_DEBUG_ == 1)
- Serial.println(t_state);
+ Serial.print("Change state out: ");
+ Serial.println(outAux);
  #endif
 
  if(t_state == "2")
  {
-   if (ioOut == IO_ON)
+   if (outAux == IO_ON)
    {
-     ioOut = IO_OFF;
-     outState = "OFF";
+     outAux = IO_OFF;
+     html = "OFF";
+     
+     #if (_HTTP_SERIAL_DEBUG_ == 1)
+     Serial.println("Out OFF");
+     #endif
    }
    else
    {
-     ioOut = IO_ON;
-     outState = "ON";
+     outAux = IO_ON;
+     html = "ON";
+
+     #if (_HTTP_SERIAL_DEBUG_ == 1)
+     Serial.println("Out OFF");
+     #endif
    }
  }
  else
  {
-   ioOut = IO_OFF;
-   outState = "OFF";
+   html = "Error";
+
+   #if (_HTTP_SERIAL_DEBUG_ == 1)
+   Serial.println("Out Error");
+   #endif
  }
  
- httpServer.send(200, "text/plane", outState); //Send web page
+ httpServer.send(200, "text/plane", html);
 }
 
-void _readGYRO()
-{
-  httpServer.send(200, "text/plane", "Gryo starting\n line 2\n line 3");
+void _readTIME()
+{ 
+  String html = "";
+
+  html = "<table style=\"width:100%\">";
+  
+  html = html + "<tr>";
+  html = html + "<td>Tiempo Encendio</td>";
+  html = html + "<td>" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "</td>";
+  html = html + "</tr>";
+
+  html = html + "</table>";
+  
+  httpServer.send(200, "text/plane", html);
 }
-
-
 
 ////////////////////////
 // Http state machine //
@@ -560,20 +572,19 @@ void _HttpLoop()
     case HTTP_INIT:
 
       // css Style
-      httpServer.on("/style.css",       _serveCSS);
+      httpServer.on("/style.css",         _serveCSS);
 
       // html pages
-      httpServer.on("/",                _serveMAIN);
-      httpServer.on("/index.htm",       _serveMAIN);
-      httpServer.on("/settings.htm",    _serveSETTINGS);
+      httpServer.on("/",                  _serveMAIN);
+      httpServer.on("/index.htm",         _serveMAIN);
+      httpServer.on("/network.htm",       _serveNETWORK);
 
       // acctions
-      httpServer.on("/setOUT",          _setOUT);
-      httpServer.on("/readOUT",         _readOUT);
-      httpServer.on("/readIN",          _readIN);
-      httpServer.on("/networSettings",  _setSETTINGS);
-
-      httpServer.on("/readGYRO",        _readGYRO);
+      httpServer.on("/setOUT",            _setOUT);
+      httpServer.on("/readOUT",           _readOUT);
+      httpServer.on("/readIN",            _readIN);
+      httpServer.on("/readTIME",          _readTIME);
+      httpServer.on("/networSettings",    _setNETWORK);
 
       httpServer.begin();
 

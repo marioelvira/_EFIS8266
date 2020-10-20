@@ -7,7 +7,7 @@ extern "C" {
 
 #include "main.h"
 
-#define HTTP_PORT      8888
+#define HTTP_PORT      80
 
 #define HTTP_INIT      0
 #define HTTP_ONSERVE   1
