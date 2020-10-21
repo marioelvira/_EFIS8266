@@ -90,6 +90,8 @@ adafruit_bno055_offsets_t gyroCalVal;
 adafruit_bno055_offsets_t gyroCalValNew;
 sensor_t                  gyroSensor;
 
+sensors_event_t           event;
+
 // I2C device address (by default address is 0x29 or 0x28)
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 
@@ -158,9 +160,9 @@ void _PINLoop()
   //------//
   
   if (outLed == IO_OFF)
-    digitalWrite(PIN_LED, PIN_OUT_OFF);
-  else
     digitalWrite(PIN_LED, PIN_OUT_ON);
+  else
+    digitalWrite(PIN_LED, PIN_OUT_OFF);
  
   if (outAux == IO_OFF)
     digitalWrite(PIN_OUT, PIN_OUT_OFF);

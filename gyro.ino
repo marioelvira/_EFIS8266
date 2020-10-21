@@ -17,7 +17,7 @@ void _GyroSetup(void)
 ////////////////////////
 void _GyroLoop()
 {
-  sensors_event_t event;
+  //sensors_event_t event;
     
   switch (gyroStatus)
   {

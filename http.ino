@@ -35,23 +35,34 @@ void _serveMAIN()
   html = html + "<h1>EFIS+ #Status<span>ESP8266 tech</span></h1>";
 
   html = html + "<div class=\"section\"><span>1</span>Time Alive</div>";
+  html = html + "<div class=\"inner-wrap\">";
   html = html + "<p class=\"sansserif\" id=\"TIMEid\">...</p>";
+  html = html + "</div>";
   
   html = html + "<div class=\"section\"><span>1</span>Digital INs</div>";
+  html = html + "<div class=\"inner-wrap\">";
   html = html + "<p class=\"sansserif\" id=\"INValue\">...</p>";
+  html = html + "</div>";
   
   html = html + "<div class=\"section\"><span>2</span>Digital OUTs</div>";
+  html = html + "<div class=\"inner-wrap\">";
   html = html + "<p class=\"sansserif\" id=\"OUTValue\">...</p>";
-  
-  html = html + "<div class=\"section\"><span>3</span>Control</div>";
+  html = html + "</div>";
   html = html + "<p>";
   html = html + "  <input type=\"button\" value=\"Change\" onclick=\"sendOUT(2)\">";
   html = html + "</p>";
+  
+  html = html + "<div class=\"section\"><span>4</span>Instruments</div>";
+  html = html + "<p>";  
+  html = html + "  <a href=\"gyro.htm\"><input type=\"button\" value=\"Gyroscope\"></a>";
+  html = html + "</p>";
+
   html = html + "<div class=\"section\"><span>4</span>Configuration</div>";
   html = html + "<p>";  
   html = html + "  <a href=\"network.htm\"><input type=\"button\" value=\"Network\"></a>";
   html = html + "</p>";
-  html = html + "</div>";
+  
+  html = html + "</div>"; // "<div class=\"myform\">";
 
   html = html + "<script>";
   
@@ -102,7 +113,63 @@ void _serveMAIN()
   
   html = html + "</script>";
 
-  html = html + "</form>";
+  html = html + "</div>";
+  
+  html = html + "</body> ";
+  html = html + "</html>";
+
+  httpServer.send (200, "text/html", html);
+}
+
+//////////
+// Gyro //
+//////////
+void _serveGYRO()
+{
+  String html = "";
+  
+  html = "<!DOCTYPE HTML><html>";
+  html = html + "<title>Gyro</title>";
+  html = html + "<head>";
+  html = html + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>";
+  html = html + "<link rel=\"icon\" href=\"data:,\">";
+  html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
+  html = html + "</head>";
+
+  html = html + "<body>";
+  html = html + "<div class=\"myform\">";
+  html = html + "<h1>EFIS+ #Status<span>ESP8266 Gyro</span></h1>";
+
+  // Gyro
+  html = html + "<div class=\"section\"><span>1</span>Status</div>";
+  html = html + "<div class=\"inner-wrap\">";
+  html = html + "<p class=\"sansserif\" id=\"GYROid\">...</p>";
+  html = html + "</div>";
+  // End
+  
+  html = html + "<div class=\"button-section\">";
+  html = html + "  <a href=\"index.htm\"><input type=\"button\" value=\"Back\"></a>";
+  html = html + "</div>";
+  
+  html = html + "<script>";
+    
+  html = html + "setInterval(function() {";
+  html = html + "  getGYRO();";
+  html = html +  "}, 1000);";
+  
+  html = html + "function getGYRO() {";
+  html = html + "  var xhttp = new XMLHttpRequest();";
+  html = html + "  xhttp.onreadystatechange = function() {";
+  html = html + "    if (this.readyState == 4 && this.status == 200) {";
+  html = html + "      document.getElementById(\"GYROid\").innerHTML = this.responseText;";
+  html = html + "   }";
+  html = html + "  };";
+  html = html + "  xhttp.open(\"GET\", \"readGYRO\", true);";
+  html = html + "  xhttp.send();";
+  html = html + "}";
+  
+  html = html + "</script>";
+
   html = html + "</div>";
   
   html = html + "</body> ";
@@ -117,8 +184,6 @@ void _serveMAIN()
 void _serveNETWORK()
 {
   String html = "";
-
-  //int n = WiFi.scanNetworks();
   
   html = "<!DOCTYPE HTML><html>";
   html = html + "<title>Network Settings</title>";
@@ -148,13 +213,6 @@ void _serveNETWORK()
     html = html + "<label><input type=\"radio\" name=\"wifimode\" value=\"st\"> Station</label>";
   }
   
-  //html = html + "<label>SSID">
-  //html = html + "<select id='wifi' name='wifi'>";
-  //html = html + " <option value=\"\" selected>Selet</option>";
-  //for (int i = 0; i < n; ++i)
-  //  html = html + " <option value=\"" + (String)(WiFi.SSID(i)) + "\">" + (String)(WiFi.SSID(i)) + "</option>";    
-  //html = html + "</select></label>";
-
   html = html + "<label>SSID <input type=\"text\" maxlength=\"30\" value=\"" + String(ssid) + "\" name=\"ssid\"/></label>";
   html = html + "<label>Password <input type=\"text\" maxlength=\"30\" value=\"" + String(password) + "\" name=\"pass\"/></label>";
 
@@ -562,6 +620,25 @@ void _readTIME()
   httpServer.send(200, "text/plane", html);
 }
 
+void _readGYRO()
+{
+  String html = "";
+
+  html = "<table style=\"width:100%\">";
+   
+  html = html + "<tr>";
+  html = html + "<td>Coordenadas</td>";
+  html = html + "<td> x: " + String(event.orientation.x) + " y: " + String(event.orientation.y) + " z: " + String(event.orientation.z) + "</td>";
+  //html = html + "<td> x- y- z- </td>";
+  
+  html = html + "</tr>";
+    
+  html = html + "</table>";
+  
+  httpServer.send(200, "text/plane", html);
+}
+
+
 ////////////////////////
 // Http state machine //
 ////////////////////////
@@ -577,6 +654,7 @@ void _HttpLoop()
       // html pages
       httpServer.on("/",                  _serveMAIN);
       httpServer.on("/index.htm",         _serveMAIN);
+      httpServer.on("/gyro.htm",          _serveGYRO);
       httpServer.on("/network.htm",       _serveNETWORK);
 
       // acctions
@@ -584,6 +662,7 @@ void _HttpLoop()
       httpServer.on("/readOUT",           _readOUT);
       httpServer.on("/readIN",            _readIN);
       httpServer.on("/readTIME",          _readTIME);
+      httpServer.on("/readGYRO",          _readGYRO);
       httpServer.on("/networSettings",    _setNETWORK);
 
       httpServer.begin();

@@ -33,7 +33,7 @@ extern "C" {
 #define WIFI_PSWD_MAX             32 // Password max 32 char -> Next 0x4F
 
 #define EEPROM_ADD_GYRO_CAL       0x4F
-#define EERPOM_ADD_GYRO_VAL       0x50
+#define EERPOM_ADD_GYRO_VAL       0x60
 #define EEPROM_GYRO_MAX           22 // Gyro Cal max 22 bytes -> Next 0x66     
 
 // Values
