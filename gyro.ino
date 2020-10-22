@@ -205,7 +205,7 @@ void _GryoSensorDetails(void)
 void _GryoSensorStatus(void)
 {
     // Get the system status values (mostly for debugging purposes)
-    uint8_t system_status, self_test_results, system_error;
+    //uint8_t system_status, self_test_results, system_error;
     system_status = self_test_results = system_error = 0;
     bno.getSystemStatus(&system_status, &self_test_results, &system_error);
 
@@ -230,20 +230,21 @@ void _GryoSensorCalStatus(void)
     // Get the four calibration values (0..3)
     // Any sensor data reporting 0 should be ignored,
     // 3 means 'fully calibrated"
-    uint8_t system, gyro, accel, mag;
-    system = gyro = accel = mag = 0;
-    bno.getCalibration(&system, &gyro, &accel, &mag);
+    //uint8_t sys, gyro, accel, mag;
+    sys = gyro = accel = mag = 0;
+        
+    bno.getCalibration(&sys, &gyro, &accel, &mag);
 
     #if (_GYRO_SERIAL_DEBUG_ == 1)
     // The data should be ignored until the system calibration is > 0
     Serial.print("\t");
-    if (!system)
+    if (!sys)
     {
         Serial.print("! ");
     }
 
     Serial.print("Sys:");
-    Serial.print(system, DEC);
+    Serial.print(sys, DEC);
     Serial.print(" G:");
     Serial.print(gyro, DEC);
     Serial.print(" A:");

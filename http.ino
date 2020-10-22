@@ -36,23 +36,23 @@ void _serveMAIN()
 
   html = html + "<div class=\"section\"><span>1</span>Time Alive</div>";
   html = html + "<div class=\"inner-wrap\">";
-  html = html + "<p class=\"sansserif\" id=\"TIMEid\">...</p>";
+  html = html + "<div class=\"sansserif\" id=\"TIMEid\">...</div>";
   html = html + "</div>";
   
   html = html + "<div class=\"section\"><span>1</span>Digital INs</div>";
   html = html + "<div class=\"inner-wrap\">";
-  html = html + "<p class=\"sansserif\" id=\"INValue\">...</p>";
+  html = html + "<div class=\"sansserif\" id=\"INValue\">...</div>";
   html = html + "</div>";
   
   html = html + "<div class=\"section\"><span>2</span>Digital OUTs</div>";
   html = html + "<div class=\"inner-wrap\">";
-  html = html + "<p class=\"sansserif\" id=\"OUTValue\">...</p>";
-  html = html + "</div>";
+  html = html + "<div class=\"sansserif\" id=\"OUTValue\">...</div>";
   html = html + "<p>";
   html = html + "  <input type=\"button\" value=\"Change\" onclick=\"sendOUT(2)\">";
   html = html + "</p>";
+  html = html + "</div>";
   
-  html = html + "<div class=\"section\"><span>4</span>Instruments</div>";
+  html = html + "<div class=\"section\"><span>3</span>Instruments</div>";
   html = html + "<p>";  
   html = html + "  <a href=\"gyro.htm\"><input type=\"button\" value=\"Gyroscope\"></a>";
   html = html + "</p>";
@@ -625,12 +625,20 @@ void _readGYRO()
   String html = "";
 
   html = "<table style=\"width:100%\">";
-   
+
+  html = html + "<tr>";
+  html = html + "<td>System</td>";
+  html = html + "<td>Status: 0x" + String(system_status) + " STest: 0x" + String(self_test_results) + " Error: 0x" + String(system_error) + "</td>";
+  html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>Calibration</td>";
+  html = html + "<td> sys: " + String(sys) + " - G: " + String(gyro) + " - A: " + String(accel) + " - M: " + String(mag) + "</td>";
+  html = html + "</tr>";
+  
   html = html + "<tr>";
   html = html + "<td>Coordenadas</td>";
   html = html + "<td> x: " + String(event.orientation.x) + " y: " + String(event.orientation.y) + " z: " + String(event.orientation.z) + "</td>";
-  //html = html + "<td> x- y- z- </td>";
-  
   html = html + "</tr>";
     
   html = html + "</table>";
