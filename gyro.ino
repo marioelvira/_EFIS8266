@@ -47,7 +47,7 @@ void _GyroLoop()
       if (gyroData.dataStored == 1)
       {
         #if (_GYRO_SERIAL_DEBUG_ == 1)
-        _GryoSensorOffsets(gyroCalVal);
+        _GyroSensorOffsets(gyroCalVal);
         #endif
 
         // Write E2PORM data on sensor...        
@@ -59,10 +59,10 @@ void _GyroLoop()
         gyroStatus = GYRO_NOT_CALIBRATED;
 
       // Get sensor details
-      _GryoSensorDetails();
+      _GyroSensorDetails();
 
       // Get sensor current status
-      _GryoSensorStatus();
+      _GyroSensorStatus();
 
       // Crystal must be configured AFTER
       // loading calibration data into BNO055.
@@ -103,7 +103,7 @@ void _GyroLoop()
         #endif
         
         // Display calibration status
-        _GryoSensorCalStatus();
+        _GyroSensorCalStatus();
 
         #if (_GYRO_SERIAL_DEBUG_ == 1)
         // New line for the next sample
@@ -128,7 +128,7 @@ void _GyroLoop()
 
       bno.getSensorOffsets(gyroCalValNew);
       #if (_GYRO_SERIAL_DEBUG_ == 1)
-      _GryoSensorOffsets(gyroCalValNew);
+      _GyroSensorOffsets(gyroCalValNew);
       #endif
 
       EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
@@ -158,11 +158,14 @@ void _GyroLoop()
       #endif
         
       // Display calibration status
-      _GryoSensorCalStatus();
+      _GyroSensorCalStatus();
 
       // Optional: Display sensor status (debug only)
-      _GryoSensorStatus();
+      _GyroSensorStatus();
 
+      // Calculus
+      _GyroCalculus();
+      
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       // New line for the next sample
       Serial.println("");
@@ -181,7 +184,7 @@ void _GyroLoop()
 /**************************/
 /* Gyro basic information */
 /**************************/
-void _GryoSensorDetails(void)
+void _GyroSensorDetails(void)
 {
     bno.getSensor(&gyroSensor);
 
@@ -202,7 +205,7 @@ void _GryoSensorDetails(void)
 /***********************/
 /* Basic Sensor status */
 /***********************/
-void _GryoSensorStatus(void)
+void _GyroSensorStatus(void)
 {
     // Get the system status values (mostly for debugging purposes)
     //uint8_t system_status, self_test_results, system_error;
@@ -225,7 +228,7 @@ void _GryoSensorStatus(void)
 /*****************************/
 /* Sensor calibration status */
 /*****************************/
-void _GryoSensorCalStatus(void)
+void _GyroSensorCalStatus(void)
 {
     // Get the four calibration values (0..3)
     // Any sensor data reporting 0 should be ignored,
@@ -258,9 +261,8 @@ void _GryoSensorCalStatus(void)
 /* Raw calibration offset and radius data */
 /******************************************/
 #if (_GYRO_SERIAL_DEBUG_ == 1)
-void _GryoSensorOffsets(const adafruit_bno055_offsets_t &calibData)
+void _GyroSensorOffsets(const adafruit_bno055_offsets_t &calibData)
 {
-    #if (_GYRO_SERIAL_DEBUG_ == 1)
     Serial.print("Accelerometer: ");
     Serial.print(calibData.accel_offset_x); Serial.print(" ");
     Serial.print(calibData.accel_offset_y); Serial.print(" ");
@@ -281,6 +283,68 @@ void _GryoSensorOffsets(const adafruit_bno055_offsets_t &calibData)
 
     Serial.print("\nMag Radius: ");
     Serial.print(calibData.mag_radius);
-    #endif
 }
 #endif
+
+void _GyroCalculus (void)
+{ 
+  int gRoll, gPitch;
+  float Gforce = 1.0;
+  
+  Mag = event.orientation.x;
+  gRoll = event.orientation.y;
+  gPitch = event.orientation.z;
+
+  // Pitch
+  if (abs(gPitch) > 90)
+  {
+    if (gRoll > 0)
+      gRoll = 180 - gRoll;
+    else
+      gRoll = -180 - gRoll;
+  }
+
+  if (gPitch > 90)
+    gPitch = 180 - gPitch;
+
+  if (gPitch < -90)
+    gPitch = -180 - gPitch;
+  
+  //textAreaMAG.Printf("%03d", MAG);
+
+  // Roll
+  sRoll = "";
+  if (abs(gRoll) < 10)
+    sRoll += " ";  
+    
+  sRoll += abs(gRoll);
+  
+  if (gRoll < 0)
+    sRoll += "R";  
+  
+  if (gRoll > 0)  
+    sRoll += "L";
+
+  // Pitch  
+  sPitch= "";
+  if (abs(gPitch) < 10)
+    sPitch += " ";
+    
+  sPitch += abs(gPitch);
+  
+  if (gPitch < 0)  
+    sPitch += "U";  
+  
+  if (gPitch > 0)  
+    sPitch += "D";
+
+  ///////////////////
+  // G-Force meter //
+  ///////////////////
+  imu::Vector<3> acc = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+  Gforce = acc.z();
+  iGforce = round(Gforce*10/9.8);
+  
+  //textAreaGmeter.print("G");
+  //textAreaGmeter.println(iGforce/10.0, 1);
+}

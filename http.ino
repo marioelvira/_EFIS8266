@@ -628,7 +628,7 @@ void _readGYRO()
 
   html = html + "<tr>";
   html = html + "<td>System</td>";
-  html = html + "<td>Status: 0x" + String(system_status) + " STest: 0x" + String(self_test_results) + " Error: 0x" + String(system_error) + "</td>";
+  html = html + "<td>Status: 0x" + String(system_status) + " Test: 0x" + String(self_test_results) + " Error: 0x" + String(system_error) + "</td>";
   html = html + "</tr>";
 
   html = html + "<tr>";
@@ -639,6 +639,16 @@ void _readGYRO()
   html = html + "<tr>";
   html = html + "<td>Coordenadas</td>";
   html = html + "<td> x: " + String(event.orientation.x) + " y: " + String(event.orientation.y) + " z: " + String(event.orientation.z) + "</td>";
+  html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>Gyro</td>";
+  html = html + "<td> MAG: " + String(Mag) + " Roll: " + sRoll + " Pitch: " + sPitch + "</td>";
+  html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>G Force</td>";
+  html = html + "<td> G: " + String(iGforce/10.0) + "</td>";
   html = html + "</tr>";
     
   html = html + "</table>";

@@ -97,6 +97,11 @@ uint8_t                   sys, gyro, accel, mag;
 // I2C device address (by default address is 0x29 or 0x28)
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 
+int Mag;
+String sRoll;
+String sPitch;
+int iGforce;
+
 //============//
 // MAIN SETUP //
 //============//
