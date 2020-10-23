@@ -167,7 +167,10 @@ void _readCONFIG (void)
   // Gyro Calibration
   gyroData.calibrated = EEPROM.read(EEPROM_ADD_GYRO_CAL);
   if (gyroData.calibrated == EEPROM_VAL_GYRO_CAL_OK)
+  {
     gyroData.calibrated = 1;
+    EEPROM.get(EERPOM_ADD_GYRO_VAL, gyroCalVal);
+  }
   else
     gyroData.calibrated = 0;
     
@@ -179,9 +182,6 @@ void _readCONFIG (void)
   else
    Serial.println(" NOK");
   #endif
-
-  EEPROM.get(EERPOM_ADD_GYRO_VAL, gyroCalVal);
-
 }
 
 void _ResetEEPROM() {

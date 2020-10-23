@@ -87,7 +87,6 @@ int timeHour = 0;
 int                       gyroStatus;
 GyroData                  gyroData;
 adafruit_bno055_offsets_t gyroCalVal;
-adafruit_bno055_offsets_t gyroCalValNew;
 sensor_t                  gyroSensor;
 
 sensors_event_t           event;

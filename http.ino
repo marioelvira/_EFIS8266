@@ -654,6 +654,21 @@ void _readGYRO()
   html = html + "<td>Calibration</td>";
   html = html + "<td> sys: " + String(sys) + " - G: " + String(gyro) + " - A: " + String(accel) + " - M: " + String(mag) + "</td>";
   html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>Giro</td>";
+  html = html + "<td>x " + String(gyroCalVal.gyro_offset_x) + " y " + String(gyroCalVal.gyro_offset_y) + " z " + String(gyroCalVal.gyro_offset_z) + "</td>";
+  html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>Accel</td>";
+  html = html + "<td>x " + String(gyroCalVal.accel_offset_x) + " y " + String(gyroCalVal.accel_offset_y) + " z " + String(gyroCalVal.accel_offset_z) + " r " + String(gyroCalVal.accel_radius) + "</td>";
+  html = html + "</tr>";
+
+  html = html + "<tr>";
+  html = html + "<td>Mag</td>";
+  html = html + "<td>x " + String(gyroCalVal.mag_offset_x) + " y " + String(gyroCalVal.mag_offset_y) + " z " + String(gyroCalVal.mag_offset_z) + " r " + String(gyroCalVal.mag_radius) + "</td>";
+  html = html + "</tr>";
   
   html = html + "<tr>";
   html = html + "<td>Coordenadas</td>";
