@@ -7,7 +7,6 @@ void _GyroSetup(void)
   // Gyro status
   gyroStatus = GYRO_DETECTION;
 
-  gyroData.dataStored = 0;
   gyroData.detected = 0;
   gyroData.calibrated = 0;
 }
@@ -44,19 +43,19 @@ void _GyroLoop()
     case GYRO_DETECTED:
 
       // Check Calibration
-      if (gyroData.dataStored == 1)
+      if (gyroData.calibrated == 1)
       {
         #if (_GYRO_SERIAL_DEBUG_ == 1)
         _GyroSensorOffsets(gyroCalVal);
         #endif
 
-        // Write E2PORM data on sensor...        
+        // Write E2PORM data on sensor...      
         bno.setSensorOffsets(gyroCalVal);
 
-        gyroStatus = GYRO_IN_CALIBRATION;
+        gyroStatus = GYRO_WORKING;
       }
       else       
-        gyroStatus = GYRO_NOT_CALIBRATED;
+        gyroStatus = GYRO_IN_CALIBRATION; // TODO send to Stand by
 
       // Get sensor details
       _GyroSensorDetails();
@@ -71,25 +70,12 @@ void _GyroLoop()
       break;
       
     case GYRO_IN_CALIBRATION:
-
-      bno.getEvent(&event);
       
+      bno.getEvent(&event);
+
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       Serial.println("Move sensor slightly to calibrate magnetometers");
       #endif
-      
-      if (!bno.isFullyCalibrated())
-      {
-        delay(GYRO_SAMPLERATE_DELAY_MS);
-      }
-      else
-        gyroStatus = GYRO_CALIBRATED;
-      
-      break;
-
-    case GYRO_NOT_CALIBRATED:
-      
-      bno.getEvent(&event);
 
       if (!bno.isFullyCalibrated())
       {
@@ -134,6 +120,10 @@ void _GyroLoop()
       EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
       EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalValNew);
 
+      EEPROM.commit();    //Store data to EEPROM
+      
+      gyroData.calibrated = 1;
+
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       Serial.println("Data stored to EEPROM.");
       Serial.println("\n--------------------------------\n");
@@ -141,11 +131,11 @@ void _GyroLoop()
       
       delay(500);
 
-      gyroStatus = GYRO_CONNECTED;
+      gyroStatus = GYRO_WORKING;
      
       break;
 
-    case GYRO_CONNECTED:
+    case GYRO_WORKING:
       bno.getEvent(&event);
 
       #if (_GYRO_SERIAL_DEBUG_ == 1)

@@ -191,43 +191,16 @@ void _PINLoop()
 //===========//
 void loop()
 {
-  int i;
-  #if (_MAIN_SERIAL_DEBUG_ == 1)
-  i = 1;
-  Serial.println("Start");
-  #endif
-  
   _PINLoop();
-  #if (_MAIN_SERIAL_DEBUG_ == 1)
-  Serial.println(i);
-  i++;
-  #endif
-  
   _GyroLoop();
-  #if (_MAIN_SERIAL_DEBUG_ == 1)
-  Serial.println(i);
-  i++;
-  #endif
-  
   _WifiLoop();
-  #if (_MAIN_SERIAL_DEBUG_ == 1)
-  Serial.println(i);
-  i++;
-  #endif
   _WifiLedLoop();
-    #if (_MAIN_SERIAL_DEBUG_ == 1)
-  Serial.println(i);
-  i++;
-  #endif
+
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
   {
     _HttpLoop();
-    #if (v == 1)
-    Serial.println(i);
-    i++;
-    #endif
   }
   
   _TimeLoop();

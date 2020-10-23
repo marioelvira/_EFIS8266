@@ -627,6 +627,25 @@ void _readGYRO()
   html = "<table style=\"width:100%\">";
 
   html = html + "<tr>";
+  html = html + "<td>Status</td>";
+  switch (gyroStatus)
+  {
+    case GYRO_DETECTION:
+      html = html + "<td>Detecting...</td>"; break;
+    case GYRO_DETECTED:
+      html = html + "<td>Detected</td>"; break;
+    case GYRO_CALIBRATED:
+      html = html + "<td>Calibrated</td>"; break;
+    case GYRO_IN_CALIBRATION:
+      html = html + "<td>In Calibration</td>"; break;
+    case GYRO_WORKING:
+      html = html + "<td>Working</td>"; break;
+    case GYRO_NOT_DETECTED:
+      html = html + "<td>Not Detected</td>"; break;
+  }
+  html = html + "</tr>";
+
+  html = html + "<tr>";
   html = html + "<td>System</td>";
   html = html + "<td>Status: 0x" + String(system_status) + " Test: 0x" + String(self_test_results) + " Error: 0x" + String(system_error) + "</td>";
   html = html + "</tr>";
