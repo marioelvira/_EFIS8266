@@ -265,7 +265,7 @@ void _GyroSensorCalStatus(void)
 
 void _GyroCalculus (void)
 { 
-  int gRoll, gPitch;
+  //int gRoll, gPitch;
   float Gforce = 1.0;
   
   Mag = event.orientation.x;
@@ -303,7 +303,7 @@ void _GyroCalculus (void)
     sRoll += "L";
 
   // Pitch  
-  sPitch= "";
+  sPitch = "";
   if (abs(gPitch) < 10)
     sPitch += " ";
     

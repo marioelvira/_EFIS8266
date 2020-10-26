@@ -691,6 +691,34 @@ void _readGYRO()
 }
 
 
+void _serveJSON()
+{
+  String json= "";
+
+  json = "[";
+  
+  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(airSpeed) + " }"; // TODO
+  json = json + ",";
+  json = json + "{ \"param\":\"rollAngle\", \"value\":" + String(gRoll) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(gPitch) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"altitute\", \"value\":" + String(altitute) + " }"; // TODO
+  json = json + ",";
+  json = json + "{ \"param\":\"QNH\", \"value\":" + String(QNH) + " }"; // TODO
+  json = json + ",";
+  json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(turnAngle) + " }"; // TODO
+  json = json + ",";
+  json = json + "{ \"param\":\"heading\", \"value\":" + String(Mag) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }"; // TODO
+
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
 ////////////////////////
 // Http state machine //
 ////////////////////////
@@ -717,6 +745,9 @@ void _HttpLoop()
       httpServer.on("/readGYRO",          _readGYRO);
       httpServer.on("/networSettings",    _setNETWORK);
 
+      // Json data
+      httpServer.on("/data.json",         _serveJSON);
+      
       httpServer.begin();
 
       #if (_HTTP_SERIAL_DEBUG_ == 1)

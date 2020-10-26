@@ -96,7 +96,7 @@ uint8_t                   sys, gyro, accel, mag;
 // I2C device address (by default address is 0x29 or 0x28)
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 
-int Mag;
+int Mag, gRoll, gPitch;
 String sRoll;
 String sPitch;
 int iGforce;
@@ -185,6 +185,64 @@ void _PINLoop()
     inAux = IO_ON;
 }
 
+/////////////////////
+// JSON simulation //
+/////////////////////
+#define JSON_TICK      100
+
+unsigned long jsonCurrentTime = millis();
+unsigned long jsonPreviousTime = 0;
+
+int airSpeed = 34;
+int rollAngle = 30;
+int pitchAngle = 50;
+int altitute = 1500;
+int QNH = 1023;
+int turnAngle = 10;
+int heading = 90;
+int vario = 2;
+
+void _JsonLoop ()
+{
+  jsonCurrentTime = millis();
+  if (jsonCurrentTime - jsonPreviousTime >= JSON_TICK)
+  {
+    airSpeed++;
+    if (airSpeed > 100)
+      airSpeed = 20;
+
+    rollAngle++;
+    if (rollAngle > 30)
+      rollAngle = 0;
+    
+    pitchAngle++;
+    if (pitchAngle > 30)
+      pitchAngle = 0;
+   
+    altitute++;
+    if (altitute > 10000)
+      altitute = 1000;
+    
+    QNH++;
+    if (QNH > 1030)
+      QNH = 990;    
+    
+    turnAngle++;
+    if (turnAngle > 30)
+      turnAngle = -30;
+    
+    heading++;
+    if (heading > 350)
+      heading = 10;
+    
+    //vario++;
+    //if (vario > 2);
+    //  vario = 0;
+        
+    jsonPreviousTime = jsonCurrentTime;
+  } 
+}
+
 //===========//
 // MAIN LOOP //
 //===========//
@@ -195,6 +253,7 @@ void loop()
   _WifiLoop();
   _WifiLedLoop();
 
+  _JsonLoop();
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
@@ -203,8 +262,4 @@ void loop()
   }
   
   _TimeLoop();
-  
-  #if (_MAIN_SERIAL_DEBUG_ == 1)
-  Serial.println("End");
-  #endif
 }
