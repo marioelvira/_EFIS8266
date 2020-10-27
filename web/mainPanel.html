@@ -10,24 +10,84 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
     <!-- Flight Indicators library styles -->
     <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
-    <title>jQuery Flight Indicators</title>
+	
+    <title>EFIS Main Pannel</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	
+	  <!-- Custom styles for this template -->
+	<link href="css/simple-sidebar.css" rel="stylesheet">
+	
 </head>
 
 <body>
-<div>
-    <div>
-        <span id="airspeed"></span>
-        <span id="attitude"></span>
-        <span id="altimeter"></span>            
-    </div><div>
-        <span id="turn_coordinator"></span>
-        <span id="heading"></span>
-        <span id="variometer"></span>
-    </div>
-</div>
 
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Instruments</div>
+      <div class="list-group list-group-flush">
+		<a id="setTestMode" href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-window-close"></i> Page 1</a>
+		<a id="setAutoMode" href="#" class="list-group-item list-group-item-action bg-light"><i class="far fa-window-close"></i> Page 2</a>
+		<a id="statusMenu" href="index.htm" class="list-group-item list-group-item-action bg-light"><i class="fas fa-angle-double-left"></i> Back</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		<button class="btn btn-light" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>		
+      </nav>
+	  
+	  <div class="container">
+		  
+		  <h4 class="mt-4"><i class="fas fa-tools"></i> Instruments</h4>
+		  
+ 		  <div class="jumbotron" style="padding:1rem">
+		  
+			<table class="table table-sm table-striped">
+				<tbody>
+					<tr>
+						<td><span id="airspeed"></span></td>
+						<td><span id="attitude"></span></td>
+						<td><span id="altimeter"></span></td>
+					</tr>
+					<tr>
+						<td><span id="vairspeed"></span></td>
+						<td><span id="vattitude"></span></td>
+						<td><span id="valtimeter"></span></td>
+					</tr>
+					<tr>
+						<td><span id="turn_coordinator"></span></td>
+						<td><span id="heading"></span></td>
+						<td><span id="variometer"></span></td>
+					</tr>
+					<tr>
+						<td><span id="vturn"></span></td>
+						<td><span id="vheading"></span></td>
+						<td><span id="vvar"></span></td>
+					</tr>
+					
+			  	 </tbody>
+			</table>
+		   </div>
+	  </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+ </div>
+ <!-- /#wrapper -->
+	
 <!-- Importing jQuery library -->
 <script src="js/jquery.2.1.0.min.js"></script>
 
@@ -57,7 +117,10 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 			$.each(jsonData, function(index, obj) {
 
 				if (obj.param == "airSpeed")
+				{
 					airspeed.setAirSpeed(obj.value);
+					$("#vairspeed").html(obj.value);
+				}
 
 				if (obj.param == "rollAngle")
 					attitude.setRoll(obj.value);
@@ -66,10 +129,16 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 					attitude.setPitch(obj.value);
 					
 				if (obj.param == "heading")
+				{
 					heading.setHeading(obj.value);
+					$("#vheading").html(obj.value);
+				}
 					
 				if (obj.param == "turnAngle")
+				{
 					turn_coordinator.setTurn(obj.value);
+					$("#vturn").html(obj.value);
+				}
 			})
 
 		});
@@ -96,6 +165,14 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 		variometer.setVario(2*Math.sin(increment/10));
 	}, 100);
 </script>
+
+ <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
 
 </body>
 </html>
