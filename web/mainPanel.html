@@ -1,6 +1,6 @@
 <!-- 
 
-jQuery Flight Indicators plugin
+jQuery Flight Indicators
 By Sébastien Matton (seb_matton@hotmail.com)
 Published under GPLv3 License.
 
@@ -12,7 +12,7 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
     <meta charset="utf-8">
     <!-- Flight Indicators library styles -->
     <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
-    <title>jQuery Flight Indicators Plugin</title>
+    <title>jQuery Flight Indicators</title>
 </head>
 
 <body>
@@ -34,6 +34,8 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 <!-- Importing the FlightIndicators library -->
 <script src="js/jquery.flightindicators.js"></script>
 
+<!-- <script type="text/javascript" src="js/app.js"></script> -->
+
 <!-- Let start our scripts -->
 <script type="text/javascript">
 	// Dynamic examples
@@ -48,12 +50,36 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 	var increment = 0;
 	setInterval(function()
 	{
+		$.getJSON("http://192.168.1.5/data.json", function(jsonData) {
+		
+			console.log(jsonData);
+    		
+			$.each(jsonData, function(index, obj) {
+
+				if (obj.param == "airSpeed")
+					airspeed.setAirSpeed(obj.value);
+
+				if (obj.param == "rollAngle")
+					attitude.setRoll(obj.value);
+
+				if (obj.param == "pitchAngle")
+					attitude.setPitch(obj.value);
+					
+				if (obj.param == "heading")
+					heading.setHeading(obj.value);
+					
+				if (obj.param == "turnAngle")
+					turn_coordinator.setTurn(obj.value);
+			})
+
+		});
+		
 		// Airspeed update
-		airspeed.setAirSpeed(80 + 80*Math.sin(increment/10));
+		//airspeed.setAirSpeed(80 + 80*Math.sin(increment/10));
 
 		// Attitude update
-		attitude.setRoll(30*Math.sin(increment/10));
-		attitude.setPitch(50*Math.sin(increment/20));
+		//attitude.setRoll(30*Math.sin(increment/10));
+		//attitude.setPitch(50*Math.sin(increment/20));
 
 		// Altimeter update
 		altimeter.setAltitude(10*increment);
@@ -61,14 +87,15 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 		increment++;
 		
 		// TC update - note that the TC appears opposite the angle of the attitude indicator, as it mirrors the actual wing up/down position
-		turn_coordinator.setTurn((30*Math.sin(increment/10))*-1);
+		//turn_coordinator.setTurn((30*Math.sin(increment/10))*-1);
 
 		// Heading update
-		heading.setHeading(increment);
+		//heading.setHeading(increment);
 		
 		// Vario update
 		variometer.setVario(2*Math.sin(increment/10));
-	}, 50);
+	}, 100);
 </script>
+
 </body>
 </html>

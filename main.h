@@ -14,7 +14,9 @@ extern "C" {
 #define _GYRO_SERIAL_DEBUG_     0
 #define _EEPROM_SERIAL_DEBUG_   1
 #define _HTTP_SERIAL_DEBUG_     1
+#define _JSON_SERIAL_DEBUG_     0
 #define _WIFI_SERIAL_DEBUG_     1
+#define _TICK_SERIAL_DEBUG_     0
 
 #endif // _MAIN_H_
 

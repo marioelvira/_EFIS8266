@@ -15,6 +15,8 @@ void _TimeSetup(void)
 ////////////////////////
 void _TimeLoop(void)
 {
+  timeMilisec = millis();
+  
   if (millis() - timeTick >= 1000)
   {
     timeSec++;
@@ -31,4 +33,9 @@ void _TimeLoop(void)
     
     timeTick = millis();
   }
+
+  #if (_TICK_SERIAL_DEBUG_ == 1)
+  Serial.print(timeMilisec);
+  Serial.println(" milis");
+  #endif
 }

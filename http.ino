@@ -690,7 +690,6 @@ void _readGYRO()
   httpServer.send(200, "text/plane", html);
 }
 
-
 void _serveJSON()
 {
   String json= "";
@@ -701,13 +700,13 @@ void _serveJSON()
   json = json + ",";
   json = json + "{ \"param\":\"rollAngle\", \"value\":" + String(gRoll) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(gPitch) + " }";
+  json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"altitute\", \"value\":" + String(altitute) + " }"; // TODO
   json = json + ",";
   json = json + "{ \"param\":\"QNH\", \"value\":" + String(QNH) + " }"; // TODO
   json = json + ",";
-  json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(turnAngle) + " }"; // TODO
+  json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(-1*gRoll) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"heading\", \"value\":" + String(Mag) + " }";
   json = json + ",";
@@ -717,6 +716,12 @@ void _serveJSON()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_JSON_SERIAL_DEBUG_ == 1)
+  Serial.print(timeMilisec - timeJSONMilisec);
+  Serial.println(" JSON");
+  timeJSONMilisec = timeMilisec;
+  #endif
 }
 
 ////////////////////////

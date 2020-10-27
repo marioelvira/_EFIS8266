@@ -73,9 +73,14 @@ char* deviceName = DEVICENAME;
 ESP8266WebServer httpServer(HTTP_PORT);
 int httpStatus;
 
+#if (_JSON_SERIAL_DEBUG_ == 1)
+unsigned long timeJSONMilisec = 0;
+#endif
+
 //////////
 // Time //
 //////////
+unsigned long timeMilisec = 0;
 unsigned long timeTick = 0;
 int timeSec = 0;
 int timeMin = 0;
@@ -194,12 +199,12 @@ unsigned long jsonCurrentTime = millis();
 unsigned long jsonPreviousTime = 0;
 
 int airSpeed = 34;
-int rollAngle = 30;
-int pitchAngle = 50;
+//int rollAngle = 30;
+//int pitchAngle = 50;
 int altitute = 1500;
 int QNH = 1023;
-int turnAngle = 10;
-int heading = 90;
+//int turnAngle = 10;
+//int heading = 90;
 int vario = 2;
 
 void _JsonLoop ()
@@ -211,13 +216,13 @@ void _JsonLoop ()
     if (airSpeed > 100)
       airSpeed = 20;
 
-    rollAngle++;
-    if (rollAngle > 30)
-      rollAngle = 0;
+    //rollAngle++;
+    //if (rollAngle > 30)
+    //  rollAngle = 0;
     
-    pitchAngle++;
-    if (pitchAngle > 30)
-      pitchAngle = 0;
+    //pitchAngle++;
+    //if (pitchAngle > 30)
+    //  pitchAngle = 0;
    
     altitute++;
     if (altitute > 10000)
@@ -227,13 +232,13 @@ void _JsonLoop ()
     if (QNH > 1030)
       QNH = 990;    
     
-    turnAngle++;
-    if (turnAngle > 30)
-      turnAngle = -30;
+    //turnAngle++;
+    //if (turnAngle > 30)
+    //  turnAngle = -30;
     
-    heading++;
-    if (heading > 350)
-      heading = 10;
+    //heading++;
+    //if (heading > 350)
+    //  heading = 10;
     
     //vario++;
     //if (vario > 2);
