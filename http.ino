@@ -600,7 +600,8 @@ void _setOUT()
    Serial.println("Out Error");
    #endif
  }
- 
+
+ httpServer.sendHeader("Access-Control-Allow-Origin","*");
  httpServer.send(200, "text/plane", html);
 }
 
@@ -647,7 +648,7 @@ void _readGYRO()
 
   html = html + "<tr>";
   html = html + "<td>System</td>";
-  html = html + "<td>Status: 0x" + String(system_status) + " Test: 0x" + String(self_test_results) + " Error: 0x" + String(system_error) + "</td>";
+  html = html + "<td>Status: 0x" + String(system_status) + " Test: 0x" + String(system_selftest) + " Error: 0x" + String(system_error) + "</td>";
   html = html + "</tr>";
 
   html = html + "<tr>";
@@ -677,7 +678,7 @@ void _readGYRO()
 
   html = html + "<tr>";
   html = html + "<td>Gyro</td>";
-  html = html + "<td> MAG: " + String(Mag) + " Roll: " + sRoll + " Pitch: " + sPitch + "</td>";
+  html = html + "<td> MAG: " + String(gMag) + " Roll: " + sRoll + " Pitch: " + sPitch + "</td>";
   html = html + "</tr>";
 
   html = html + "<tr>";
@@ -690,6 +691,7 @@ void _readGYRO()
   httpServer.send(200, "text/plane", html);
 }
 
+// Json Cfg
 void _jsonGyroCfg()
 {
   String json= "";
@@ -750,6 +752,85 @@ void _jsonNetworkCfg()
   httpServer.send (200, "application/json", json);
 }
 
+// Json Status
+void _jsonIOStatus()
+{
+  String json = "";
+
+  json = "[";
+  
+  json = json + "{ \"param\":\"uptime\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"outAux\", \"value\":" + String(outAux) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"inAux\", \"value\":" + String(inAux) + " }";
+
+  json = json + "]";
+  
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
+void _jsonGyroStatus()
+{
+  String json= "";
+  String jsonGyroStatus = "";
+
+  switch (gyroStatus)
+  {
+    case GYRO_DETECTION:
+      jsonGyroStatus = "Detecting..."; break;
+    case GYRO_DETECTED:
+      jsonGyroStatus = "Detected"; break;
+    case GYRO_CALIBRATED:
+      jsonGyroStatus = "Calibrated"; break;
+    case GYRO_IN_CALIBRATION:
+      jsonGyroStatus = "In Calibration"; break;
+    case GYRO_WORKING:
+      jsonGyroStatus = "Working"; break;
+    case GYRO_NOT_DETECTED:
+      jsonGyroStatus = "Not Detected"; break;
+  }
+
+  json = "[";
+    
+  json = json + "{ \"param\":\"gyroStatus\", \"value\":\"" + jsonGyroStatus + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"system_status\", \"value\":" + String(system_status) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"system_selftest\", \"value\":" + String(system_selftest) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"system_error\", \"value\":" + String(system_error) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"cal_sys\", \"value\":" + String(sys) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"cal_gyro\", \"value\":" + String(gyro) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"cal_accel\", \"value\":" + String(accel) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"cal_mag\", \"value\":" + String(mag) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"coor_x\", \"value\":" + String(event.orientation.x) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"coor_y\", \"value\":" + String(event.orientation.y) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"coor_z\", \"value\":" + String(event.orientation.z) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_mag\", \"value\":" + String(gMag) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_roll\", \"value\":\"" + sRoll + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_pitch\", \"value\":\"" + sPitch + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gforce\", \"value\":" + String(iGforce/10.0) + " }";
+  
+  json = json + "]";
+  
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
+// Json data main
 void _jsonDATA()
 {
   String json= "";
@@ -768,7 +849,7 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(-1*gRoll) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"heading\", \"value\":" + String(Mag) + " }";
+  json = json + "{ \"param\":\"heading\", \"value\":" + String(gMag) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }";
   json = json + ",";
@@ -810,7 +891,12 @@ void _HttpLoop()
 
       // Json data
       httpServer.on("/data.json",         _jsonDATA);
-      
+
+      // Json Status
+      httpServer.on("/ioStatus.json",     _jsonIOStatus);
+      httpServer.on("/gyroStatus.json",   _jsonGyroStatus);
+
+      // Json Config
       httpServer.on("/networkCfg.json",   _jsonNetworkCfg);
       httpServer.on("/gyroCfg.json",      _jsonGyroCfg);
       

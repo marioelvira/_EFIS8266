@@ -93,13 +93,13 @@ adafruit_bno055_offsets_t gyroCalVal;
 sensor_t                  gyroSensor;
 
 sensors_event_t           event;
-uint8_t                   system_status, self_test_results, system_error;
+uint8_t                   system_status, system_selftest, system_error;
 uint8_t                   sys, gyro, accel, mag;
 
 // I2C device address (by default address is 0x29 or 0x28)
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
 
-int Mag, gRoll, gPitch;
+int gMag, gRoll, gPitch;
 String sRoll;
 String sPitch;
 int iGforce;

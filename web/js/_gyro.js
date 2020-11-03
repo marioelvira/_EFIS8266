@@ -2,7 +2,69 @@
 $(document).ready( function()
 {
 	fgetConfig();
+	frefreshStatus();
 });
+
+function frefreshStatus()
+{
+	setTimeout( function() {	
+
+		$.getJSON("http://192.168.1.5/gyroStatus.json", function(jsonData) {
+			console.log(jsonData);
+    		
+			$.each(jsonData, function(index, obj) {
+				
+				if (obj.param == "gyroStatus")
+					$("#gyroStatus").html(obj.value);
+				
+				if (obj.param == "system_status")
+					$("#system_status").html(obj.value);
+				
+				if (obj.param == "system_selftest")
+					$("#system_selftest").html(obj.value);
+				
+				if (obj.param == "system_error")
+					$("#system_error").html(obj.value);
+				
+				if (obj.param == "cal_sys")
+					$("#cal_sys").html(obj.value);
+				
+				if (obj.param == "cal_gyro")
+					$("#cal_gyro").html(obj.value);
+				
+				if (obj.param == "cal_accel")
+					$("#cal_accel").html(obj.value);
+				
+				if (obj.param == "cal_mag")
+					$("#cal_mag").html(obj.value);
+				
+				if (obj.param == "coor_x")
+					$("#coor_x").html(obj.value);
+				
+				if (obj.param == "coor_y")
+					$("#coor_y").html(obj.value);
+				
+				if (obj.param == "coor_z")
+					$("#coor_z").html(obj.value);
+				
+				if (obj.param == "gyro_mag")
+					$("#gyro_mag").html(obj.value);
+				
+				if (obj.param == "gyro_roll")
+					$("#gyro_roll").html(obj.value);
+				
+				if (obj.param == "gyro_pitch")
+					$("#gyro_pitch").html(obj.value);
+				
+				if (obj.param == "gforce")
+					$("#gforce").html(obj.value);
+
+			})
+		});
+
+		frefreshStatus();
+	}, 1000);
+}
 
 function fgetConfig()
 {

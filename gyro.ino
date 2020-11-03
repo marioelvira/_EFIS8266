@@ -156,7 +156,7 @@ void _GyroLoop()
       #endif
 
       // Display sensor status
-      bno.getSystemStatus(&system_status, &self_test_results, &system_error);
+      bno.getSystemStatus(&system_status, &system_selftest, &system_error);
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       _GyroSensorStatus();
       #endif
@@ -233,7 +233,7 @@ void _GyroSensorStatus(void)
     Serial.print("System Status: 0x");
     Serial.println(system_status, HEX);
     Serial.print("Self Test:     0x");
-    Serial.println(self_test_results, HEX);
+    Serial.println(system_selftest, HEX);
     Serial.print("System Error:  0x");
     Serial.println(system_error, HEX);
     Serial.println("");
@@ -265,12 +265,11 @@ void _GyroSensorCalStatus(void)
 
 void _GyroCalculus (void)
 { 
-  //int gRoll, gPitch;
   float Gforce = 1.0;
-  
-  Mag = event.orientation.x;
-  gRoll = event.orientation.y;
-  gPitch = event.orientation.z;
+
+  gMag = event.orientation.x + 0.5;
+  gRoll = event.orientation.y + 0.5;
+  gPitch = event.orientation.z + 0.5;
 
   // Pitch
   if (abs(gPitch) > 90)
@@ -286,8 +285,6 @@ void _GyroCalculus (void)
 
   if (gPitch < -90)
     gPitch = -180 - gPitch;
-  
-  //textAreaMAG.Printf("%03d", MAG);
 
   // Roll
   sRoll = "";
