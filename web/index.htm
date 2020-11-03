@@ -25,6 +25,10 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 	  <!-- Custom styles for this template -->
 	<link href="css/simple-sidebar.css" rel="stylesheet">
 	
+	<!-- Incons-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<!--<link href="img/iconsall.css" rel="stylesheet" >-->
+  
 </head>
 
 <body>
@@ -33,10 +37,10 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Instruments</div>
+      <div class="sidebar-heading">EFIS Main Pannel</div>
       <div class="list-group list-group-flush">
-		<a id="setTestMode" href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-window-close"></i> Page 1</a>
-		<a id="setAutoMode" href="#" class="list-group-item list-group-item-action bg-light"><i class="far fa-window-close"></i> Page 2</a>
+		<a href="network.htm" class="list-group-item list-group-item-action bg-light"><i class="fas fa-rss"></i> Network</a>
+		<a href="gyro.htm" class="list-group-item list-group-item-action bg-light"><i class="fas fa-location-arrow"></i> Gryroscope</a>
 		<a id="statusMenu" href="index.htm" class="list-group-item list-group-item-action bg-light"><i class="fas fa-angle-double-left"></i> Back</a>
       </div>
     </div>
@@ -52,34 +56,17 @@ https://github.com/sebmatton/jQuery-Flight-Indicators
 	  <div class="container">
 		  
 		  <h4 class="mt-4"><i class="fas fa-tools"></i> Instruments</h4>
-		  
- 		  <div class="jumbotron" style="padding:1rem">
-		  
-			<table class="table table-sm table-striped">
-				<tbody>
-					<tr>
-						<td><span id="airspeed"></span></td>
-						<td><span id="attitude"></span></td>
-						<td><span id="altimeter"></span></td>
-					</tr>
-					<tr>
-						<td><span id="vairspeed"></span></td>
-						<td><span id="vattitude"></span></td>
-						<td><span id="valtimeter"></span></td>
-					</tr>
-					<tr>
-						<td><span id="turn_coordinator"></span></td>
-						<td><span id="heading"></span></td>
-						<td><span id="variometer"></span></td>
-					</tr>
-					<tr>
-						<td><span id="vturn"></span></td>
-						<td><span id="vheading"></span></td>
-						<td><span id="vvar"></span></td>
-					</tr>
-					
-			  	 </tbody>
-			</table>
+		  <div class="col-sm-8">
+
+		    <div>
+				<span id="airspeed"></span>
+				<span id="attitude"></span>
+				<span id="altimeter"></span>
+			</div><div>
+				<span id="turn_coordinator"></span>
+				<span id="heading"></span>
+				<span id="variometer"></span>
+			</div>
 		   </div>
 	  </div>
     </div>

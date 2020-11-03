@@ -690,7 +690,67 @@ void _readGYRO()
   httpServer.send(200, "text/plane", html);
 }
 
-void _serveJSON()
+void _jsonGyroCfg()
+{
+  String json= "";
+
+  json = "[";
+    
+  json = json + "{ \"param\":\"accel_offset_x\", \"value\":" + String(gyroCalVal.accel_offset_x) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"accel_offset_y\", \"value\":" + String(gyroCalVal.accel_offset_y) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"accel_offset_z\", \"value\":" + String(gyroCalVal.accel_offset_z) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"accel_radius\", \"value\":" + String(gyroCalVal.accel_radius) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_offset_x\", \"value\":" + String(gyroCalVal.gyro_offset_x) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_offset_y\", \"value\":" + String(gyroCalVal.gyro_offset_y) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"gyro_offset_z\", \"value\":" + String(gyroCalVal.gyro_offset_z) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"mag_offset_x\", \"value\":" + String(gyroCalVal.mag_offset_x) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"mag_offset_y\", \"value\":" + String(gyroCalVal.mag_offset_y) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"mag_offset_z\", \"value\":" + String(gyroCalVal.mag_offset_z) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"mag_radius\", \"value\":" + String(gyroCalVal.mag_radius) + " }";
+  
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
+void _jsonNetworkCfg()
+{
+  String json= "";
+
+  json = "[";
+  
+  json = json + "{ \"param\":\"wifimode\", \"value\":" + String(wifiMode) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"wifissid\", \"value\":\"" + String(ssid) + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"wifipwd\", \"value\":\"" + String(password) + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ipmode\", \"value\":" + String(ipMode) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ipaddress\", \"value\":\"" + String(ipAddress.toString()) + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ipmask\", \"value\":\"" + String(netMask.toString()) + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ipgateway\", \"value\":\"" + String(gateWay.toString()) + "\" }";
+  
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
+void _jsonDATA()
 {
   String json= "";
 
@@ -710,18 +770,16 @@ void _serveJSON()
   json = json + ",";
   json = json + "{ \"param\":\"heading\", \"value\":" + String(Mag) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }"; // TODO
-
+  json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }"; // TODO
+  
   json = json + "]";
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
 
-  #if (_JSON_SERIAL_DEBUG_ == 1)
-  Serial.print(timeMilisec - timeJSONMilisec);
-  Serial.println(" JSON");
   timeJSONMilisec = timeMilisec;
-  #endif
 }
 
 ////////////////////////
@@ -751,7 +809,10 @@ void _HttpLoop()
       httpServer.on("/networSettings",    _setNETWORK);
 
       // Json data
-      httpServer.on("/data.json",         _serveJSON);
+      httpServer.on("/data.json",         _jsonDATA);
+      
+      httpServer.on("/networkCfg.json",   _jsonNetworkCfg);
+      httpServer.on("/gyroCfg.json",      _jsonGyroCfg);
       
       httpServer.begin();
 

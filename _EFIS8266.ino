@@ -73,9 +73,7 @@ char* deviceName = DEVICENAME;
 ESP8266WebServer httpServer(HTTP_PORT);
 int httpStatus;
 
-#if (_JSON_SERIAL_DEBUG_ == 1)
 unsigned long timeJSONMilisec = 0;
-#endif
 
 //////////
 // Time //
