@@ -37,7 +37,7 @@ extern "C" {
 #define EEPROM_GYRO_MAX           22 // Gyro Cal max 22 bytes -> Next 0x66     
 
 // Values
-#define EEPROM_VAL_OK             0xAB
+#define EEPROM_VAL_OK             0xAA
 
 #define EEPROM_VAL_IP_MODE        DHCP_MODE
 #define EEPROM_VAL_IP1            192

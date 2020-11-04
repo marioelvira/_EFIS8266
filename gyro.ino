@@ -268,8 +268,16 @@ void _GyroCalculus (void)
   float Gforce = 1.0;
 
   gMag = event.orientation.x + 0.5;
-  gRoll = event.orientation.y + 0.5;
-  gPitch = event.orientation.z + 0.5;
+  
+  if (event.orientation.y >= 0)
+    gRoll = event.orientation.y + 0.5;
+  else
+    gRoll = event.orientation.y - 0.5;
+    
+  if (event.orientation.z >= 0)
+    gPitch = event.orientation.z + 0.5;
+  else
+    gPitch = event.orientation.z - 0.5;
 
   // Pitch
   if (abs(gPitch) > 90)

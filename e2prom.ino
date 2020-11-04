@@ -8,8 +8,8 @@ void _ConfigSetup(void)
     
   // Config setup
   #if (_ERASE_EEPROM_ == 1)
-    _ResetEEPROM();
-    delay(1000);
+  _ResetEEPROM();
+  delay(1000);
   #endif
 
   // Read config from EEPROM
@@ -96,10 +96,12 @@ void _readCONFIG (void)
   ipMode = EEPROM.read(EEPROM_ADD_IP_MODE);
   
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("IP Mode: ");
+  Serial.print(ipMode);
   if (ipMode == FIXIP_MODE)
-    Serial.println("IP Mode: FIX IP");
+    Serial.println(" FIX IP");   
   else
-    Serial.println("IP Mode: DHCP");
+    Serial.println(" DHCP");
   #endif
   
   if (ipMode == FIXIP_MODE)
