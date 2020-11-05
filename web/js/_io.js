@@ -1,3 +1,4 @@
+var ip = "192.168.43.37";
 
 $(document).ready( function()
 {
@@ -6,9 +7,12 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
+	var jsondir = "http://" + ip +"/ioStatus.json";
+	
 	setTimeout( function() {	
 
-		$.getJSON("http://192.168.1.5/ioStatus.json", function(jsonData) {
+		$.getJSON(jsondir, function(jsonData) {
+			
 			console.log(jsonData);
     		
 			$.each(jsonData, function(index, obj) {
@@ -26,4 +30,12 @@ function frefreshStatus()
 
 		frefreshStatus();
 	}, 1000);
+}
+
+function sendOUT(out)
+{
+	var xhttp = new XMLHttpRequest();
+	
+	xhttp.open("GET", "http://" + ip + "/setOUT?OUTstate=" + out, true);
+	xhttp.send();
 }

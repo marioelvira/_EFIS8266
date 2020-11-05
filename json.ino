@@ -4,7 +4,9 @@ void _jsonGyroCfg()
   String json= "";
 
   json = "[";
-    
+
+  json = json + "{ \"param\":\"gyroInfo\", \"value\":\"" + gyroInfo + "\" }";
+  json = json + ",";
   json = json + "{ \"param\":\"accel_offset_x\", \"value\":" + String(gyroCalVal.accel_offset_x) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"accel_offset_y\", \"value\":" + String(gyroCalVal.accel_offset_y) + " }";

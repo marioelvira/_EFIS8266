@@ -9,6 +9,8 @@ void _GyroSetup(void)
 
   gyroData.detected = 0;
   gyroData.calibrated = 0;
+
+  gyroInfo = "";
 }
 
 ////////////////////////
@@ -16,8 +18,7 @@ void _GyroSetup(void)
 ////////////////////////
 void _GyroLoop()
 {
-  //sensors_event_t event;
-    
+   
   switch (gyroStatus)
   {
     case GYRO_DETECTION:
@@ -44,9 +45,7 @@ void _GyroLoop()
 
       // Get sensor Type and details...
       bno.getSensor(&gyroSensor);
-      #if (_GYRO_SERIAL_DEBUG_ == 1)
       _GyroSensorDetails();
-      #endif
 
       // Check Calibration
       if (gyroData.calibrated == 1)
@@ -179,24 +178,28 @@ void _GyroLoop()
   }
 }
 
-#if (_GYRO_SERIAL_DEBUG_ == 1)
 /**************************/
 /* Gyro basic information */
 /**************************/
 void _GyroSensorDetails(void)
 {
-    Serial.println("------------------------------------");
-    Serial.print("Sensor:       "); Serial.println(gyroSensor.name);
-    Serial.print("Driver Ver:   "); Serial.println(gyroSensor.version);
-    Serial.print("Unique ID:    "); Serial.println(gyroSensor.sensor_id);
-    Serial.print("Max Value:    "); Serial.print  (gyroSensor.max_value);  Serial.println(" xxx");
-    Serial.print("Min Value:    "); Serial.print  (gyroSensor.min_value);  Serial.println(" xxx");
-    Serial.print("Resolution:   "); Serial.print  (gyroSensor.resolution); Serial.println(" xxx");
-    Serial.println("------------------------------------");
-    Serial.println("");
-    delay(500);
+  gyroInfo =            "Sensor:     " + (String)gyroSensor.name + "</br>";
+  gyroInfo = gyroInfo + "Driver Ver: " + (String)gyroSensor.version + "</br>";
+  gyroInfo = gyroInfo + "Unique ID:  " + (String)gyroSensor.sensor_id + "</br>";
+  gyroInfo = gyroInfo + "Max Value:  " + (String)gyroSensor.max_value + "</br>";
+  gyroInfo = gyroInfo + "Min Value:  " + (String)gyroSensor.min_value + "</br>";
+  gyroInfo = gyroInfo + "Resolution: " + (String)gyroSensor.resolution + "</br>";
+
+  #if (_GYRO_SERIAL_DEBUG_ == 1)
+  Serial.println("------------------------------------");
+  Serial.println(gyroInfo);
+  Serial.println("------------------------------------");
+  Serial.println("");
+  delay(500);
+  #endif
 }
 
+#if (_GYRO_SERIAL_DEBUG_ == 1)
 /******************************************/
 /* Raw calibration offset and radius data */
 /******************************************/
@@ -326,7 +329,4 @@ void _GyroCalculus (void)
   imu::Vector<3> acc = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   Gforce = acc.z();
   iGforce = round(Gforce*10/9.8);
-  
-  //textAreaGmeter.print("G");
-  //textAreaGmeter.println(iGforce/10.0, 1);
 }

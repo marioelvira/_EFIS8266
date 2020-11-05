@@ -1,3 +1,4 @@
+var ip = "192.168.43.37";
 
 $(document).ready( function()
 {
@@ -6,7 +7,9 @@ $(document).ready( function()
 
 function fgetConfig()
 {
-	$.getJSON("http://192.168.1.5/networkCfg.json", function(jsonData) {
+	var jsondir = "http://" + ip + "/networkCfg.json";
+	
+	$.getJSON(jsondir, function(jsonData) {
 		
 		console.log(jsonData);
 			
@@ -37,3 +40,4 @@ function fgetConfig()
 		});
 	});
 }
+

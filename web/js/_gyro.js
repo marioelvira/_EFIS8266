@@ -1,3 +1,4 @@
+var ip = "192.168.43.37";
 
 $(document).ready( function()
 {
@@ -7,9 +8,12 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
+	var jsondir = "http://" + ip +"/gyroStatus.json";
+	
 	setTimeout( function() {	
 
-		$.getJSON("http://192.168.1.5/gyroStatus.json", function(jsonData) {
+		$.getJSON(jsondir, function(jsonData) {
+			
 			console.log(jsonData);
     		
 			$.each(jsonData, function(index, obj) {
@@ -68,13 +72,17 @@ function frefreshStatus()
 
 function fgetConfig()
 {
-	$.getJSON("http://192.168.1.5/gyroCfg.json", function(jsonData) {
+	var jsondir = "http://" + ip +"/gyroCfg.json";
+	
+	$.getJSON(jsondir, function(jsonData) {
 		
 		console.log(jsonData);
 			
 		$.each(jsonData, function(index, obj) {
 			
-			// Gyroscope
+			if (obj.param == "gyroInfo")
+				$("#gyroInfo").html(obj.value);
+			
 			if (obj.param == "accel_offset_x")
 				$("#accel_offset_x").val(obj.value);
 			
@@ -110,4 +118,12 @@ function fgetConfig()
 
 		});
 	});
+}
+
+function _sendGyroCfg()
+{
+	var xhttp = new XMLHttpRequest();
+	
+	xhttp.open("GET", "http://" + ip + "/setOUT?OUTstate=" + out, true);
+	xhttp.send();
 }

@@ -52,6 +52,9 @@
 					<a class="nav-link active" data-toggle="tab" href="#Status">Status</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#Info">Info</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#Config">Configuration</a>
 				</li>
 			</ul>
@@ -131,9 +134,15 @@
 			</div>
 			</div>
 			</div>
+			
+			<div id="Info" class="container tab-pane"><br>
+				<div class="form-group">
+					<div class="alert alert-primary" id="gyroInfo">...</div>
+				</div>
+			</div>
 
 			<div id="Config" class="container tab-pane fade"><br>
-			<form action="http://192.168.1.5/gyroCfg.php" class="needs-validation" novalidate>
+			<form action="http://192.168.43.37/gyroCfg.php" class="needs-validation" novalidate>
 			<div class="row">
 			<div class="col-sm-3">
 				<div class="form-group">
