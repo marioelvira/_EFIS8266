@@ -27,6 +27,8 @@ extern "C" {
  *                   VIN -|      |- 3V
  *                        --------
  */
+
+#define PIN_AIR_IN      A0  // Entrada
  
 #define PIN_I2C_CLK     5   // GPIO5 -> D1
 #define PIN_I2C_DTA     4   // GPIO4 -> D2

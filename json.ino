@@ -145,7 +145,7 @@ void _jsonDATA()
 
   json = "[";
   
-  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(airSpeed) + " }"; // TODO
+  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(IAirSpeed) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"rollAngle\", \"value\":" + String(gRoll) + " }";
   json = json + ",";

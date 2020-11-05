@@ -7,6 +7,7 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
+#include "airspeed.h"
 #include "e2prom.h"
 #include "gyro.h"
 #include "http.h"
@@ -105,6 +106,19 @@ String sRoll;
 String sPitch;
 int iGforce;
 
+//////////////
+// Airspeed //
+//////////////
+float IAirSpeed;
+float AirPressure;
+int   AirInValue;
+int   AirInArray[AIR_ARRAY_SIZE];
+int   AirInPointer;
+#if (_AIR_SERIAL_DEBUG_ == 1)
+unsigned long AirCurrentTime = millis();
+unsigned long AirPreviousTime = 0;
+#endif
+
 //============//
 // MAIN SETUP //
 //============//
@@ -115,6 +129,9 @@ void setup(void)
 
   // Gyro setup
   _GyroSetup();
+
+  // Airspeed setup
+  _AirspeedSetup();
   
   #if (_SERIAL_DEBUG_ == 1)
   delay(5000);  // 5 secs
@@ -197,7 +214,7 @@ void _PINLoop()
 unsigned long jsonCurrentTime = millis();
 unsigned long jsonPreviousTime = 0;
 
-int airSpeed = 34;
+//int airSpeed = 34;
 //int rollAngle = 30;
 //int pitchAngle = 50;
 int altitute = 1500;
@@ -211,9 +228,9 @@ void _JsonLoop ()
   jsonCurrentTime = millis();
   if (jsonCurrentTime - jsonPreviousTime >= JSON_TICK)
   {
-    airSpeed++;
-    if (airSpeed > 100)
-      airSpeed = 20;
+    //airSpeed++;
+    //if (airSpeed > 100)
+    //  airSpeed = 20;
 
     //rollAngle++;
     //if (rollAngle > 30)
@@ -254,6 +271,7 @@ void loop()
 {
   _PINLoop();
   _GyroLoop();
+  _AirspeedLoop();
   _WifiLoop();
   _WifiLedLoop();
 
