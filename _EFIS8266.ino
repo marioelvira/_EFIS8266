@@ -3,11 +3,16 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 
+#include <Wire.h>
+#include <SPI.h>
+#include <Adafruit_BME280.h>
+
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
 #include "airspeed.h"
+#include "altimeter.h"
 #include "e2prom.h"
 #include "gyro.h"
 #include "http.h"
@@ -106,6 +111,18 @@ String sRoll;
 String sPitch;
 int iGforce;
 
+///////////////
+// Altimeter //
+///////////////
+String                    altInfo;
+int                       altStatus;
+
+Adafruit_BME280 bme; // use I2C interface
+Adafruit_Sensor *bme_temp = bme.getTemperatureSensor();
+Adafruit_Sensor *bme_pressure = bme.getPressureSensor();
+Adafruit_Sensor *bme_humidity = bme.getHumiditySensor();
+sensors_event_t temp_event, pressure_event, humidity_event;
+
 //////////////
 // Airspeed //
 //////////////
@@ -133,6 +150,9 @@ void setup(void)
 
   // Airspeed setup
   _AirspeedSetup();
+
+  // Altimeter setup
+  _AltimeterSetup();
   
   #if (_SERIAL_DEBUG_ == 1)
   delay(5000);  // 5 secs
@@ -273,6 +293,7 @@ void loop()
   _PINLoop();
   _GyroLoop();
   _AirspeedLoop();
+  _AltimeterLoop();
   _WifiLoop();
   _WifiLedLoop();
 

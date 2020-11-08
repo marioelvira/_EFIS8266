@@ -440,6 +440,7 @@ void _HttpLoop()
       httpServer.on("/ioStatus.json",     _jsonIOStatus);
       httpServer.on("/gyroStatus.json",   _jsonGyroStatus);
       httpServer.on("/anemoStatus.json",  _jsonAnemoStatus);
+      httpServer.on("/altimStatus.json",  _jsonAltStatus);
 
       // Json Config
       httpServer.on("/networkCfg.json",   _jsonNetworkCfg);

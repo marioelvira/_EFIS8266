@@ -8,7 +8,7 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/anemoStatus.json";
+	var jsondir = "http://" + ip +"/altimStatus.json";
 	
 	setTimeout( function() {	
 
@@ -18,17 +18,17 @@ function frefreshStatus()
     		
 			$.each(jsonData, function(index, obj) {
 				
-				if (obj.param == "airInValue")
-					$("#airInValue").html(obj.value);
+				if (obj.param == "altStatus")
+					$("#altStatus").html(obj.value);
 				
-				if (obj.param == "airInVolts")
-					$("#airInVolts").html(obj.value);
+				if (obj.param == "alt_temp")
+					$("#alt_temp").html(obj.value);
 
-				if (obj.param == "airPressure")
-					$("#airPressure").html(obj.value);
+				if (obj.param == "alt_humid")
+					$("#alt_humid").html(obj.value);
 				
-				if (obj.param == "airSpeed")
-					$("#airSpeed").html(obj.value);
+				if (obj.param == "alt_press")
+					$("#alt_press").html(obj.value);
 			})
 		});
 

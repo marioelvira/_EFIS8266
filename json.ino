@@ -99,10 +99,43 @@ void _jsonAnemoStatus()
   httpServer.send (200, "application/json", json);
 }
 
+void _jsonAltStatus()
+{
+  String json= "";
+  String jsonAltStatus = "...";
+
+  switch (altStatus)
+  {
+    case ALT_DETECTION:
+      jsonAltStatus = "Detecting..."; break;
+    case ALT_DETECTED:
+      jsonAltStatus = "Detected"; break;
+    case ALT_WORKING:
+      jsonAltStatus = "Working"; break;
+    case ALT_NOT_DETECTED:
+      jsonAltStatus = "Not Detected"; break;
+  }
+
+  json = "[";
+    
+  json = json + "{ \"param\":\"altStatus\", \"value\":\"" + jsonAltStatus + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"alt_temp\", \"value\":" + String(temp_event.temperature) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"alt_humid\", \"value\":" + String(humidity_event.relative_humidity) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"alt_press\", \"value\":" + String(pressure_event.pressure) + " }";
+   
+  json = json + "]";
+  
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
 void _jsonGyroStatus()
 {
   String json= "";
-  String jsonGyroStatus = "";
+  String jsonGyroStatus = "...";
 
   switch (gyroStatus)
   {

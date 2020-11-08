@@ -1,4 +1,5 @@
-var ip = "192.168.43.37";
+//var ip = "192.168.43.37";
+var ip = "192.168.1.5";
 
 $(document).ready( function()
 {
@@ -118,12 +119,4 @@ function fgetConfig()
 
 		});
 	});
-}
-
-function _sendGyroCfg()
-{
-	var xhttp = new XMLHttpRequest();
-	
-	xhttp.open("GET", "http://" + ip + "/setOUT?OUTstate=" + out, true);
-	xhttp.send();
 }
