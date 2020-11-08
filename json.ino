@@ -79,6 +79,26 @@ void _jsonIOStatus()
   httpServer.send (200, "application/json", json);
 }
 
+void _jsonAnemoStatus()
+{
+  String json = "";
+
+  json = "[";
+
+  json = json + "{ \"param\":\"airInValue\", \"value\":" + String(AirInValue) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airInVolts\", \"value\":" + String(AirInVolts) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airPressure\", \"value\":" + String(AirPressure) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(AirSpeed) + " }";
+
+  json = json + "]";
+  
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
 void _jsonGyroStatus()
 {
   String json= "";
@@ -145,7 +165,7 @@ void _jsonDATA()
 
   json = "[";
   
-  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(IAirSpeed) + " }";
+  json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(AirSpeed) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"rollAngle\", \"value\":" + String(gRoll) + " }";
   json = json + ",";

@@ -31,6 +31,14 @@ void _AirspeedLoop(void)
   
   AirInValue = airAcc/AIR_ARRAY_SIZE;
 
+  AirInVolts = map(AirInValue,
+                   (int)0,
+                   (int)1024,
+                   (int)0,
+                   (int)330);
+      
+  AirInVolts = AirInVolts/100;
+                   
   AirPressure = map(AirInValue,
                    (int)AIR_SENSOR_IN_SHIFT,
                    (int)AIR_SENSOR_IN_MAX,
@@ -40,7 +48,8 @@ void _AirspeedLoop(void)
   if (AirPressure < 0)
     AirPressure = 0;
 
-  IAirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
+  //AirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
+  AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
 
   // TODO
   //if (IAirSpeed < 20)
@@ -52,10 +61,12 @@ void _AirspeedLoop(void)
   {
     Serial.print("AirInValue: ");
     Serial.print(AirInValue);
+    Serial.print("\t AirInVolts: ");
+    Serial.print(AirInVolts);
     Serial.print("\t AirPressure: ");
     Serial.print(AirPressure);
-    Serial.print("\t IAirSpeed: ");
-    Serial.println(IAirSpeed);
+    Serial.print("\t AirSpeed: ");
+    Serial.println(AirSpeed);
             
     AirPreviousTime = AirCurrentTime;
   }

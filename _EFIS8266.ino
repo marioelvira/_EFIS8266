@@ -109,8 +109,9 @@ int iGforce;
 //////////////
 // Airspeed //
 //////////////
-float IAirSpeed;
+float AirSpeed;
 float AirPressure;
+float AirInVolts;
 int   AirInValue;
 int   AirInArray[AIR_ARRAY_SIZE];
 int   AirInPointer;

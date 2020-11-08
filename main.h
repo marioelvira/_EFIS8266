@@ -10,7 +10,7 @@ extern "C" {
 ///////////
 #define _SERIAL_DEBUG_          1
 
-#define _AIR_SERIAL_DEBUG_      1
+#define _AIR_SERIAL_DEBUG_      0
 #define _MAIN_SERIAL_DEBUG_     0
 #define _GYRO_SERIAL_DEBUG_     0
 #define _EEPROM_SERIAL_DEBUG_   1
