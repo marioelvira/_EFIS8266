@@ -380,7 +380,10 @@ void _setCMD()
    html = "Reset forced";
    #if (_HTTP_SERIAL_DEBUG_ == 1)
    Serial.println("Reset forced");
-   #endif 
+   #endif
+   #if (_USE_WDT_ == 1)
+   wdtForced = 1;
+   #endif
  }
  else if(cmd == "2")
  {
@@ -408,7 +411,8 @@ void _setCMD()
    html = "E2PROM erased";
    #if (_HTTP_SERIAL_DEBUG_ == 1)
    Serial.println("E2PROM erased");
-   #endif 
+   #endif
+   resetConfig = 1;
  }
  else
  {

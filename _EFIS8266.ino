@@ -21,6 +21,13 @@
 #include "main.h"
 #include "wifi.h"
 
+//////////////
+// Watchdog //
+//////////////
+#if (_USE_WDT_ == 1)
+int wdtForced;
+#endif
+
 ////////////
 // E2PROM //
 ////////////
@@ -179,6 +186,11 @@ void setup(void)
 
   // Time Setup
   _TimeSetup();
+
+  #if (_USE_WDT_ == 1)
+  // Wdt Setup
+  _WdtSetup();  
+  #endif
 }
 
 ///////////////
@@ -255,4 +267,8 @@ void loop()
   
   _TimeLoop();
   _ConfigLoop();
+
+  #if (_USE_WDT_ == 1)
+  _WdtLoop();  
+  #endif
 }

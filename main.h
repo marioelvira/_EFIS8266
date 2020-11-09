@@ -20,6 +20,8 @@ extern "C" {
 #define _TICK_SERIAL_DEBUG_     0
 #define _PHP_SERIAL_DEBUG_      1
 
+#define _USE_WDT_               0
+
 #endif // _MAIN_H_
 
 #ifdef __cplusplus
