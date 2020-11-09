@@ -24,51 +24,31 @@ setInterval(function()
 		$.each(jsonData, function(index, obj) {
 
 			if (obj.param == "airSpeed")
-			{
 				airspeed.setAirSpeed(obj.value);
-				$("#vairspeed").html(obj.value);
-			}
 
 			if (obj.param == "rollAngle")
 				attitude.setRoll(obj.value);
 
 			if (obj.param == "pitchAngle")
 				attitude.setPitch(obj.value);
-					
+			
+			if (obj.param == "altitude")
+				altimeter.setAltitude(obj.value);
+
+			if (obj.param == "QNH")
+				altimeter.setPressure(obj.value);			
+			
 			if (obj.param == "heading")
-			{
 				heading.setHeading(obj.value);
-				$("#vheading").html(obj.value);
-			}
-					
+		
 			if (obj.param == "turnAngle")
-			{
 				turn_coordinator.setTurn(obj.value);
-				$("#vturn").html(obj.value);
-			}
+			
+			if (obj.param == "vario")
+				variometer.setVario(obj.value);			
 		})
 
 	});
 		
-	// Airspeed update
-	//airspeed.setAirSpeed(80 + 80*Math.sin(increment/10));
-
-	// Attitude update
-	//attitude.setRoll(30*Math.sin(increment/10));
-	//attitude.setPitch(50*Math.sin(increment/20));
-
-	// Altimeter update
-	altimeter.setAltitude(10*increment);
-	altimeter.setPressure(1000 + 3*Math.sin(increment/50));
-	increment++;
-		
-	// TC update - note that the TC appears opposite the angle of the attitude indicator, as it mirrors the actual wing up/down position
-	//turn_coordinator.setTurn((30*Math.sin(increment/10))*-1);
-
-	// Heading update
-	//heading.setHeading(increment);
-		
-	// Vario update
-	variometer.setVario(2*Math.sin(increment/10));
 }, 100);
 

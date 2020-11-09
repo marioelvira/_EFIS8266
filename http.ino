@@ -375,7 +375,14 @@ void _setCMD()
  Serial.println(cmd);
  #endif
 
- if(cmd == "2")
+ if(cmd == "1")
+ {
+   html = "Reset forced";
+   #if (_HTTP_SERIAL_DEBUG_ == 1)
+   Serial.println("Reset forced");
+   #endif 
+ }
+ else if(cmd == "2")
  {
    if (outAux == IO_ON)
    {
@@ -396,12 +403,19 @@ void _setCMD()
      #endif
    }
  }
+ else if(cmd == "3")
+ {
+   html = "E2PROM erased";
+   #if (_HTTP_SERIAL_DEBUG_ == 1)
+   Serial.println("E2PROM erased");
+   #endif 
+ }
  else
  {
    html = "Error";
 
    #if (_HTTP_SERIAL_DEBUG_ == 1)
-   Serial.println("Out Error");
+   Serial.println("CMD Error");
    #endif
  }
 

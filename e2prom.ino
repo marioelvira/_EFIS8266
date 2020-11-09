@@ -19,6 +19,19 @@ void _ConfigSetup(void)
   delay(1000);
   _ReadEEPROM();
   #endif
+
+  resetConfig = 0;
+}
+
+void _ConfigLoop(void)
+{
+   
+  if (resetConfig == 1)
+  {
+    resetConfig = 0;
+    _ResetEEPROM();
+    delay(1000);
+  }
 }
 
 void _readCONFIG (void)

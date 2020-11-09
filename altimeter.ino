@@ -8,6 +8,9 @@ void _AltimeterSetup(void)
   altStatus = GYRO_DETECTION;
 
   altInfo = "";
+
+  altitude = 1500;
+  QNH = 1023;
 }
 
 /////////////////////////////
@@ -51,6 +54,8 @@ void _AltimeterLoop(void)
       bme_pressure->getEvent(&pressure_event);
       bme_humidity->getEvent(&humidity_event);
 
+      _AltimeterCalculus();
+
       #if (_ALT_SERIAL_DEBUG_ == 1)
       Serial.print(F("Temperature = "));
       Serial.print(temp_event.temperature);
@@ -73,4 +78,9 @@ void _AltimeterLoop(void)
     case ALT_NOT_DETECTED:
       break;
   }
+}
+
+void _AltimeterCalculus (void)
+{ 
+  //altitude = (float)44330 * (1 - pow(((float)(pressure_event.pressure)/((float) QNH * 100)), 0.190295)) * 3.281;
 }

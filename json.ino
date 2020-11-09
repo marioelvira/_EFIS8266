@@ -204,7 +204,7 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitute\", \"value\":" + String(altitute) + " }"; // TODO
+  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude) + " }"; // TODO
   json = json + ",";
   json = json + "{ \"param\":\"QNH\", \"value\":" + String(QNH) + " }"; // TODO
   json = json + ",";
@@ -214,7 +214,7 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }"; // TODO
+  json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }";
   
   json = json + "]";
 
