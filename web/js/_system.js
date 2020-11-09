@@ -8,7 +8,7 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/ioStatus.json";
+	var jsondir = "http://" + ip +"/systemStatus.json";
 	
 	setTimeout( function() {	
 
@@ -33,10 +33,10 @@ function frefreshStatus()
 	}, 1000);
 }
 
-function sendOUT(out)
+function sendCMD(out)
 {
 	var xhttp = new XMLHttpRequest();
 	
-	xhttp.open("GET", "http://" + ip + "/setOUT?OUTstate=" + out, true);
+	xhttp.open("GET", "http://" + ip + "/setCMD?CMDsent=" + out, true);
 	xhttp.send();
 }

@@ -61,7 +61,7 @@ void _jsonNetworkCfg()
   httpServer.send (200, "application/json", json);
 }
 
-void _jsonIOStatus()
+void _jsonSystemStatus()
 {
   String json = "";
 

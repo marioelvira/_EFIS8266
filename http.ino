@@ -365,17 +365,17 @@ void _setNETWORK()
 /////////////
 // Actions //
 /////////////
-void _setOUT()
+void _setCMD()
 {
- String t_state = httpServer.arg("OUTstate");
+ String cmd = httpServer.arg("CMDsent");
  String html = "";
  
  #if (_HTTP_SERIAL_DEBUG_ == 1)
- Serial.print("Change state out: ");
- Serial.println(outAux);
+ Serial.print("CMD received: ");
+ Serial.println(cmd);
  #endif
 
- if(t_state == "2")
+ if(cmd == "2")
  {
    if (outAux == IO_ON)
    {
@@ -426,7 +426,7 @@ void _HttpLoop()
       httpServer.on("/index.htm",         _serveNETWORK);
 
       // acctions
-      httpServer.on("/setOUT",            _setOUT);
+      httpServer.on("/setCMD",            _setCMD);
       httpServer.on("/networSettings",    _setNETWORK);
 
       // Actions Php
@@ -437,7 +437,7 @@ void _HttpLoop()
       httpServer.on("/data.json",         _jsonDATA);
 
       // Json Status
-      httpServer.on("/ioStatus.json",     _jsonIOStatus);
+      httpServer.on("/systemStatus.json", _jsonSystemStatus);
       httpServer.on("/gyroStatus.json",   _jsonGyroStatus);
       httpServer.on("/anemoStatus.json",  _jsonAnemoStatus);
       httpServer.on("/altimStatus.json",  _jsonAltStatus);
