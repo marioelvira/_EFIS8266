@@ -1,3 +1,18 @@
+void _jsonAltCfg()
+{
+  String json= "";
+
+  json = "[";
+
+  json = json + "{ \"param\":\"altInfo\", \"value\":\"" + altInfo + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"QNH\", \"value\":\"" + QNH + "\" }";
+    
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
 
 void _jsonGyroCfg()
 {

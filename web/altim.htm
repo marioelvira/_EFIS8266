@@ -52,6 +52,9 @@
 					<a class="nav-link active" data-toggle="tab" href="#Status">Status</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#Info">Info</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#Config">Configuration</a>
 				</li>
 			</ul>
@@ -82,7 +85,27 @@
 			</div>
 			</div>
 			
+			<div id="Info" class="container tab-pane"><br>
+				<div class="form-group">
+					<div class="alert alert-primary" id="altInfo">...</div>
+				</div>
+			</div>
+			
 			<div id="Config" class="container tab-pane fade"><br>
+			<!--<form action="http://192.168.43.37/altimCfg.php" class="needs-validation" novalidate>-->
+			<form action="http://192.168.1.5/altimCfg.php" class="needs-validation" novalidate>
+			<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>QNH </label>
+					<input type="number" class="form-control" name="QNH" id="QNH" required>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+			</div>
+			</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>	
 			</div>
 	
 			<!-- Tab panes -->

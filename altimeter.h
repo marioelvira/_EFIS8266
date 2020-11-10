@@ -12,6 +12,8 @@ extern "C" {
 
 #define ALT_SAMPLERATE_DELAY_MS    100
 
+#define CONV_METERS_TO_FEET   3.281
+
 #endif // _ALTIMETER_H_
 
 #ifdef __cplusplus

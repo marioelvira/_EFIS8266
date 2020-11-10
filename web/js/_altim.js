@@ -3,6 +3,7 @@ var ip = "192.168.1.5";
 
 $(document).ready( function()
 {
+	fgetConfig();
 	frefreshStatus();
 });
 
@@ -34,4 +35,24 @@ function frefreshStatus()
 
 		frefreshStatus();
 	}, 1000);
+}
+
+function fgetConfig()
+{
+	var jsondir = "http://" + ip + "/altimCfg.json";
+	
+	$.getJSON(jsondir, function(jsonData) {
+		
+		console.log(jsonData);
+		
+		$.each(jsonData, function(index, obj) {
+			
+			if (obj.param == "altInfo")
+				$("#altInfo").html(obj.value);
+				
+			if (obj.param == "QNH")
+				$("#QNH").val(obj.value);
+
+		});
+	});
 }

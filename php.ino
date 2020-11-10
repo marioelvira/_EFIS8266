@@ -241,6 +241,30 @@ void _phpNetworkCfg()
     httpServer.send (i, "text/html", "Error"); // TODO
 }
 
+void _phpAltCfg()
+{ 
+  String qnh = httpServer.arg("QNH");
+
+  QNH = qnh.toInt();
+
+  #if (_PHP_SERIAL_DEBUG_ == 1)
+  Serial.print("---->QNH: ");
+  Serial.println(QNH);
+  Serial.println("");
+  #endif
+
+  //EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
+  //EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
+
+  //EEPROM.commit();    //Store data to EEPROM
+
+  // Read config from EEPROM
+  //_readCONFIG();
+    
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "text/html", "OK");
+}
+
 void _phpGyroCfg()
 {
   adafruit_bno055_offsets_t  gyroCalWeb;

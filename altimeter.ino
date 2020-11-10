@@ -40,11 +40,23 @@ void _AltimeterLoop(void)
       break;
       
     case ALT_DETECTED:
+      altInfo = "Temp: </br>";
+      bme_temp->getSensor(&altSensor);
+      _AltSensorDetails();
+      altInfo = altInfo + "Pressure: </br>";
+      bme_pressure->getSensor(&altSensor);
+      _AltSensorDetails();
+      altInfo = altInfo + "Humidity: </br>";
+      bme_humidity->getSensor(&altSensor);
+      _AltSensorDetails();      
+      /*
       #if (_ALT_SERIAL_DEBUG_ == 1)
       bme_temp->printSensorDetails();
       bme_pressure->printSensorDetails();
       bme_humidity->printSensorDetails();
       #endif
+      */
+      
       altStatus = ALT_WORKING;
       break;
       
@@ -59,7 +71,7 @@ void _AltimeterLoop(void)
       #if (_ALT_SERIAL_DEBUG_ == 1)
       Serial.print(F("Temperature = "));
       Serial.print(temp_event.temperature);
-      Serial.println(" *C");
+      Serial.println(" ºC");
     
       Serial.print(F("Humidity = "));
       Serial.print(humidity_event.relative_humidity);
@@ -80,7 +92,28 @@ void _AltimeterLoop(void)
   }
 }
 
+/*******************************/
+/* Altimeter basic information */
+/*******************************/
+void _AltSensorDetails(void)
+{
+  altInfo = altInfo + "Sensor:     " + (String)altSensor.name + "</br>";
+  altInfo = altInfo + "Driver Ver: " + (String)altSensor.version + "</br>";
+  altInfo = altInfo + "Unique ID:  " + (String)altSensor.sensor_id + "</br>";
+  altInfo = altInfo + "Max Value:  " + (String)altSensor.max_value + "</br>";
+  altInfo = altInfo + "Min Value:  " + (String)altSensor.min_value + "</br>";
+  altInfo = altInfo + "Resolution: " + (String)altSensor.resolution + "</br>";
+
+  #if (_ALT_SERIAL_DEBUG_ == 1)
+  Serial.println("------------------------------------");
+  Serial.println(altInfo);
+  Serial.println("------------------------------------");
+  Serial.println("");
+  delay(500);
+  #endif
+}
+
 void _AltimeterCalculus (void)
-{ 
-  //altitude = (float)44330 * (1 - pow(((float)(pressure_event.pressure)/((float) QNH * 100)), 0.190295)) * 3.281;
+{
+  altitude = (float)44330 * (1 - pow(((float)(pressure_event.pressure)/((float) QNH)), 0.190295)) * CONV_METERS_TO_FEET;
 }

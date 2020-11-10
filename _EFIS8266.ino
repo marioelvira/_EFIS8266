@@ -126,16 +126,19 @@ int iGforce;
 ///////////////
 // Altimeter //
 ///////////////
-String altInfo;
-int    altStatus;
-float  altitude;
-int    QNH;
-int    vario = 2;   // TODO
+sensor_t    altSensor;
+String      altInfo;
+int         altStatus;
+
+float       altitude;
+int         QNH;         // hPa
+int         vario = 2;   // TODO
 
 Adafruit_BME280 bme; // use I2C interface
 Adafruit_Sensor *bme_temp = bme.getTemperatureSensor();
 Adafruit_Sensor *bme_pressure = bme.getPressureSensor();
 Adafruit_Sensor *bme_humidity = bme.getHumiditySensor();
+// preasure hPa, Temp ºC, Humidity %
 sensors_event_t temp_event, pressure_event, humidity_event;
 
 //////////////
