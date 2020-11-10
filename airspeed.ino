@@ -44,6 +44,9 @@ void _AirspeedLoop(void)
                    (int)AIR_SENSOR_IN_MAX,
                    (int)AIR_SENSOR_PA_MIN,
                    (int)AIR_SENSOR_PA_MAX);
+
+  // kPa
+  //AirPressure = AirPressure / 1000;
  
   if (AirPressure < 0)
     AirPressure = 0;
