@@ -102,7 +102,9 @@ void _jsonAnemoStatus()
 
   json = json + "{ \"param\":\"airInValue\", \"value\":" + String(AirInValue) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"airInVolts\", \"value\":" + String(AirInVolts) + " }";
+  json = json + "{ \"param\":\"airInValueC\", \"value\":" + String(AirInValueCorrected) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airInVolts\", \"value\":" + String(Air_mVolts) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"airPressure\", \"value\":" + String(AirPressure) + " }";
   json = json + ",";

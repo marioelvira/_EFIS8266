@@ -17,7 +17,7 @@ void _AirspeedSetup(void)
 // Airspeed state machine //
 ////////////////////////////
 void _AirspeedLoop(void)
-{
+{ 
   int airAcc = 0;
 
   AirInArray[AirInPointer] = analogRead(PIN_AIR_IN);
@@ -31,32 +31,20 @@ void _AirspeedLoop(void)
   
   AirInValue = airAcc/AIR_ARRAY_SIZE;
 
-  AirInVolts = map(AirInValue,
-                   (int)0,
-                   (int)1024,
-                   (int)0,
-                   (int)330);
-      
-  AirInVolts = AirInVolts/100;
-                   
-  AirPressure = map(AirInValue,
-                   (int)AIR_SENSOR_IN_SHIFT,
-                   (int)AIR_SENSOR_IN_MAX,
-                   (int)AIR_SENSOR_PA_MIN,
-                   (int)AIR_SENSOR_PA_MAX);
+  AirInValueCorrected = AirInValue - AIR_DIG_OFFSET;
+  if (AirInValueCorrected < 0)
+    AirInValueCorrected = 0;
 
-  // kPa
-  //AirPressure = AirPressure / 1000;
- 
-  if (AirPressure < 0)
-    AirPressure = 0;
+  Air_mVolts = (float)AirInValueCorrected * (AIR_MVOLTS_EOS /(AIR_DIG_EOS - AIR_DIG_OFFSET));
+      
+  AirPressure = ((Air_mVolts) / AIR_SENS_SENSIVITY * CONV_MMH2O_KPA);        // result in kPa
 
   //AirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
-  AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
+  AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)(AirPressure*1000)/(float)AIR_DENSITY);
 
   // TODO
-  //if (IAirSpeed < 20)
-  //  IAirSpeed = 0; 
+  if (AirSpeed < 20)
+    AirSpeed = 0; 
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   AirCurrentTime = millis();
@@ -64,8 +52,10 @@ void _AirspeedLoop(void)
   {
     Serial.print("AirInValue: ");
     Serial.print(AirInValue);
+    Serial.print("AirInValueC: ");
+    Serial.print(AirInValueCorrected);
     Serial.print("\t AirInVolts: ");
-    Serial.print(AirInVolts);
+    Serial.print(Air_mVolts);
     Serial.print("\t AirPressure: ");
     Serial.print(AirPressure);
     Serial.print("\t AirSpeed: ");

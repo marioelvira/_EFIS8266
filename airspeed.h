@@ -8,19 +8,15 @@ extern "C" {
 #define AIR_ARRAY_SIZE  5
 #define AIR_TICK        1000
 
-#define AIR_DENSITY     1.225   // kg/m^3
-#define CONV_MPS_KNOTS  1.94    // m/s to knots
-#define CONV_MPS_KMH    3.6     // m/s to km/h
+#define AIR_DENSITY     1.225     // kg/m^3
+#define CONV_MPS_KNOTS  1.94      // m/s to knots
+#define CONV_MPS_KMH    3.6       // m/s to km/h
+#define CONV_MMH2O_KPA  0.00981   // convesion multiplier from mmH2O to kPa
 
-// Sensor map
-#define AIR_SENSOR_IN_SHIFT    0    // 520
-#define AIR_SENSOR_IN_MAX      1024 // 998
-#define AIR_SENSOR_PA_MIN      0
-// Max pressure for MPXV5010DP is 10Kpa at 5V (250 knots)
-#define AIR_SENSOR_PA_MAX      6900 // TODO: a 3.3V 10000 a 5V
-
-// Max pressure for MPXV7002 is 2Kpa (112 knots)
-//#define AIR_SENSOR_PA_MAX    2000
+#define AIR_DIG_OFFSET          55      // Digital Offset
+#define AIR_DIG_EOS             1023    // Digital End Of Scale
+#define AIR_MVOLTS_EOS          3300    // mVolts Enf Of Scale
+#define AIR_SENS_SENSIVITY      3.713   // 4.413 in mV/mmH2O taken from datasheet. 4.413 * 3.3/5
 
 #endif // _AIRSEEP_H_
 

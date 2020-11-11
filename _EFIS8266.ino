@@ -146,8 +146,9 @@ sensors_event_t temp_event, pressure_event, humidity_event;
 //////////////
 float AirSpeed;
 float AirPressure;
-float AirInVolts;
+float Air_mVolts;
 int   AirInValue;
+int   AirInValueCorrected;
 int   AirInArray[AIR_ARRAY_SIZE];
 int   AirInPointer;
 #if (_AIR_SERIAL_DEBUG_ == 1)
