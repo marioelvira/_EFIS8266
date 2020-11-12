@@ -21,8 +21,11 @@ function frefreshStatus()
 			$.each(jsonData, function(index, obj) {
 				
 				if (obj.param == "airInValue")
-					$("#airInValue").html(obj.value);
+					$("#airInValue").html(obj.value);				
 				
+				if (obj.param == "airInValueC")
+					$("#airInValueC").html(obj.value);
+
 				if (obj.param == "airInVolts")
 					$("#airInVolts").html(obj.value);
 
