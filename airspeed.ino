@@ -4,6 +4,15 @@
 /////////////////////
 void _AirspeedSetup(void)
 {
+	
+  // TODO read form E2PROM
+  airInfo = "";
+  
+  airDigOffset = AIR_DIG_OFFSET;
+  airDigEOS = AIR_DIG_EOS;
+  airmVoltsEOS = AIR_MVOLTS_EOS;
+  airSenSensivity = AIR_SENS_SENSIVITY;
+
   AirPressure = 0;  
   AirInValue = 0;
 
@@ -11,6 +20,8 @@ void _AirspeedSetup(void)
     AirInArray[i] = 0;
 
   AirInPointer = 0;
+  
+  _AirSensorDetails();
 }
 
 ////////////////////////////
@@ -31,13 +42,13 @@ void _AirspeedLoop(void)
   
   AirInValue = airAcc/AIR_ARRAY_SIZE;
 
-  AirInValueCorrected = AirInValue - AIR_DIG_OFFSET;
+  AirInValueCorrected = AirInValue - airDigOffset;
   if (AirInValueCorrected < 0)
     AirInValueCorrected = 0;
 
-  Air_mVolts = (float)AirInValueCorrected * (AIR_MVOLTS_EOS /(AIR_DIG_EOS - AIR_DIG_OFFSET));
+  Air_mVolts = (float)AirInValueCorrected * (airmVoltsEOS /(airDigEOS - airDigOffset));
       
-  AirPressure = ((Air_mVolts) / AIR_SENS_SENSIVITY * CONV_MMH2O_KPA);        // result in kPa
+  AirPressure = ((Air_mVolts) / airSenSensivity * CONV_MMH2O_KPA);        // result in kPa
 
   //AirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
   AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)(AirPressure*1000)/(float)AIR_DENSITY);
@@ -63,5 +74,23 @@ void _AirspeedLoop(void)
             
     AirPreviousTime = AirCurrentTime;
   }
+  #endif
+}
+
+/******************************/
+/* Airspeed basic information */
+/******************************/
+void _AirSensorDetails(void)
+{
+  airInfo =           "Sensor:     " + (String)AIR_SENS_INFO_TYPE + "</br>";
+  airInfo = airInfo + "Max Value:  " + (String)AIR_SENS_INFO_MAX + "</br>";
+  airInfo = airInfo + "Sensivity:  " + (String)AIR_SENS_INFO_SENSIVITY + "</br>";
+
+  #if (_AIR_SERIAL_DEBUG_ == 1)
+  Serial.println("------------------------------------");
+  Serial.println(airInfo);
+  Serial.println("------------------------------------");
+  Serial.println("");
+  delay(500);
   #endif
 }

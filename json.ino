@@ -14,6 +14,28 @@ void _jsonAltCfg()
   httpServer.send (200, "application/json", json);
 }
 
+void _jsonAnemoCfg()
+{
+  String json= "";
+
+  json = "[";
+
+  json = json + "{ \"param\":\"airInfo\", \"value\":\"" + airInfo + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airDigOffset\", \"value\":\"" + airDigOffset + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airDigEOS\", \"value\":\"" + airDigEOS + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airmVoltsEOS\", \"value\":\"" + airmVoltsEOS + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSenSensivity\", \"value\":\"" + airSenSensivity + "\" }";
+  
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
 void _jsonGyroCfg()
 {
   String json= "";

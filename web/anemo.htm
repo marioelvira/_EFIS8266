@@ -52,6 +52,10 @@
 					<a class="nav-link active" data-toggle="tab" href="#Status">Status</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#Info">Info</a>
+				</li>
+
+				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#Config">Configuration</a>
 				</li>
 			</ul>
@@ -82,7 +86,50 @@
 			</div>
 			</div>
 			
+			<div id="Info" class="container tab-pane"><br>
+				<div class="form-group">
+					<div class="alert alert-primary" id="airInfo">...</div>
+				</div>
+			</div>
+			
 			<div id="Config" class="container tab-pane fade"><br>
+			<!--<form action="http://192.168.43.37/anemoCfg.php" class="needs-validation" novalidate>-->
+			<!--<form action="http://192.168.1.5/anemoCfg.php" class="needs-validation" novalidate>-->
+			<form action="http://172.16.0.50/anemoCfg.php" class="needs-validation" novalidate>
+			<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>airDigOffset </label>
+					<input type="number" class="form-control" name="airDigOffset" id="airDigOffset" required>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+				<div class="form-group">
+					<label>airDigEOS </label>
+					<input type="number" class="form-control" name="airDigEOS" id="airDigEOS" required>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>air EOS (mV) </label>
+					<input type="number" class="form-control" name="airmVoltsEOS" id="airmVoltsEOS" required>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+				<div class="form-group">
+					<label>air Sensor Sensivity (mV/mmH2O) </label>
+					<input type="number" class="form-control" name="airSenSensivity" id="airSenSensivity" required>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+			</div>
+			
+			</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>	
 			</div>
 	
 			<!-- Tab panes -->

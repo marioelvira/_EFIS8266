@@ -1,5 +1,6 @@
 //var ip = "192.168.43.37";
-var ip = "192.168.1.5";
+//var ip = "192.168.1.5";
+var ip = "172.16.0.50";
 
 // Dynamic examples
 var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : true});

@@ -265,6 +265,43 @@ void _phpAltCfg()
   httpServer.send (200, "text/html", "OK");
 }
 
+void _phpAnemoCfg()
+{ 
+  String sAirDigOffset = httpServer.arg("airDigOffset");
+  String sAirDigEOS = httpServer.arg("airDigEOS");
+  String sAirmVoltsEOS = httpServer.arg("airmVoltsEOS");
+  String sAirSenSensivity = httpServer.arg("airSenSensivity");
+
+  airDigOffset = sAirDigOffset.toInt();
+  airDigEOS = sAirDigEOS.toInt();
+  airmVoltsEOS = (float)sAirmVoltsEOS.toFloat();
+  airSenSensivity = (float)sAirSenSensivity.toFloat();
+
+  #if (_PHP_SERIAL_DEBUG_ == 1)
+  Serial.print("---->airDigOffset: ");
+  Serial.println(airDigOffset);
+  Serial.print("---->airDigEOS: ");
+  Serial.println(airDigEOS);
+  Serial.print("---->airmVoltsEOS: ");
+  Serial.println(airmVoltsEOS);
+  Serial.print("---->sAirSenSensivity: ");
+  Serial.println(sAirSenSensivity);
+  Serial.println("");
+  #endif
+
+  //EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
+  //EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
+
+  //EEPROM.commit();    //Store data to EEPROM
+
+  // Read config from EEPROM
+  //_readCONFIG();
+    
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "text/html", "OK");
+}
+
+
 void _phpGyroCfg()
 {
   adafruit_bno055_offsets_t  gyroCalWeb;

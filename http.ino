@@ -450,6 +450,7 @@ void _HttpLoop()
       // Actions Php
       httpServer.on("/networkCfg.php",    _phpNetworkCfg);
       httpServer.on("/gyroCfg.php",       _phpGyroCfg);
+      httpServer.on("/anemoCfg.php",      _phpAnemoCfg);
       httpServer.on("/altimCfg.php",      _phpAltCfg);
 
       // Json data
@@ -464,6 +465,7 @@ void _HttpLoop()
       // Json Config
       httpServer.on("/networkCfg.json",   _jsonNetworkCfg);
       httpServer.on("/gyroCfg.json",      _jsonGyroCfg);
+      httpServer.on("/anemoCfg.json",     _jsonAnemoCfg);
       httpServer.on("/altimCfg.json",     _jsonAltCfg);
       
       httpServer.begin();
