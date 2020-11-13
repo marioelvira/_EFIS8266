@@ -4,14 +4,13 @@
 /////////////////////
 void _AirspeedSetup(void)
 {
-	
-  // TODO read form E2PROM
   airInfo = "";
-  
-  airDigOffset = AIR_DIG_OFFSET;
-  airDigEOS = AIR_DIG_EOS;
-  airmVoltsEOS = AIR_MVOLTS_EOS;
-  airSenSensivity = AIR_SENS_SENSIVITY;
+
+  // TODO read form E2PROM
+  airsData.digOffset = AIR_DIG_OFFSET;
+  airsData.digEOS = AIR_DIG_EOS;
+  airsData.mVoltsEOS = AIR_MVOLTS_EOS;
+  airsData.senSensivity = AIR_SENS_SENSIVITY;
 
   AirPressure = 0;  
   AirInValue = 0;
@@ -42,13 +41,13 @@ void _AirspeedLoop(void)
   
   AirInValue = airAcc/AIR_ARRAY_SIZE;
 
-  AirInValueCorrected = AirInValue - airDigOffset;
+  AirInValueCorrected = AirInValue - airsData.digOffset;
   if (AirInValueCorrected < 0)
     AirInValueCorrected = 0;
 
-  Air_mVolts = (float)AirInValueCorrected * (airmVoltsEOS /(airDigEOS - airDigOffset));
+  Air_mVolts = (float)AirInValueCorrected * (airsData.mVoltsEOS /(airsData.digEOS - airsData.digOffset));
       
-  AirPressure = ((Air_mVolts) / airSenSensivity * CONV_MMH2O_KPA);        // result in kPa
+  AirPressure = ((Air_mVolts) / airsData.senSensivity * CONV_MMH2O_KPA);        // result in kPa
 
   //AirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
   AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)(AirPressure*1000)/(float)AIR_DENSITY);

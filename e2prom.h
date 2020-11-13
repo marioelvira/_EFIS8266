@@ -34,7 +34,15 @@ extern "C" {
 
 #define EEPROM_ADD_GYRO_CAL       0x4F
 #define EERPOM_ADD_GYRO_VAL       0x50
-#define EEPROM_GYRO_MAX           22 // Gyro Cal max 22 bytes -> Next 0x66     
+#define EEPROM_GYRO_MAX           22 // Gyro Cal max 22 bytes -> Next 0x66
+
+#define EEPROM_ADD_AIRS_CAL       0x66
+#define EERPOM_ADD_AIRS_DIG_OFF   0x67
+#define EERPOM_ADD_AIRS_DIG_EOS   0x69
+#define EERPOM_ADD_AIRS_MV_EOS    0x6B
+#define EERPOM_ADD_AIRS_SSX1000   0x6D
+
+#define EERPOM_NEXT               0x6F  // Next value
 
 // Values
 #define EEPROM_VAL_OK             0xAA
@@ -57,8 +65,14 @@ extern "C" {
 #define STATION_MODE              1
 #define EEPROM_VAL_WIFI_MODE      ACCESSPOINT_MODE // STATION_MODE
 
-#define EEPROM_VAL_GYRO_CAL      0x00   // Not calibrated
-#define EEPROM_VAL_GYRO_CAL_OK   0xCA
+#define EEPROM_VAL_NOT_CAL        0x00   // Not calibrated
+
+#define EEPROM_VAL_GYRO_CAL_OK    0xCA
+
+#define EERPOM_VAL_AIRS_DIG_OFF   56
+#define EERPOM_VAL_AIRS_DIG_EOS   1023
+#define EERPOM_VAL_AIRS_MV_EOS    3300
+#define EERPOM_VAL_AIRS_SSX1000   3713
 
 #endif // _E2PROM_H_
 

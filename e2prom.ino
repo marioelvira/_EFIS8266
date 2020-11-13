@@ -92,9 +92,13 @@ void _readCONFIG (void)
     #endif
     
     // Gyro
-    EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL);
+    EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_NOT_CAL);
     for (i = 0; i < EEPROM_GYRO_MAX; i++)
       EEPROM.write(EERPOM_ADD_GYRO_VAL + i, 0);
+
+    // Airspeed
+    EEPROM.write(EEPROM_ADD_AIRS_CAL, EEPROM_VAL_NOT_CAL);
+    
 
     EEPROM.commit();    //Store data to EEPROM
   }
@@ -190,13 +194,34 @@ void _readCONFIG (void)
     gyroData.calibrated = 0;
     
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
-  Serial.print("EPROM CAL: ");
+  Serial.print("EPROM GYRO CAL: ");
   Serial.print(i);
   if (gyroData.calibrated == 1)
     Serial.println(" OK");
   else
    Serial.println(" NOK");
   #endif
+
+  // Airspeed
+  /*
+  airsData.calibrated = EEPROM.read(EEPROM_ADD_AIRS_CAL);
+  if (gyroData.calibrated == EEPROM_VAL_GYRO_CAL_OK)
+  {
+    gyroData.calibrated = 1;
+    EEPROM.get(EERPOM_ADD_GYRO_VAL, gyroCalVal);
+  }
+  else
+    gyroData.calibrated = 0;
+    
+  #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("EPROM ANEMO CAL: ");
+  Serial.print(i);
+  if (gyroData.calibrated == 1)
+    Serial.println(" OK");
+  else
+   Serial.println(" NOK");
+  #endif
+  */
 }
 
 void _ResetEEPROM() {

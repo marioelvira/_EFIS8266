@@ -5,6 +5,15 @@ extern "C" {
 #ifndef _AIRSEEP_H_
 #define _AIRSEEP_H_
 
+typedef struct
+{
+  int   calibrated;
+  int   digOffset;
+  int   digEOS;
+  float mVoltsEOS;
+  float senSensivity;
+} AirsData;
+
 #define AIR_ARRAY_SIZE  5
 #define AIR_TICK        1000
 

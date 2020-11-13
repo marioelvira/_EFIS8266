@@ -155,11 +155,13 @@ int   AirInArray[AIR_ARRAY_SIZE];
 int   AirInPointer;
 
 String airInfo;
+AirsData airsData;
+/*
 int airDigOffset;
 int airDigEOS;
 float airmVoltsEOS;
 float airSenSensivity;
-
+*/
 #if (_AIR_SERIAL_DEBUG_ == 1)
 unsigned long AirCurrentTime = millis();
 unsigned long AirPreviousTime = 0;

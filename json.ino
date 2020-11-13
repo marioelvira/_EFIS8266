@@ -22,13 +22,13 @@ void _jsonAnemoCfg()
 
   json = json + "{ \"param\":\"airInfo\", \"value\":\"" + airInfo + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airDigOffset\", \"value\":\"" + airDigOffset + "\" }";
+  json = json + "{ \"param\":\"airDigOffset\", \"value\":\"" + airsData.digOffset + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airDigEOS\", \"value\":\"" + airDigEOS + "\" }";
+  json = json + "{ \"param\":\"airDigEOS\", \"value\":\"" + airsData.digEOS + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airmVoltsEOS\", \"value\":\"" + airmVoltsEOS + "\" }";
+  json = json + "{ \"param\":\"airmVoltsEOS\", \"value\":\"" + airsData.mVoltsEOS + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airSenSensivity\", \"value\":\"" + airSenSensivity + "\" }";
+  json = json + "{ \"param\":\"airSenSensivity\", \"value\":\"" + airsData.senSensivity + "\" }";
   
   json = json + "]";
 
