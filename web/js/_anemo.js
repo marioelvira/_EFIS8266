@@ -1,6 +1,4 @@
-//var ip = "192.168.43.37";
-//var ip = "192.168.1.5";
-var ip = "172.16.0.50";
+var ip = localStorage.getItem("vip"); 
 
 $(document).ready( function()
 {
