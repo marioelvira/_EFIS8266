@@ -7,11 +7,10 @@ extern "C" {
 
 typedef struct
 {
-  int   calibrated;
-  int   digOffset;
-  int   digEOS;
-  float mVoltsEOS;
-  float senSensivity;
+  int   digOffset;      // 2 bytes
+  int   digEOS;         // 2 bytes
+  float mVoltsEOS;      // 4 bytes
+  float senSensivity;   // 4 bytes
 } AirsData;
 
 #define AIR_ARRAY_SIZE  5

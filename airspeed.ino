@@ -7,11 +7,6 @@ void _AirspeedSetup(void)
   airInfo = "";
 
   // TODO read form E2PROM
-  airsData.digOffset = AIR_DIG_OFFSET;
-  airsData.digEOS = AIR_DIG_EOS;
-  airsData.mVoltsEOS = AIR_MVOLTS_EOS;
-  airsData.senSensivity = AIR_SENS_SENSIVITY;
-
   AirPressure = 0;  
   AirInValue = 0;
 

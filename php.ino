@@ -253,7 +253,6 @@ void _phpAltCfg()
   Serial.println("");
   #endif
 
-  //EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
   //EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
 
   //EEPROM.commit();    //Store data to EEPROM
@@ -289,13 +288,12 @@ void _phpAnemoCfg()
   Serial.println("");
   #endif
 
-  //EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
-  //EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
-
-  //EEPROM.commit();    //Store data to EEPROM
+  EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
+  
+  EEPROM.commit();    //Store data to EEPROM
 
   // Read config from EEPROM
-  //_readCONFIG();
+  _readCONFIG();
     
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "text/html", "OK");
