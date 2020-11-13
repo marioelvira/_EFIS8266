@@ -69,7 +69,7 @@ void _GyroLoop()
       
     case GYRO_IN_CALIBRATION:
       
-      bno.getEvent(&event);
+      bno.getEvent(&gyroEvent);
 
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       Serial.print("Cal -> ");
@@ -137,15 +137,15 @@ void _GyroLoop()
       break;
 
     case GYRO_WORKING:
-      bno.getEvent(&event);
+      bno.getEvent(&gyroEvent);
 
       #if (_GYRO_SERIAL_DEBUG_ == 1)
       Serial.print("X: ");
-      Serial.print(event.orientation.x, 4);
+      Serial.print(gyroEvent.orientation.x, 4);
       Serial.print("\tY: ");
-      Serial.print(event.orientation.y, 4);
+      Serial.print(gyroEvent.orientation.y, 4);
       Serial.print("\tZ: ");
-      Serial.print(event.orientation.z, 4);
+      Serial.print(gyroEvent.orientation.z, 4);
       #endif
         
       // Display calibration status
@@ -270,17 +270,17 @@ void _GyroCalculus (void)
 { 
   float Gforce = 1.0;
 
-  gMag = event.orientation.x + 0.5;
+  gMag = gyroEvent.orientation.x + 0.5;
   
-  if (event.orientation.y >= 0)
-    gRoll = event.orientation.y + 0.5;
+  if (gyroEvent.orientation.y >= 0)
+    gRoll = gyroEvent.orientation.y + 0.5;
   else
-    gRoll = event.orientation.y - 0.5;
+    gRoll = gyroEvent.orientation.y - 0.5;
     
-  if (event.orientation.z >= 0)
-    gPitch = event.orientation.z + 0.5;
+  if (gyroEvent.orientation.z >= 0)
+    gPitch = gyroEvent.orientation.z + 0.5;
   else
-    gPitch = event.orientation.z - 0.5;
+    gPitch = gyroEvent.orientation.z - 0.5;
 
   // Pitch
   if (abs(gPitch) > 90)

@@ -111,7 +111,7 @@ GyroData                  gyroData;
 adafruit_bno055_offsets_t gyroCalVal;
 sensor_t                  gyroSensor;
 
-sensors_event_t           event;
+sensors_event_t           gyroEvent;
 uint8_t                   system_status, system_selftest, system_error;
 uint8_t                   sys, gyro, accel, mag;
 
@@ -138,8 +138,10 @@ Adafruit_BME280 bme; // use I2C interface
 Adafruit_Sensor *bme_temp = bme.getTemperatureSensor();
 Adafruit_Sensor *bme_pressure = bme.getPressureSensor();
 Adafruit_Sensor *bme_humidity = bme.getHumiditySensor();
-// preasure hPa, Temp ºC, Humidity %
-sensors_event_t temp_event, pressure_event, humidity_event;
+
+sensors_event_t temp_event;       // Temp ºC
+sensors_event_t pressure_event;   // Pressure hPa
+sensors_event_t humidity_event;   // Humidity %
 
 //////////////
 // Airspeed //

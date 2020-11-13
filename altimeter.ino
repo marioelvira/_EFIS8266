@@ -49,24 +49,21 @@ void _AltimeterLoop(void)
       altInfo = altInfo + "Humidity: </br>";
       bme_humidity->getSensor(&altSensor);
       _AltSensorDetails();      
-      /*
-      #if (_ALT_SERIAL_DEBUG_ == 1)
-      bme_temp->printSensorDetails();
-      bme_pressure->printSensorDetails();
-      bme_humidity->printSensorDetails();
-      #endif
-      */
       
       altStatus = ALT_WORKING;
       break;
       
     case ALT_WORKING:
-      
+
+      // Porsia...
+      if (bme.isReadingCalibration())
+       break;
+
       bme_temp->getEvent(&temp_event);
       bme_pressure->getEvent(&pressure_event);
       bme_humidity->getEvent(&humidity_event);
 
-      _AltimeterCalculus();
+      _FromQHN2Altitude();
 
       #if (_ALT_SERIAL_DEBUG_ == 1)
       Serial.print(F("Temperature = "));
@@ -113,7 +110,12 @@ void _AltSensorDetails(void)
   #endif
 }
 
-void _AltimeterCalculus (void)
+void _FromQHN2Altitude (void)
 {
-  altitude = (float)44330 * (1 - pow(((float)(pressure_event.pressure)/((float) QNH)), 0.190295)) * CONV_METERS_TO_FEET;
+  altitude = (float)T0_DIV_L * (1.0 - pow(((float)(pressure_event.pressure)/((float) QNH)), LR_DIV_Mg));
+}
+
+void _FromAltitude2QNH (void)
+{
+  QNH = ((float)pressure_event.pressure) / (pow(1.0 - (altitude / T0_DIV_L), Mg_DIV_LR));
 }

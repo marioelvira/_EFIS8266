@@ -13,9 +13,9 @@ extern "C" {
 #define CONV_MPS_KMH    3.6       // m/s to km/h
 #define CONV_MMH2O_KPA  0.00981   // convesion multiplier from mmH2O to kPa
 
-#define AIR_SENS_INFO_TYPE		"MPX5010DP"
-#define AIR_SENS_INFO_MAX		"10kPa"
-#define AIR_SENS_INFO_SENSIVITY	"4.413 mV/mmH20"
+#define AIR_SENS_INFO_TYPE		    "MPX5010DP"
+#define AIR_SENS_INFO_MAX		      "10kPa"
+#define AIR_SENS_INFO_SENSIVITY	  "4.413 mV/mmH20"
 
 #define AIR_DIG_OFFSET          55      	// Digital Offset
 #define AIR_DIG_EOS             1023    	// Digital End Of Scale

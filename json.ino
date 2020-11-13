@@ -210,11 +210,11 @@ void _jsonGyroStatus()
   json = json + ",";
   json = json + "{ \"param\":\"cal_mag\", \"value\":" + String(mag) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"coor_x\", \"value\":" + String(event.orientation.x) + " }";
+  json = json + "{ \"param\":\"coor_x\", \"value\":" + String(gyroEvent.orientation.x) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"coor_y\", \"value\":" + String(event.orientation.y) + " }";
+  json = json + "{ \"param\":\"coor_y\", \"value\":" + String(gyroEvent.orientation.y) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"coor_z\", \"value\":" + String(event.orientation.z) + " }";
+  json = json + "{ \"param\":\"coor_z\", \"value\":" + String(gyroEvent.orientation.z) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"gyro_mag\", \"value\":" + String(gMag) + " }";
   json = json + ",";
@@ -243,7 +243,7 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude) + " }"; // TODO
+  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude*CONV_METERS_TO_FEET) + " }"; // TODO
   json = json + ",";
   json = json + "{ \"param\":\"QNH\", \"value\":" + String(QNH) + " }"; // TODO
   json = json + ",";
