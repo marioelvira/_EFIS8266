@@ -7,7 +7,7 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/systemStatus.json";
+	var jsondir = "http://" + ip + "/systemStatus.json";
 	
 	setTimeout( function() {	
 

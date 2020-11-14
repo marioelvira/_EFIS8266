@@ -8,6 +8,9 @@ $(document).ready( function()
 function fgetConfig()
 {
 	var jsondir = "http://" + ip + "/networkCfg.json";
+	var phpdir  = "http://" + ip + "/networkCfg.php";
+
+	$("#formCfg").attr("action", phpdir);
 	
 	$.getJSON(jsondir, function(jsonData) {
 		

@@ -8,7 +8,7 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/gyroStatus.json";
+	var jsondir = "http://" + ip + "/gyroStatus.json";
 	
 	setTimeout( function() {	
 
@@ -72,7 +72,10 @@ function frefreshStatus()
 
 function fgetConfig()
 {
-	var jsondir = "http://" + ip +"/gyroCfg.json";
+	var jsondir = "http://" + ip + "/gyroCfg.json";
+	var phpdir  = "http://" + ip + "/gyroCfg.php";
+
+	$("#formCfg").attr("action", phpdir);
 	
 	$.getJSON(jsondir, function(jsonData) {
 		

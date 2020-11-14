@@ -1,4 +1,4 @@
-var ip = localStorage.getItem("vip"); 
+var ip = localStorage.getItem("vip");
 
 $(document).ready( function()
 {
@@ -39,6 +39,9 @@ function frefreshStatus()
 function fgetConfig()
 {
 	var jsondir = "http://" + ip + "/altimCfg.json";
+	var phpdir  = "http://" + ip + "/altimCfg.php";
+
+	$("#formCfg").attr("action", phpdir);
 	
 	$.getJSON(jsondir, function(jsonData) {
 		
@@ -55,3 +58,4 @@ function fgetConfig()
 		});
 	});
 }
+

@@ -10,10 +10,10 @@ extern "C" {
 ///////////////////
 /*
  *                        --------
- *                    A0 -|      |- GPIO16 -> D0 <- IN
+ *                    A0 -|      |- GPIO16 -> D0 <- OUT
  *                    G  -|      |- GPIO5  -> D1 <> SCL*
  *                    VU -|      |- GPIO4  -> D2 <> SDA*
- *         AS3 <- GPIO10 -|      |- GPIO0  -> D3 -> OUT
+ *         AS3 <- GPIO10 -|      |- GPIO0  -> D3 -> IN
  *         AS2 <-  GPIO9 -|      |- GPIO2  -> D4 -> LED
  *          S1 <-   MOSI -|      |- 3V
  *                    CS -|      |- G
@@ -33,9 +33,9 @@ extern "C" {
 #define PIN_I2C_CLK     5   // GPIO5 -> D1
 #define PIN_I2C_DTA     4   // GPIO4 -> D2
 
-#define PIN_OUT         0   // GPIO0 -> D3
+#define PIN_OUT         16  // GPIO16 -> D0
 #define PIN_LED         2   // GPIO2 -> D4
-#define PIN_IN          16  // GPIO16 -> D0
+#define PIN_IN          0   // GPIO0 -> D3
 
 #define PIN_OUT_ON      1
 #define PIN_OUT_OFF     0

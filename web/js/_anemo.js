@@ -8,7 +8,7 @@ $(document).ready( function()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/anemoStatus.json";
+	var jsondir = "http://" + ip + "/anemoStatus.json";
 	
 	setTimeout( function() {	
 
@@ -42,6 +42,9 @@ function frefreshStatus()
 function fgetConfig()
 {
 	var jsondir = "http://" + ip + "/anemoCfg.json";
+	var phpdir  = "http://" + ip + "/anemoCfg.php";
+
+	$("#formCfg").attr("action", phpdir);
 	
 	$.getJSON(jsondir, function(jsonData) {
 		

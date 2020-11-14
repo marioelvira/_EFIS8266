@@ -1,4 +1,4 @@
-var ip = localStorage.getItem("vip"); 
+var ip = localStorage.getItem("vip");
 
 // Dynamic examples
 var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : true});
@@ -29,7 +29,7 @@ function freInitStatus()
 
 function frefreshStatus()
 {
-	var jsondir = "http://" + ip +"/data.json";
+	var jsondir = "http://" + ip + "/data.json";
 	
 	setInterval(function()
 	{	

@@ -42,7 +42,7 @@ extern "C" {
 #define EERPOM_NEXT               0x72  // Next value
 
 // Values
-#define EEPROM_VAL_OK             0xAB
+#define EEPROM_VAL_OK             0xA0
 
 #define EEPROM_VAL_IP_MODE        DHCP_MODE
 #define EEPROM_VAL_IP1            192
