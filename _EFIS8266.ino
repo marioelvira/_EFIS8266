@@ -11,6 +11,8 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
+#include "main.h"
+
 #include "airspeed.h"
 #include "altimeter.h"
 #include "e2prom.h"
@@ -18,7 +20,11 @@
 #include "http.h"
 #include "io.h"
 #include "ip.h"
-#include "main.h"
+#include "json.h"
+#include "php.h"
+#include "time.h"
+#include "vario.h"
+#include "wdt.h"
 #include "wifi.h"
 
 //////////////
@@ -132,10 +138,9 @@ int         altStatus;
 
 float       altitude;
 int         QNH;         // hPa
-int         vario = 2;   // TODO
 
-Adafruit_BME280 bme; // use I2C interface
-Adafruit_Sensor *bme_temp = bme.getTemperatureSensor();
+Adafruit_BME280 bme;
+Adafruit_Sensor *bme_temp     = bme.getTemperatureSensor();
 Adafruit_Sensor *bme_pressure = bme.getPressureSensor();
 Adafruit_Sensor *bme_humidity = bme.getHumiditySensor();
 
@@ -154,13 +159,23 @@ int   AirInValueCorrected;
 int   AirInArray[AIR_ARRAY_SIZE];
 int   AirInPointer;
 
-String airInfo;
+String   airInfo;
 AirsData airsData;
 
 #if (_AIR_SERIAL_DEBUG_ == 1)
 unsigned long AirCurrentTime = millis();
 unsigned long AirPreviousTime = 0;
 #endif
+
+///////////
+// Vario //
+///////////
+int vario = 0;
+float VarioCurrentAtlitude;
+float VarioPreviousAtlitude;
+float VarioValue;
+unsigned long VarioCurrentTime = millis();
+unsigned long VarioPreviousTime = 0;
 
 //============//
 // MAIN SETUP //
@@ -178,6 +193,9 @@ void setup(void)
 
   // Altimeter setup
   _AltimeterSetup();
+
+  // Vario setup
+  _VarioSetup();
   
   #if (_SERIAL_DEBUG_ == 1)
   delay(5000);  // 5 secs
@@ -266,6 +284,7 @@ void loop()
   _GyroLoop();
   _AirspeedLoop();
   _AltimeterLoop();
+  _VarioLoop();
   _WifiLoop();
   _WifiLedLoop();
 
