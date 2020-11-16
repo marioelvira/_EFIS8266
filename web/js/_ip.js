@@ -1,6 +1,7 @@
 //var _ip = "192.168.43.37";
 //var _ip = "192.168.1.5";
-var _ip = "172.16.0.50";
+//var _ip = "172.16.0.50";
+var _ip = "192.168.4.1";
 
 localStorage.setItem("vip", _ip); 
 

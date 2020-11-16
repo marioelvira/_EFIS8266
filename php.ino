@@ -245,21 +245,21 @@ void _phpAltCfg()
 { 
   String qnh = httpServer.arg("QNH");
 
-  QNH = qnh.toInt();
+  atlData.QNH = qnh.toInt();
 
   #if (_PHP_SERIAL_DEBUG_ == 1)
   Serial.print("---->QNH: ");
-  Serial.println(QNH);
+  Serial.println(atlData.QNH);
   Serial.println("");
   #endif
 
-  //EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
+  EEPROM.put(EERPOM_ADD_ALT_VAL, atlData);
 
-  //EEPROM.commit();    //Store data to EEPROM
+  EEPROM.commit();    //Store data to EEPROM
 
   // Read config from EEPROM
-  //_readCONFIG();
-    
+  _readCONFIG();
+
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "text/html", "OK");
 }
@@ -360,7 +360,6 @@ void _phpGyroCfg()
   Serial.println("");
   #endif
 
-  //EEPROM.write(EEPROM_ADD_GYRO_CAL, EEPROM_VAL_GYRO_CAL_OK);
   EEPROM.put(EERPOM_ADD_GYRO_VAL, gyroCalWeb);
 
   EEPROM.commit();    //Store data to EEPROM

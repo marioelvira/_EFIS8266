@@ -9,6 +9,8 @@ extern "C" {
 #define _READ_EEPROM_         0
 #define _WRITE_SSID_EEPROM_   0
 
+#define EEPROM_SIZE           512
+
 // Address
 #define EEPROM_ADD_OK             0x00
 
@@ -32,14 +34,20 @@ extern "C" {
 #define EEPROM_ADD_WIFI_PSWD      0x2F
 #define WIFI_PSWD_MAX             32    // Password max 32 char -> Next 0x4F
 
-#define EEPROM_ADD_GYRO_CAL       0x4F
+#define EEPROM_ADD_GYRO_CAL       0x4F  // 79
 #define EERPOM_ADD_GYRO_VAL       0x50
 #define EEPROM_GYRO_MAX           22    // Gyro Cal max 22 bytes -> Next 0x66
 
-#define EERPOM_ADD_AIRS_VAL       0x66
-#define EERPOM_AIRS_MAX           12    // Gyro Cal max 22 bytes -> Next 0x72
+#define EERPOM_ADD_AIRS_VAL       0x66  // 102
+#define EERPOM_AIRS_MAX           12    // Airspeed 12 bytes -> Next 0x72
 
-#define EERPOM_NEXT               0x72  // Next value
+#define EERPOM_ADD_ALT_VAL        0x72
+#define EERPOM_ALT_MAX            2     // Altimeter 2 bytes -> Next 0x74
+
+#define EERPOM_ADD_UNITS_VAL      0x74
+#define EERPOM_UNITS_MAX          4     // Units 4 bytes -> Next 0x78
+
+#define EERPOM_NEXT               0x78  // Next value
 
 // Values
 #define EEPROM_VAL_OK             0xA0

@@ -83,7 +83,7 @@ void _serveNETWORK()
                         
   html = html + "<div class=\"button-section\">";
   html = html + "  <input type=\"submit\" value=\"Save\">";
-  html = html + "  <a href=\"index.htm\"><input type=\"button\" value=\"Back\"></a>";
+  //html = html + "  <a href=\"index.htm\"><input type=\"button\" value=\"Back\"></a>";
   html = html + "</div>";
   
   html = html + "</div>";

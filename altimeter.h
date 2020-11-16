@@ -5,12 +5,19 @@ extern "C" {
 #ifndef _ALTIMETER_H_
 #define _ALTIMETER_H_
 
+typedef struct
+{
+  int16_t QNH;      // 2 bytes
+} AltData;
+
 #define ALT_DETECTION      0
 #define ALT_DETECTED       1
 #define ALT_WORKING        2
 #define ALT_NOT_DETECTED   3
 
 #define ALT_SAMPLERATE_DELAY_MS    100
+
+#define QNH_ISA           1023
 
 /******************************************************
   altitude = (T0/L) * [(P0/P)^(LR/Mg) - 1]

@@ -42,7 +42,7 @@ void _readCONFIG (void)
   #endif
   byte val[4];
   
-  EEPROM.begin(512);
+  EEPROM.begin(EEPROM_SIZE);
     
   i = EEPROM.read(EEPROM_ADD_OK);
   
@@ -50,7 +50,7 @@ void _readCONFIG (void)
   if (i != EEPROM_VAL_OK)
   {
     #if (_EEPROM_SERIAL_DEBUG_ == 1)
-    Serial.println("Config NOK");
+    Serial.println("00 - EPROM Config NOK");
     #endif
    
     EEPROM.write(EEPROM_ADD_OK,      EEPROM_VAL_OK);
@@ -102,21 +102,33 @@ void _readCONFIG (void)
     airsData.mVoltsEOS = AIR_MVOLTS_EOS;
     airsData.senSensivity = AIR_SENS_SENSIVITY;
     EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
+	
+	  // Altimeter
+	  atlData.QNH = QNH_ISA;
+	  EEPROM.put(EERPOM_ADD_ALT_VAL, atlData);
+
+	  // Units
+	  units.alt = ALT_FEET;
+    units.airspeed = AIRS_KMH;
+    units.vario = VARIO_FEETpS;
+    units.temp = TEMP_CELSIUS;
+	  EEPROM.put(EERPOM_ADD_UNITS_VAL, units);
 
     EEPROM.commit();    //Store data to EEPROM
   }
   else
   {
     #if (_EEPROM_SERIAL_DEBUG_ == 1)
-    Serial.println("Config OK");
+    Serial.println("00 - EPROM Config OK");
     #endif
   }
+
 
   // IP Mode
   ipMode = EEPROM.read(EEPROM_ADD_IP_MODE);
   
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
-  Serial.print("IP Mode: ");
+  Serial.print("01 - EPROM IP Mode: ");
   Serial.print(ipMode);
   if (ipMode == FIXIP_MODE)
     Serial.println(" FIX IP");   
@@ -161,10 +173,11 @@ void _readCONFIG (void)
   wifiMode = EEPROM.read(EEPROM_ADD_WIFI_MODE);
 
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("02 - EPROM Wi-Fi Mode: ");
   if (wifiMode == STATION_MODE)
-    Serial.println("Wi-Fi Mode: Station");
+    Serial.println("Station");
   else
-    Serial.println("Wi-Fi Mode: Access point");
+    Serial.println("Access point");
   #endif
 
   if (wifiMode == STATION_MODE)
@@ -197,7 +210,7 @@ void _readCONFIG (void)
     gyroData.calibrated = 0;
     
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
-  Serial.print("EPROM GYRO CAL: ");
+  Serial.print("03 - EPROM GYRO CAL: ");
   Serial.print(i);
   if (gyroData.calibrated == 1)
     Serial.println(" OK");
@@ -206,7 +219,43 @@ void _readCONFIG (void)
   #endif
 
   // Airspeed
-  EEPROM.get(EERPOM_ADD_AIRS_VAL, airsData);  
+  EEPROM.get(EERPOM_ADD_AIRS_VAL, airsData);
+
+  #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("04 - EPROM AIRSPEED: ");
+  Serial.print(" digOffset: ");
+  Serial.print(airsData.digOffset);
+  Serial.print(" digEOS: ");
+  Serial.print(airsData.digEOS);
+  Serial.print(" mVoltsEOS: ");
+  Serial.print(airsData.mVoltsEOS);
+  Serial.print(" Gateway: ");
+  Serial.println(airsData.senSensivity);  
+  #endif
+  
+  // Altimeter
+  EEPROM.get(EERPOM_ADD_ALT_VAL, atlData);
+  
+  #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("05 - EPROM ALT: "); 
+  Serial.print(" QNH: ");
+  Serial.println(atlData.QNH);
+  #endif
+ 
+  // Units
+  EEPROM.get(EERPOM_ADD_UNITS_VAL, units);
+
+  #if (_EEPROM_SERIAL_DEBUG_ == 1)
+  Serial.print("06 - EPROM UNITS: ");
+  Serial.print(" alt: ");
+  Serial.print(units.alt);
+  Serial.print(" airspeed: ");
+  Serial.print(units.airspeed);
+  Serial.print(" vario: ");
+  Serial.print(units.vario);
+  Serial.print(" temp: ");
+  Serial.println(units.temp);
+  #endif
 }
 
 void _ResetEEPROM() {
@@ -231,9 +280,9 @@ void _ReadEEPROM() {
   Serial.println("Reading E2PROM 512 size... ");
   #endif
 
-  EEPROM.begin(512);
+  EEPROM.begin(EEPROM_SIZE);
    
-  for (int i = 0; i < 512; i++) {
+  for (int i = 0; i < EEPROM_SIZE; i++) {
 
     #if (_EEPROM_SERIAL_DEBUG_ == 1)
     j = EEPROM.read(i);

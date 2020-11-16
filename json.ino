@@ -6,7 +6,7 @@ void _jsonAltCfg()
 
   json = json + "{ \"param\":\"altInfo\", \"value\":\"" + altInfo + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"QNH\", \"value\":\"" + QNH + "\" }";
+  json = json + "{ \"param\":\"QNH\", \"value\":\"" + atlData.QNH + "\" }";
     
   json = json + "]";
 
@@ -243,9 +243,9 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude*CONV_METERS_TO_FEET) + " }"; // TODO
+  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude*CONV_METERS_TO_FEET) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"QNH\", \"value\":" + String(QNH) + " }"; // TODO
+  json = json + "{ \"param\":\"QNH\", \"value\":" + String(atlData.QNH) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(-1*gRoll) + " }";
   json = json + ",";

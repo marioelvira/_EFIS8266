@@ -23,6 +23,7 @@
 #include "json.h"
 #include "php.h"
 #include "time.h"
+#include "units.h"
 #include "vario.h"
 #include "wdt.h"
 #include "wifi.h"
@@ -137,7 +138,8 @@ String      altInfo;
 int         altStatus;
 
 float       altitude;
-int         QNH;         // hPa
+AltData     atlData;
+//int         QNH;         // hPa
 
 Adafruit_BME280 bme;
 Adafruit_Sensor *bme_temp     = bme.getTemperatureSensor();
@@ -176,6 +178,11 @@ float VarioPreviousAtlitude;
 float VarioValue;
 unsigned long VarioCurrentTime = millis();
 unsigned long VarioPreviousTime = 0;
+
+///////////
+// Units //
+///////////
+Units  units;
 
 //============//
 // MAIN SETUP //
