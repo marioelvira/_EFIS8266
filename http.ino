@@ -452,6 +452,7 @@ void _HttpLoop()
       httpServer.on("/gyroCfg.php",       _phpGyroCfg);
       httpServer.on("/anemoCfg.php",      _phpAnemoCfg);
       httpServer.on("/altimCfg.php",      _phpAltCfg);
+      httpServer.on("/unitsCfg.php",      _phpUnitsCfg);
 
       // Json data
       httpServer.on("/data.json",         _jsonDATA);
@@ -467,6 +468,7 @@ void _HttpLoop()
       httpServer.on("/gyroCfg.json",      _jsonGyroCfg);
       httpServer.on("/anemoCfg.json",     _jsonAnemoCfg);
       httpServer.on("/altimCfg.json",     _jsonAltCfg);
+      httpServer.on("/unitsCfg.json",     _jsonUnitsCfg);
       
       httpServer.begin();
 

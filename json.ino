@@ -1,3 +1,7 @@
+///////////////////
+// Configuration //
+///////////////////
+
 void _jsonAltCfg()
 {
   String json= "";
@@ -72,6 +76,26 @@ void _jsonGyroCfg()
   httpServer.send (200, "application/json", json);
 }
 
+void _jsonUnitsCfg()
+{
+  String json= "";
+
+  json = "[";
+  
+  json = json + "{ \"param\":\"units_alt\", \"value\":" + String(units.alt) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"units_airspeed\", \"value\":" + String(units.airspeed) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"units_vario\", \"value\":" + String(units.vario) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"units_temp\", \"value\":" + String(units.temp) + " }";
+  
+  json = json + "]";
+
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "application/json", json);
+}
+
 void _jsonNetworkCfg()
 {
   String json= "";
@@ -98,6 +122,9 @@ void _jsonNetworkCfg()
   httpServer.send (200, "application/json", json);
 }
 
+////////////
+// Status //
+////////////
 void _jsonSystemStatus()
 {
   String json = "";

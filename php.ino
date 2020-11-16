@@ -299,7 +299,6 @@ void _phpAnemoCfg()
   httpServer.send (200, "text/html", "OK");
 }
 
-
 void _phpGyroCfg()
 {
   adafruit_bno055_offsets_t  gyroCalWeb;
@@ -369,4 +368,39 @@ void _phpGyroCfg()
     
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "text/html", "OK");
- }
+}
+
+void _phpUnitsCfg()
+{
+  String units_alt = httpServer.arg("units_alt");
+  String units_airspeed = httpServer.arg("units_airspeed");
+  String units_vario = httpServer.arg("units_vario");
+  String units_temp = httpServer.arg("units_temp");
+
+  units.alt = units_alt.toInt();
+  units.airspeed = units_airspeed.toInt();
+  units.vario = units_vario.toInt();
+  units.temp = units_temp.toInt();
+
+  #if (_PHP_SERIAL_DEBUG_ == 1)
+  Serial.print("----> alt: ");
+  Serial.println(units.alt);
+  Serial.print("----> airspeed: ");
+  Serial.println(units.airspeed);
+  Serial.print("---> vario: ");
+  Serial.println(units.vario);
+  Serial.print("----> temp: ");
+  Serial.println(units.temp);
+  Serial.println("");
+  #endif
+
+  EEPROM.put(EERPOM_ADD_UNITS_VAL, units);
+  
+  EEPROM.commit();    //Store data to EEPROM
+
+  // Read config from EEPROM
+  _readCONFIG();
+    
+  httpServer.sendHeader("Access-Control-Allow-Origin","*");
+  httpServer.send (200, "text/html", "OK");
+}

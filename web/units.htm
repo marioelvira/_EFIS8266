@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>EFIS Units</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+
+  <script src="js/jquery.2.1.0.min.js"></script>
+
+  <!-- Incons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">EFIS Project</div>
+      <div class="list-group list-group-flush">
+        <a id="statusMenu" href="index.htm" class="list-group-item list-group-item-action bg-light"><i class="fas fa-angle-double-left"></i> Back</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		    <button class="btn btn-light" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+      </nav>
+	  
+	  <div class="container">
+		  <h4 class="mt-4"><i class="fas fa-file-alt"></i> Units</h4>      
+		  	
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#Status">Status</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#Config">Configuration</a>
+				</li>
+			</ul>
+			
+			<!-- Tab panes -->
+			<div class="tab-content">
+			
+			<div id="Status" class="container tab-pane active"><br>
+			</div>
+			
+			<div id="Config" class="container tab-pane fade"><br>
+			
+			<form id="formCfg" class="needs-validation" novalidate>
+			<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>Altitude</label>
+					<select class="form-control" name="units_alt" id="units_alt">
+						<option value="0">feet</option>
+						<option value="1">meters</option>
+					</select>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+				<div class="form-group">
+					<label>Airspeed</label>
+					<select class="form-control" name="units_airspeed" id="units_airspeed">
+						<option value="0">knots</option>
+						<option value="1">km/h</option>
+					</select>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+				<div class="form-group">
+					<label>Vario</label>
+					<select class="form-control" name="units_vario" id="units_vario">
+						<option value="0">feet/s</option>
+						<option value="1">meters/s</option>
+						<option value="2">feet/min</option>
+						<option value="3">meters/min</option>
+					</select>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+				<div class="form-group">
+					<label>Temperature</label>
+					<select class="form-control" name="units_temp" id="units_temp">
+						<option value="0">Celsius</option>
+						<option value="1">Kelvin</option>
+						<option value="2">Farenheit</option>
+					</select>
+					<div class="valid-feedback">OK</div>
+					<div class="invalid-feedback">Error</div>
+				</div>
+			</div>
+			</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			</div>
+	
+			<!-- Tab panes -->
+		    </div>
+			
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+  
+  <script type="text/javascript" src="js/_ip.js"></script>
+  <script type="text/javascript" src="js/_units.js"></script>
+  
+  <!-- Bootstrap core JavaScript
+  <script src="jquery/jquery.min.js"></script> -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

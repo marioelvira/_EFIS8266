@@ -139,7 +139,6 @@ int         altStatus;
 
 float       altitude;
 AltData     atlData;
-//int         QNH;         // hPa
 
 Adafruit_BME280 bme;
 Adafruit_Sensor *bme_temp     = bme.getTemperatureSensor();
