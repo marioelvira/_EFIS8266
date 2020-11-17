@@ -10,7 +10,7 @@ void _jsonAltCfg()
 
   json = json + "{ \"param\":\"altInfo\", \"value\":\"" + altInfo + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"QNH\", \"value\":\"" + atlData.QNH + "\" }";
+  json = json + "{ \"param\":\"QNH\", \"value\":\"" + altData.QNH + "\" }";
     
   json = json + "]";
 
@@ -101,7 +101,9 @@ void _jsonNetworkCfg()
   String json= "";
 
   json = "[";
-  
+
+  json = json + "{ \"param\":\"wifiInfo\", \"value\":\"" + wifiInfo + "\" }";
+  json = json + ",";
   json = json + "{ \"param\":\"wifimode\", \"value\":" + String(wifiMode) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"wifissid\", \"value\":\"" + String(ssid) + "\" }";
@@ -270,15 +272,15 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitude\", \"value\":" + String(altitude*CONV_METERS_TO_FEET) + " }";
+  json = json + "{ \"param\":\"altitude\", \"value\":" + String(Altimeter) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"QNH\", \"value\":" + String(atlData.QNH) + " }";
+  json = json + "{ \"param\":\"QNH\", \"value\":" + String(altData.QNH) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(-1*gRoll) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"heading\", \"value\":" + String(gMag) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"vario\", \"value\":" + String(vario) + " }";
+  json = json + "{ \"param\":\"vario\", \"value\":" + String(Vario) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }";
   

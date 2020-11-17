@@ -6,6 +6,7 @@ void _WifiSetup(void)
 {
   // Wi-Fi status
   wifiStatus = WIFI_START_ACCESSPOINT;
+  wifiInfo = "";
 }
 
 /////////////////////////
@@ -17,24 +18,24 @@ void _WifiLoop()
   {
     case WIFI_START_ACCESSPOINT:
 
-      #if (_WIFI_SERIAL_DEBUG_ == 1)
-      Serial.println("Access point mode start ");
-      Serial.print("SSID: ");
-      Serial.println(ssidAp);
-      Serial.print("PASSWORD: ");
-      Serial.println(passwordAp);
-      #endif
+      wifiInfo =            "Access point mode start </br>";
+      wifiInfo = wifiInfo + "SSID: " + ssidAp + "</br>";
+      wifiInfo = wifiInfo + "PASSWORD: " + passwordAp + "</br>";
     
       WiFi.mode(WIFI_AP);
       WiFi.softAP(ssidAp, passwordAp);
   
       wifiIP = WiFi.softAPIP();
+
+      wifiInfo = wifiInfo + "AP IP address: " + wifiIP.toString() + "</br>";
       
       #if (_WIFI_SERIAL_DEBUG_ == 1)
-      Serial.print("AP IP address: ");
-      Serial.println(wifiIP);
+      Serial.println("------------------------------------");
+      Serial.println(wifiInfo);
+      Serial.println("------------------------------------");
+      Serial.println("");
       #endif
-
+      
       // Http setup
       _HttpSetup();
 
@@ -75,12 +76,15 @@ void _WifiLoop()
       WiFi.begin(ssid, password);
       WiFi.mode(WIFI_STA);        // WiFi mode station (connect to wifi router only)
 
+      wifiInfo =            "Station Mode start </br>";
+      wifiInfo = wifiInfo + "SSID: " + ssid + "</br>";
+      wifiInfo = wifiInfo + "PASSWORD: " + password + "</br>";
+
       #if (_WIFI_SERIAL_DEBUG_ == 1)
-      Serial.println("Station Mode start ");
-      Serial.print("SSID: ");
-      Serial.println(ssid);
-      Serial.print("PASSWORD: ");
-      Serial.println(password);
+      Serial.println("------------------------------------");
+      Serial.println(wifiInfo);
+      Serial.println("------------------------------------");
+      Serial.println("");
       #endif
 
       wifiStatus = WIFI_STATION_CONNECTING;
@@ -103,21 +107,23 @@ void _WifiLoop()
         ipAddress = WiFi.localIP();
         gateWay   = WiFi.gatewayIP();
         netMask   = WiFi.subnetMask();
-                
-        #if (_WIFI_SERIAL_DEBUG_ == 1)
-        Serial.println("");
-        Serial.print("Connected to ");
-        Serial.println(ssid);
+
+        wifiInfo = wifiInfo + "IP Mode: ";
         if (ipMode == FIXIP_MODE)
-          Serial.println("Fix IP Mode");
+          wifiInfo = wifiInfo + "Fix </br>";
         else
-          Serial.println("DHCP Mode");
-        Serial.print("IP address: ");
-        Serial.println(ipAddress);
-        Serial.print("Mask: ");
-        Serial.println(netMask);
-        Serial.print("Gateway: ");
-        Serial.println(gateWay);
+          wifiInfo = wifiInfo + "DHCP </br>";
+        
+        wifiInfo = wifiInfo + "IP address: " + ipAddress.toString() + "</br>";
+        wifiInfo = wifiInfo + "Mask: "       + netMask.toString()   + "</br>";
+        wifiInfo = wifiInfo + "Gateway: "    + gateWay.toString()   + "</br>";
+        //wifiInfo = wifiInfo + "MAC: " + (String)(mac[5],HEX) + ":" + (String)(mac[4],HEX) + ":" + (String)(mac[3],HEX) + ":" + (String)(mac[2],HEX) + ":" + (String)(mac[1],HEX) + ":" + (String)(mac[0],HEX) + "</br>";  
+
+        #if (_WIFI_SERIAL_DEBUG_ == 1)
+        Serial.println("------------------------------------");
+        Serial.println(wifiInfo);
+        Serial.println("------------------------------------");
+        Serial.println("");
         Serial.print("MAC: ");
         Serial.print(mac[5],HEX);
         Serial.print(":");
@@ -131,7 +137,7 @@ void _WifiLoop()
         Serial.print(":");
         Serial.println(mac[0],HEX);
         #endif
-
+        
         // Http setup
         _HttpSetup();
       

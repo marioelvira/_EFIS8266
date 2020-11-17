@@ -3,9 +3,8 @@
 //////////////////
 void _VarioSetup(void)
 {
-  VarioCurrentAtlitude = 0;
   VarioPreviousAtlitude = 0;
-  VarioValue = 0;
+  Vario_mps = 0;
 }
 
 /////////////////////////
@@ -13,19 +12,27 @@ void _VarioSetup(void)
 /////////////////////////
 void _VarioLoop(void)
 {
-  VarioCurrentAtlitude = altitude;
   VarioCurrentTime = millis();
   if (VarioCurrentTime - VarioPreviousTime >= VARIO_TICK)
   {
-    VarioValue = (VarioPreviousAtlitude - VarioCurrentAtlitude)*1000/(VarioPreviousTime - VarioCurrentTime); // m/s 
+    Vario_mps = (VarioPreviousAtlitude - Altitude_m)*1000/(VarioPreviousTime - VarioCurrentTime); // m/s 
 
+    if (units.vario == VARIO_FEETpS)
+      Vario = CONV_METERS_TO_FEET*Vario_mps;
+    else if (units.vario == VARIO_MpS)
+      Vario = Vario_mps;
+    else if (units.vario == VARIO_FEETpM)
+      Vario = 60*CONV_METERS_TO_FEET*Vario_mps;
+    else
+      Vario = 60*Vario_mps;
+      
     #if (_VARIO_SERIAL_DEBUG_ == 1)
     Serial.print("---> Vario" );
     Serial.print(VarioValue);
     Serial.println(" m/s");
     #endif
     
-    VarioPreviousAtlitude = VarioCurrentAtlitude;
+    VarioPreviousAtlitude = Altitude_m;
     VarioPreviousTime = VarioCurrentTime;
   }
 }

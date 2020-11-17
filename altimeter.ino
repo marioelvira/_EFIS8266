@@ -9,7 +9,7 @@ void _AltimeterSetup(void)
 
   altInfo = "";
 
-  altitude = 1500;
+  Altitude_m = 0;
 }
 
 /////////////////////////////
@@ -110,11 +110,16 @@ void _AltSensorDetails(void)
 }
 
 void _FromQHN2Altitude (void)
-{
-  altitude = (float)T0_DIV_L * (1.0 - pow(((float)(pressure_event.pressure)/((float) atlData.QNH)), LR_DIV_Mg));
+{ 
+  Altitude_m = (float)T0_DIV_L * (1.0 - pow(((float)(pressure_event.pressure)/((float) altData.QNH)), LR_DIV_Mg));
+
+  if (units.alt == ALT_FEET)
+    Altimeter = CONV_METERS_TO_FEET * Altitude_m;
+  else
+    Altimeter = Altitude_m;
 }
 
 void _FromAltitude2QNH (void)
 {
-  atlData.QNH = ((float)pressure_event.pressure) / (pow(1.0 - (altitude / T0_DIV_L), Mg_DIV_LR));
+  altData.QNH = ((float)pressure_event.pressure) / (pow(1.0 - (Altitude_m / T0_DIV_L), Mg_DIV_LR));
 }

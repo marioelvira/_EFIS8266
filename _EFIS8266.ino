@@ -50,12 +50,10 @@ int inAux;
 ///////////
 // Wi-Fi //
 ///////////
+String        wifiInfo;
+
 unsigned long wifiAPTick = 0;
 unsigned long wifiLEDTick = 0;
-
-///////////
-// Wi-Fi //
-///////////
 
 #if (_WRITE_SSID_EEPROM_ == 1)
 const char* ssidSt = SSIDST;
@@ -133,12 +131,14 @@ int iGforce;
 ///////////////
 // Altimeter //
 ///////////////
-sensor_t    altSensor;
-String      altInfo;
-int         altStatus;
+float     Altimeter;
+float     Altitude_m;
 
-float       altitude;
-AltData     atlData;
+sensor_t  altSensor;
+String    altInfo;
+int       altStatus;
+
+AltData   altData;
 
 Adafruit_BME280 bme;
 Adafruit_Sensor *bme_temp     = bme.getTemperatureSensor();
@@ -153,6 +153,7 @@ sensors_event_t humidity_event;   // Humidity %
 // Airspeed //
 //////////////
 float AirSpeed;
+
 float AirPressure;
 float Air_mVolts;
 int   AirInValue;
@@ -171,10 +172,12 @@ unsigned long AirPreviousTime = 0;
 ///////////
 // Vario //
 ///////////
-int vario = 0;
-float VarioCurrentAtlitude;
+float Vario;
+float Vario_mps;
+
+//float VarioCurrentAtlitude;
 float VarioPreviousAtlitude;
-float VarioValue;
+
 unsigned long VarioCurrentTime = millis();
 unsigned long VarioPreviousTime = 0;
 

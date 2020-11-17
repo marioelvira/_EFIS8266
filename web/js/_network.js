@@ -18,7 +18,9 @@ function fgetConfig()
 			
 		$.each(jsonData, function(index, obj) {
 			
-			// Network
+			if (obj.param == "wifiInfo")
+				$("#wifiInfo").html(obj.value);
+			
 			if (obj.param == "wifimode")
 				$("#wifimode").val(obj.value);
 

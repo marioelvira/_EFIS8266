@@ -24,6 +24,7 @@ void _AirspeedSetup(void)
 void _AirspeedLoop(void)
 { 
   int airAcc = 0;
+  float airSpeed_mps = 0;
 
   AirInArray[AirInPointer] = analogRead(PIN_AIR_IN);
   AirInPointer++;
@@ -42,14 +43,17 @@ void _AirspeedLoop(void)
 
   Air_mVolts = (float)AirInValueCorrected * (airsData.mVoltsEOS /(airsData.digEOS - airsData.digOffset));
       
-  AirPressure = ((Air_mVolts) / airsData.senSensivity * CONV_MMH2O_KPA);        // result in kPa
+  AirPressure = ((Air_mVolts) / airsData.senSensivity * CONV_MMH2O_KPA);  // kPa
 
-  //AirSpeed = (float)CONV_MPS_KNOTS * sqrt(2*(float)AirPressure/(float)AIR_DENSITY);
-  AirSpeed = (float)CONV_MPS_KMH * sqrt(2*(float)(AirPressure*1000)/(float)AIR_DENSITY);
+  airSpeed_mps = (float) sqrt(2*(float)AirPressure/(float)AIR_DENSITY);       // m/s
 
-  // TODO
-  if (AirSpeed < 20)
-    AirSpeed = 0; 
+  if (airSpeed_mps < 20)
+    airSpeed_mps = 0; 
+  
+  if (units.airspeed == AIRS_KNOTS)
+    AirSpeed = (float)CONV_MPS_KNOTS * airSpeed_mps;
+  else 
+    AirSpeed = (float)CONV_MPS_KMH * airSpeed_mps;
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   AirCurrentTime = millis();

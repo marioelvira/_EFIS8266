@@ -104,8 +104,8 @@ void _readCONFIG (void)
     EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
 	
 	  // Altimeter
-	  atlData.QNH = QNH_ISA;
-	  EEPROM.put(EERPOM_ADD_ALT_VAL, atlData);
+	  altData.QNH = QNH_ISA;
+	  EEPROM.put(EERPOM_ADD_ALT_VAL, altData);
 
 	  // Units
 	  units.alt = ALT_FEET;
@@ -234,12 +234,12 @@ void _readCONFIG (void)
   #endif
   
   // Altimeter
-  EEPROM.get(EERPOM_ADD_ALT_VAL, atlData);
+  EEPROM.get(EERPOM_ADD_ALT_VAL, altData);
   
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
   Serial.print("05 - EPROM ALT: "); 
   Serial.print(" QNH: ");
-  Serial.println(atlData.QNH);
+  Serial.println(altData.QNH);
   #endif
  
   // Units

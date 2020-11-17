@@ -245,15 +245,15 @@ void _phpAltCfg()
 { 
   String qnh = httpServer.arg("QNH");
 
-  atlData.QNH = qnh.toInt();
+  altData.QNH = qnh.toInt();
 
   #if (_PHP_SERIAL_DEBUG_ == 1)
   Serial.print("---->QNH: ");
-  Serial.println(atlData.QNH);
+  Serial.println(altData.QNH);
   Serial.println("");
   #endif
 
-  EEPROM.put(EERPOM_ADD_ALT_VAL, atlData);
+  EEPROM.put(EERPOM_ADD_ALT_VAL, altData);
 
   EEPROM.commit();    //Store data to EEPROM
 
