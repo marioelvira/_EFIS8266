@@ -79,11 +79,11 @@ void _GyroLoop()
       {
         #if (_GYRO_SERIAL_DEBUG_ == 1)
         Serial.print("X: ");
-        Serial.print(event.orientation.x, 4);
+        Serial.print(gyroEvent.orientation.x, 4);
         Serial.print("\tY: ");
-        Serial.print(event.orientation.y, 4);
+        Serial.print(gyroEvent.orientation.y, 4);
         Serial.print("\tZ: ");
-        Serial.print(event.orientation.z, 4);
+        Serial.print(gyroEvent.orientation.z, 4);
         #endif
                
         // Display calibration status

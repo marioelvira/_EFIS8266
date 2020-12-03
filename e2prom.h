@@ -72,7 +72,7 @@ extern "C" {
 
 #define EEPROM_VAL_NOT_CAL        0x00   // Not calibrated
 
-#define EEPROM_VAL_GYRO_CAL_OK    0xCA
+#define EEPROM_VAL_GYRO_CAL_OK    0xC0
 
 #endif // _E2PROM_H_
 
