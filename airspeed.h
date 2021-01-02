@@ -29,7 +29,11 @@ typedef struct
 #define AIR_DIG_EOS             1023    	// Digital End Of Scale
 #define AIR_MVOLTS_EOS          3300    	// mVolts Enf Of Scale
 #define AIR_SENS_SENSIVITY      3.713   	// 4.413 in mV/mmH2O taken from datasheet. 4.413 * 3.3/5
-
+/*
+#define AIR_SENS_INFO_TYPE        "XGZP6897A"
+#define AIR_SENS_INFO_MAX         "5kPa"
+#define AIR_SENS_INFO_SENSIVITY   "4.413 mV/mmH20"
+*/
 #endif // _AIRSEEP_H_
 
 #ifdef __cplusplus
