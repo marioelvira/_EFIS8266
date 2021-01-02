@@ -10,10 +10,10 @@ extern "C" {
 ///////////////////
 /*
  *                        --------
- *                    A0 -|      |- GPIO16 -> D0 <- OUT
+ *                    A0 -|      |- GPIO16 -> D0 -> OUT
  *                    G  -|      |- GPIO5  -> D1 <> SCL*
  *                    VU -|      |- GPIO4  -> D2 <> SDA*
- *         AS3 <- GPIO10 -|      |- GPIO0  -> D3 -> IN
+ *         AS3 <- GPIO10 -|      |- GPIO0  -> D3 <- IN
  *         AS2 <-  GPIO9 -|      |- GPIO2  -> D4 -> LED
  *          S1 <-   MOSI -|      |- 3V
  *                    CS -|      |- G
@@ -45,6 +45,12 @@ extern "C" {
 // IO definition
 #define IO_ON       1
 #define IO_OFF      0
+
+// Temporizaciones UpPulsaciones
+#define NO_PULSACION          0     // x10ms
+#define PULSACION_CORTA       50    // x10ms
+#define PULSACION_LARGA       150   // x10ms
+#define PULSACION_ERROR       10    // x10ms
 
 #endif // _IO_H_
 

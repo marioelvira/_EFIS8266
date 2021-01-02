@@ -47,6 +47,11 @@ int outAux;
 int outLed;
 int inAux;
 
+int   InStatus = 0;
+int   InStatus_ant = 0;
+int   InCounter = 0;
+int   InPulsacion = 0;
+
 ///////////
 // Wi-Fi //
 ///////////
@@ -191,8 +196,11 @@ Units  units;
 //============//
 void setup(void)
 { 
-  // IO setup
+  // PIN setup
   _PINSetup();
+
+  // IO setup
+  _IOSetup();
 
   // Gyro setup
   _GyroSetup();
@@ -290,6 +298,7 @@ void _PINLoop()
 void loop()
 {
   _PINLoop();
+  _IOLoop();
   _GyroLoop();
   _AirspeedLoop();
   _AltimeterLoop();
