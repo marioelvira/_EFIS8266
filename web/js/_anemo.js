@@ -64,8 +64,14 @@ function fgetConfig()
 			if (obj.param == "airmVoltsEOS")
 				$("#airmVoltsEOS").val(obj.value);
 			
-			if (obj.param == "airSenSensivity")
-				$("#airSenSensivity").val(obj.value);
+			if (obj.param == "airSensR")
+				$("#airSensR").val(obj.value);
+			
+			if (obj.param == "airSensM")
+				$("#airSensM").val(obj.value);
+			
+			if (obj.param == "airSensB")
+				$("#airSensB").val(obj.value);
 		});
 	});
 }

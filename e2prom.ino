@@ -100,7 +100,9 @@ void _readCONFIG (void)
     airsData.digOffset = AIR_DIG_OFFSET;
     airsData.digEOS = AIR_DIG_EOS;
     airsData.mVoltsEOS = AIR_MVOLTS_EOS;
-    airsData.senSensivity = 0;
+    airsData.airSensM = AIR_SENS_M;
+    airsData.airSensB = AIR_SENS_B;
+    airsData.airSensR = AIR_SENS_R;
     EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
 	
 	  // Altimeter
@@ -229,8 +231,12 @@ void _readCONFIG (void)
   Serial.print(airsData.digEOS);
   Serial.print(" mVoltsEOS: ");
   Serial.print(airsData.mVoltsEOS);
-  Serial.print(" Gateway: ");
-  Serial.println(airsData.senSensivity);  
+  Serial.print(" airSensM: ");
+  Serial.println(airsData.airSensM);
+  Serial.print(" airSensB: ");
+  Serial.println(airsData.airSensB);
+  Serial.print(" airSensR: ");
+  Serial.println(airsData.airSensR);
   #endif
   
   // Altimeter

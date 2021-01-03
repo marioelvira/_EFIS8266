@@ -32,7 +32,11 @@ void _jsonAnemoCfg()
   json = json + ",";
   json = json + "{ \"param\":\"airmVoltsEOS\", \"value\":\"" + airsData.mVoltsEOS + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airSenSensivity\", \"value\":\"" + airsData.senSensivity + "\" }";
+  json = json + "{ \"param\":\"airSensM\", \"value\":\"" + airsData.airSensM + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensB\", \"value\":\"" + airsData.airSensB + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensR\", \"value\":\"" + airsData.airSensR + "\" }";
   
   json = json + "]";
 
