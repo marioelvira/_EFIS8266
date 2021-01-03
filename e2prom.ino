@@ -100,7 +100,7 @@ void _readCONFIG (void)
     airsData.digOffset = AIR_DIG_OFFSET;
     airsData.digEOS = AIR_DIG_EOS;
     airsData.mVoltsEOS = AIR_MVOLTS_EOS;
-    airsData.senSensivity = AIR_SENS_SENSIVITY;
+    airsData.senSensivity = 0;
     EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
 	
 	  // Altimeter

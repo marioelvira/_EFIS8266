@@ -42,13 +42,17 @@ void _AirspeedLoop(void)
     AirInValueCorrected = 0;
 
   Air_mVolts = (float)AirInValueCorrected * (airsData.mVoltsEOS /(airsData.digEOS - airsData.digOffset));
-      
-  AirPressure = ((Air_mVolts) / airsData.senSensivity * CONV_MMH2O_KPA);  // kPa
+  
+  AirPressure = (Air_mVolts)*(AIR_SENS_M/AIR_SENS_R) + AIR_SENS_B;  // Pa
 
-  airSpeed_mps = (float) sqrt(2*(float)AirPressure/(float)AIR_DENSITY);       // m/s
+  // https://www.vcalc.com/wiki/vCalc/Air+Speed
+  if (AirPressure <= 0)
+    airSpeed_mps = 0;
+  else 
+    airSpeed_mps = (float) sqrt(2*(float)AirPressure/(float)AIR_DENSITY);   // m/s
 
-  if (airSpeed_mps < 20)
-    airSpeed_mps = 0; 
+  //if (airSpeed_mps < 20)
+  //  airSpeed_mps = 0; 
   
   if (units.airspeed == AIRS_KNOTS)
     AirSpeed = (float)CONV_MPS_KNOTS * airSpeed_mps;
@@ -81,8 +85,8 @@ void _AirspeedLoop(void)
 void _AirSensorDetails(void)
 {
   airInfo =           "Sensor:     " + (String)AIR_SENS_INFO_TYPE + "</br>";
-  airInfo = airInfo + "Max Value:  " + (String)AIR_SENS_INFO_MAX + "</br>";
-  airInfo = airInfo + "Sensivity:  " + (String)AIR_SENS_INFO_SENSIVITY + "</br>";
+  airInfo = airInfo + "Pa (range): " + (String)AIR_SENS_INFO_PA + "</br>";
+  airInfo = airInfo + "V (range):  " + (String)AIR_SENS_INFO_V + "</br>";
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   Serial.println("------------------------------------");

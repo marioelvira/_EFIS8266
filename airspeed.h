@@ -19,21 +19,25 @@ typedef struct
 #define AIR_DENSITY     1.225     // kg/m^3
 #define CONV_MPS_KNOTS  1.94      // m/s to knots
 #define CONV_MPS_KMH    3.6       // m/s to km/h
-#define CONV_MMH2O_KPA  0.00981   // convesion multiplier from mmH2O to kPa
 
-#define AIR_SENS_INFO_TYPE		    "MPX5010DP"
-#define AIR_SENS_INFO_MAX		      "10kPa"
-#define AIR_SENS_INFO_SENSIVITY	  "4.413 mV/mmH20"
+#define AIR_DIG_OFFSET          0     // Digital Offset
+#define AIR_DIG_EOS             1024  // Digital End Of Scale
+#define AIR_MVOLTS_EOS          3300  // mVolts Enf Of Scale
 
-#define AIR_DIG_OFFSET          55      	// Digital Offset
-#define AIR_DIG_EOS             1023    	// Digital End Of Scale
-#define AIR_MVOLTS_EOS          3300    	// mVolts Enf Of Scale
-#define AIR_SENS_SENSIVITY      3.713   	// 4.413 in mV/mmH2O taken from datasheet. 4.413 * 3.3/5
+#define AIR_SENS_R              0.66  // (3.3 <-> 5)
+
+#define AIR_SENS_INFO_TYPE        "MPX5010DP"
+#define AIR_SENS_INFO_PA          "0kPa - 10kPa"
+#define AIR_SENS_INFO_V           "200mV - 4700mV"
+#define AIR_SENS_M                2.223
+#define AIR_SENS_B                -444.45
+
 /*
 #define AIR_SENS_INFO_TYPE        "XGZP6897A"
-#define AIR_SENS_INFO_MAX         "5kPa"
-#define AIR_SENS_INFO_SENSIVITY   "4.413 mV/mmH20"
+#define AIR_SENS_INFO_PA          "-1kPa - 1kPa"
+#define AIR_SENS_INFO_V           "500mV - 4500mV"
 */
+
 #endif // _AIRSEEP_H_
 
 #ifdef __cplusplus
