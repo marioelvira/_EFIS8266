@@ -100,9 +100,11 @@ void _readCONFIG (void)
     airsData.digOffset = AIR_DIG_OFFSET;
     airsData.digEOS = AIR_DIG_EOS;
     airsData.mVoltsEOS = AIR_MVOLTS_EOS;
-    airsData.airSensM = AIR_SENS_M;
-    airsData.airSensB = AIR_SENS_B;
     airsData.airSensR = AIR_SENS_R;
+    airsData.airSensPA1 = AIR_SENS_PA1;
+    airsData.airSensPA2 = AIR_SENS_PA2;
+    airsData.airSensV1 = AIR_SENS_V1;
+    airsData.airSensV2 = AIR_SENS_V2;
     EEPROM.put(EERPOM_ADD_AIRS_VAL, airsData);
 	
 	  // Altimeter
@@ -133,9 +135,9 @@ void _readCONFIG (void)
   Serial.print("01 - EPROM IP Mode: ");
   Serial.print(ipMode);
   if (ipMode == FIXIP_MODE)
-    Serial.println(" FIX IP");   
+    Serial.print(" FIX IP ");   
   else
-    Serial.println(" DHCP");
+    Serial.print(" DHCP  ");
   #endif
   
   if (ipMode == FIXIP_MODE)
@@ -231,12 +233,16 @@ void _readCONFIG (void)
   Serial.print(airsData.digEOS);
   Serial.print(" mVoltsEOS: ");
   Serial.print(airsData.mVoltsEOS);
-  Serial.print(" airSensM: ");
-  Serial.println(airsData.airSensM);
-  Serial.print(" airSensB: ");
-  Serial.println(airsData.airSensB);
   Serial.print(" airSensR: ");
-  Serial.println(airsData.airSensR);
+  Serial.print(airsData.airSensR);
+  Serial.print(" airSensPA1: ");
+  Serial.print(airsData.airSensPA1);
+  Serial.print(" airSensPA2: ");
+  Serial.print(airsData.airSensPA2);
+  Serial.print(" airSensV1: ");
+  Serial.print(airsData.airSensV1);
+  Serial.print(" airSensV2: ");
+  Serial.println(airsData.airSensV2);
   #endif
   
   // Altimeter

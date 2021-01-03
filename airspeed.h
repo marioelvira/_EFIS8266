@@ -10,9 +10,11 @@ typedef struct
   int16_t digOffset;      // 2 bytes
   int16_t digEOS;         // 2 bytes
   float   mVoltsEOS;      // 4 bytes
-  float   airSensM;       // 4 bytes
-  float   airSensB;       // 4 bytes
   float   airSensR;       // 4 bytes
+  float   airSensPA1;     // 4 bytes
+  float   airSensPA2;     // 4 bytes
+  float   airSensV1;      // 4 bytes
+  float   airSensV2;      // 4 bytes
 } AirsData;
 
 #define AIR_ARRAY_SIZE  5
@@ -28,17 +30,13 @@ typedef struct
 
 #define AIR_SENS_R              0.66  // (3.3 <-> 5)
 
-#define AIR_SENS_INFO_TYPE        "MPX5010DP"
-#define AIR_SENS_INFO_PA          "0kPa - 10kPa"
-#define AIR_SENS_INFO_V           "200mV - 4700mV"
-#define AIR_SENS_M                2.223
-#define AIR_SENS_B                -444.45
-
-/*
+//#define AIR_SENS_INFO_TYPE      "MPX5010DP"
 #define AIR_SENS_INFO_TYPE        "XGZP6897A"
-#define AIR_SENS_INFO_PA          "-1kPa - 1kPa"
-#define AIR_SENS_INFO_V           "500mV - 4500mV"
-*/
+
+#define AIR_SENS_PA1              0     // 0  Pa
+#define AIR_SENS_PA2              10000 // 10 kPa
+#define AIR_SENS_V1               200   // 200 mV
+#define AIR_SENS_V2               4700  // 4700 mV
 
 #endif // _AIRSEEP_H_
 

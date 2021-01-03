@@ -14,6 +14,9 @@ void _AirspeedSetup(void)
     AirInArray[i] = 0;
 
   AirInPointer = 0;
+
+  AirSpeed_m = (airsData.airSensPA2 - airsData.airSensPA1)/(airsData.airSensV2 - airsData.airSensV1);
+  AirSpeed_b = airsData.airSensPA2 - AirSpeed_m*airsData.airSensV2;
   
   _AirSensorDetails();
 }
@@ -43,7 +46,7 @@ void _AirspeedLoop(void)
 
   Air_mVolts = (float)AirInValueCorrected * (airsData.mVoltsEOS /(airsData.digEOS - airsData.digOffset));
   
-  AirPressure = (Air_mVolts)*(AIR_SENS_M/AIR_SENS_R) + AIR_SENS_B;  // Pa
+  AirPressure = (Air_mVolts)*(AirSpeed_m/AIR_SENS_R) + AirSpeed_b;  // Pa
 
   // https://www.vcalc.com/wiki/vCalc/Air+Speed
   if (AirPressure <= 0)
@@ -85,8 +88,8 @@ void _AirspeedLoop(void)
 void _AirSensorDetails(void)
 {
   airInfo =           "Sensor:     " + (String)AIR_SENS_INFO_TYPE + "</br>";
-  airInfo = airInfo + "Pa (range): " + (String)AIR_SENS_INFO_PA + "</br>";
-  airInfo = airInfo + "V (range):  " + (String)AIR_SENS_INFO_V + "</br>";
+  airInfo = airInfo + "m :  " + (String)AirSpeed_m + "</br>";
+  airInfo = airInfo + "b :  " + (String)AirSpeed_b + "</br>";
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   Serial.println("------------------------------------");

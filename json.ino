@@ -32,12 +32,15 @@ void _jsonAnemoCfg()
   json = json + ",";
   json = json + "{ \"param\":\"airmVoltsEOS\", \"value\":\"" + airsData.mVoltsEOS + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"airSensM\", \"value\":\"" + airsData.airSensM + "\" }";
-  json = json + ",";
-  json = json + "{ \"param\":\"airSensB\", \"value\":\"" + airsData.airSensB + "\" }";
-  json = json + ",";
   json = json + "{ \"param\":\"airSensR\", \"value\":\"" + airsData.airSensR + "\" }";
-  
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensPA1\", \"value\":\"" + airsData.airSensPA1 + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensPA2\", \"value\":\"" + airsData.airSensPA2 + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensV1\", \"value\":\"" + airsData.airSensV1 + "\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"airSensV2\", \"value\":\"" + airsData.airSensV2 + "\" }";
   json = json + "]";
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");

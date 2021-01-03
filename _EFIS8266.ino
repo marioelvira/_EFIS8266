@@ -168,6 +168,8 @@ int   AirInPointer;
 
 String   airInfo;
 AirsData airsData;
+float AirSpeed_m;
+float AirSpeed_b;
 
 #if (_AIR_SERIAL_DEBUG_ == 1)
 unsigned long AirCurrentTime = millis();
@@ -195,13 +197,22 @@ Units  units;
 // MAIN SETUP //
 //============//
 void setup(void)
-{ 
+{  
   // PIN setup
   _PINSetup();
 
   // IO setup
   _IOSetup();
 
+  #if (_SERIAL_DEBUG_ == 1)
+  delay(5000);  // 5 secs
+  Serial.begin(115200);
+  Serial.println("");
+  #endif
+
+  // Config setup
+  _ConfigSetup();
+  
   // Gyro setup
   _GyroSetup();
 
@@ -214,15 +225,6 @@ void setup(void)
   // Vario setup
   _VarioSetup();
   
-  #if (_SERIAL_DEBUG_ == 1)
-  delay(5000);  // 5 secs
-  Serial.begin(115200);
-  Serial.println("");
-  #endif
-
-  // Config setup
-  _ConfigSetup();
-
   // Wi-Fi setup
   _WifiSetup();
 

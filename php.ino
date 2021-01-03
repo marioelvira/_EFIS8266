@@ -269,17 +269,21 @@ void _phpAnemoCfg()
   String sAirDigOffset = httpServer.arg("airDigOffset");
   String sAirDigEOS = httpServer.arg("airDigEOS");
   String sAirmVoltsEOS = httpServer.arg("airmVoltsEOS");
-  String sAirSensM = httpServer.arg("airSensM");
-  String sAirSensB = httpServer.arg("airSensB");
   String sAirSensR = httpServer.arg("airSensR");
-
+  String sAirSensPA1 = httpServer.arg("airSensPA1");
+  String sAirSensPA2 = httpServer.arg("airSensPA2");
+  String sAirSensV1 = httpServer.arg("airSensV1");
+  String sAirSensV2 = httpServer.arg("airSensV2");
+  
   airsData.digOffset = sAirDigOffset.toInt();
   airsData.digEOS = sAirDigEOS.toInt();
   airsData.mVoltsEOS = (float)sAirmVoltsEOS.toFloat();
-  airsData.airSensM = (float)sAirSensM.toFloat();
-  airsData.airSensB = (float)sAirSensB.toFloat();
   airsData.airSensR = (float)sAirSensR.toFloat();
-
+  airsData.airSensPA1 = (float)sAirSensPA1.toFloat();
+  airsData.airSensPA2 = (float)sAirSensPA2.toFloat();
+  airsData.airSensV1 = (float)sAirSensV1.toFloat();
+  airsData.airSensV2 = (float)sAirSensV2.toFloat();
+  
   #if (_PHP_SERIAL_DEBUG_ == 1)
   Serial.print("---->airDigOffset: ");
   Serial.println(airsData.digOffset);
@@ -287,12 +291,16 @@ void _phpAnemoCfg()
   Serial.println(airsData.digEOS);
   Serial.print("---->airmVoltsEOS: ");
   Serial.println(airsData.mVoltsEOS);
-  Serial.print("---->sAirSensM: ");
-  Serial.println(airsData.airSensM);
-  Serial.print("---->sAirSensB: ");
-  Serial.println(airsData.airSensB);
-  Serial.print("---->sAirSensR: ");
+  Serial.print("---->airSensR: ");
   Serial.println(airsData.airSensR);
+  Serial.print("---->airSensPA1: ");
+  Serial.println(airsData.airSensPA1);
+  Serial.print("---->airSensPA2: ");
+  Serial.println(airsData.airSensPA2);
+  Serial.print("---->airSensV1: ");
+  Serial.println(airsData.airSensV1);
+  Serial.print("---->airSensV1: ");
+  Serial.println(airsData.airSensV2);
   Serial.println("");
   #endif
 

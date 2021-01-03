@@ -39,18 +39,18 @@ extern "C" {
 #define EEPROM_GYRO_MAX           22    // Gyro Cal max 22 bytes -> Next 0x66
 
 #define EERPOM_ADD_AIRS_VAL       0x66  // 102
-#define EERPOM_AIRS_MAX           12    // Airspeed 20 bytes -> Next 0x7A
+#define EERPOM_AIRS_MAX           28    // Airspeed 28 bytes -> Next 0x82
 
-#define EERPOM_ADD_ALT_VAL        0x7A
-#define EERPOM_ALT_MAX            2     // Altimeter 2 bytes -> Next 0x7C
+#define EERPOM_ADD_ALT_VAL        0x82  // 130
+#define EERPOM_ALT_MAX            2     // Altimeter 2 bytes -> Next 0x84
 
-#define EERPOM_ADD_UNITS_VAL      0x7C
-#define EERPOM_UNITS_MAX          4     // Units 4 bytes -> Next 0x80
+#define EERPOM_ADD_UNITS_VAL      0x84  // 134
+#define EERPOM_UNITS_MAX          4     // Units 4 bytes -> Next 0x88
 
-#define EERPOM_NEXT               0x80  // Next value
+#define EERPOM_NEXT               0x88  // 136 Next value
 
 // Values
-#define EEPROM_VAL_OK             0xA0
+#define EEPROM_VAL_OK             0xA5
 
 #define EEPROM_VAL_IP_MODE        DHCP_MODE
 #define EEPROM_VAL_IP1            192

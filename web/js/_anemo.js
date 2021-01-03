@@ -67,11 +67,17 @@ function fgetConfig()
 			if (obj.param == "airSensR")
 				$("#airSensR").val(obj.value);
 			
-			if (obj.param == "airSensM")
-				$("#airSensM").val(obj.value);
+			if (obj.param == "airSensPA1")
+				$("#airSensPA1").val(obj.value);
 			
-			if (obj.param == "airSensB")
-				$("#airSensB").val(obj.value);
+			if (obj.param == "airSensPA2")
+				$("#airSensPA2").val(obj.value);
+			
+			if (obj.param == "airSensV1")
+				$("#airSensV1").val(obj.value);
+			
+			if (obj.param == "airSensV2")
+				$("#airSensV2").val(obj.value);
 		});
 	});
 }
