@@ -6,9 +6,10 @@ void _GyroSetup(void)
 {
   // Gyro status
   gyroStatus = GYRO_DETECTION;
+  gyroNConnec = 0;
 
   gyroData.detected = 0;
-  gyroData.calibrated = 0;
+  //gyroData.calibrated = 0; // Read from E2PROM
 
   gyroInfo = "";
 }
@@ -30,6 +31,7 @@ void _GyroLoop()
         #endif
         gyroData.detected = 0;
         gyroStatus = GYRO_NOT_DETECTED;
+        gyroTickReconnect = millis();
       }
       else
       {
@@ -38,6 +40,7 @@ void _GyroLoop()
         #endif
         gyroData.detected = 1;
         gyroStatus = GYRO_DETECTED;
+        gyroNConnec++;
       }
       break;
 
@@ -53,13 +56,19 @@ void _GyroLoop()
         // Write E2PORM data loaded on gyroCalVal into sensor...      
         bno.setSensorOffsets(gyroCalVal);
         #if (_GYRO_SERIAL_DEBUG_ == 1)
+        Serial.println("Gyro BNO055 Calibrated...");
         _GyroSensorOffsets(gyroCalVal);
         #endif
 
         gyroStatus = GYRO_WORKING;
       }
-      else       
-        gyroStatus = GYRO_IN_CALIBRATION; // TODO send to Stand by
+      else
+      {
+        #if (_GYRO_SERIAL_DEBUG_ == 1)
+        Serial.println("Gyro BNO055 in Calibration...");
+        #endif    
+        gyroStatus = GYRO_IN_CALIBRATION;
+      }
 
       // Crystal must be configured AFTER
       // loading calibration data into BNO055.
@@ -174,6 +183,9 @@ void _GyroLoop()
       break;
 
     case GYRO_NOT_DETECTED:
+      if (millis() - gyroTickReconnect >= 1000)
+        gyroStatus = GYRO_DETECTION;
+
       break;
   }
 }
@@ -183,12 +195,13 @@ void _GyroLoop()
 /**************************/
 void _GyroSensorDetails(void)
 {
-  gyroInfo =            "Sensor:     " + (String)gyroSensor.name + "</br>";
-  gyroInfo = gyroInfo + "Driver Ver: " + (String)gyroSensor.version + "</br>";
-  gyroInfo = gyroInfo + "Unique ID:  " + (String)gyroSensor.sensor_id + "</br>";
-  gyroInfo = gyroInfo + "Max Value:  " + (String)gyroSensor.max_value + "</br>";
-  gyroInfo = gyroInfo + "Min Value:  " + (String)gyroSensor.min_value + "</br>";
-  gyroInfo = gyroInfo + "Resolution: " + (String)gyroSensor.resolution + "</br>";
+  gyroInfo =            "Sensor:      " + (String)gyroSensor.name + "</br>";
+  gyroInfo = gyroInfo + "Connections: " + (String)gyroNConnec + "</br>";
+  gyroInfo = gyroInfo + "Driver Ver:  " + (String)gyroSensor.version + "</br>";
+  gyroInfo = gyroInfo + "Unique ID:   " + (String)gyroSensor.sensor_id + "</br>";
+  gyroInfo = gyroInfo + "Max Value:   " + (String)gyroSensor.max_value + "</br>";
+  gyroInfo = gyroInfo + "Min Value:   " + (String)gyroSensor.min_value + "</br>";
+  gyroInfo = gyroInfo + "Resolution:  " + (String)gyroSensor.resolution + "</br>";
 
   #if (_GYRO_SERIAL_DEBUG_ == 1)
   Serial.println("------------------------------------");

@@ -215,7 +215,7 @@ void _readCONFIG (void)
     
   #if (_EEPROM_SERIAL_DEBUG_ == 1)
   Serial.print("03 - EPROM GYRO CAL: ");
-  Serial.print(i);
+  Serial.print(gyroData.calibrated);
   if (gyroData.calibrated == 1)
     Serial.println(" OK");
   else

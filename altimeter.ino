@@ -6,6 +6,7 @@ void _AltimeterSetup(void)
 {
   // Alt status
   altStatus = GYRO_DETECTION;
+  altNConnec = 0;
 
   altInfo = "";
 
@@ -25,8 +26,9 @@ void _AltimeterLoop(void)
         #if (_ALT_SERIAL_DEBUG_ == 1)
         Serial.println(F("Could not find a valid BME280 sensor, check wiring!"));
         #endif
-        
+
         altStatus = ALT_NOT_DETECTED;
+        altTickReconnect = millis();
       }
       else
       {
@@ -35,6 +37,7 @@ void _AltimeterLoop(void)
         #endif
 
         altStatus = ALT_DETECTED;
+        altNConnec++;
       }
       break;
       
@@ -84,6 +87,9 @@ void _AltimeterLoop(void)
       break;
       
     case ALT_NOT_DETECTED:
+      if (millis() - altTickReconnect >= 1000)
+        altStatus = ALT_DETECTION;
+         
       break;
   }
 }
@@ -93,12 +99,13 @@ void _AltimeterLoop(void)
 /*******************************/
 void _AltSensorDetails(void)
 {
-  altInfo = altInfo + "Sensor:     " + (String)altSensor.name + "</br>";
-  altInfo = altInfo + "Driver Ver: " + (String)altSensor.version + "</br>";
-  altInfo = altInfo + "Unique ID:  " + (String)altSensor.sensor_id + "</br>";
-  altInfo = altInfo + "Max Value:  " + (String)altSensor.max_value + "</br>";
-  altInfo = altInfo + "Min Value:  " + (String)altSensor.min_value + "</br>";
-  altInfo = altInfo + "Resolution: " + (String)altSensor.resolution + "</br>";
+  altInfo = altInfo + "Sensor:      " + (String)altSensor.name + "</br>";
+  altInfo = altInfo + "Connections: " + (String)altNConnec + "</br>";
+  altInfo = altInfo + "Driver Ver:  " + (String)altSensor.version + "</br>";
+  altInfo = altInfo + "Unique ID:   " + (String)altSensor.sensor_id + "</br>";
+  altInfo = altInfo + "Max Value:   " + (String)altSensor.max_value + "</br>";
+  altInfo = altInfo + "Min Value:   " + (String)altSensor.min_value + "</br>";
+  altInfo = altInfo + "Resolution:  " + (String)altSensor.resolution + "</br>";
 
   #if (_ALT_SERIAL_DEBUG_ == 1)
   Serial.println("------------------------------------");

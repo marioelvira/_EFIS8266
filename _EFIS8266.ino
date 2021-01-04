@@ -116,6 +116,8 @@ int timeHour = 0;
 // Gyro //
 //////////
 String                    gyroInfo;
+int                       gyroNConnec;
+unsigned long             gyroTickReconnect;
 int                       gyroStatus;
 GyroData                  gyroData;
 adafruit_bno055_offsets_t gyroCalVal;
@@ -139,9 +141,11 @@ int iGforce;
 float     Altimeter;
 float     Altitude_m;
 
-sensor_t  altSensor;
-String    altInfo;
-int       altStatus;
+sensor_t      altSensor;
+String        altInfo;
+int           altStatus;
+int           altNConnec;
+unsigned long altTickReconnect;
 
 AltData   altData;
 

@@ -200,7 +200,8 @@ void _jsonAltStatus()
   json = json + "{ \"param\":\"alt_humid\", \"value\":" + String(humidity_event.relative_humidity) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"alt_press\", \"value\":" + String(pressure_event.pressure) + " }";
-   
+  json = json + ",";
+  json = json + "{ \"param\":\"altitude\", \"value\":" + String(Altimeter) + " }";
   json = json + "]";
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");

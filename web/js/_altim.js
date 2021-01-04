@@ -29,6 +29,9 @@ function frefreshStatus()
 				
 				if (obj.param == "alt_press")
 					$("#alt_press").html(obj.value);
+				
+				if (obj.param == "altitude")
+					$("#altitude").html(obj.value);
 			})
 		});
 
