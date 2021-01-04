@@ -1,12 +1,16 @@
 var ip = localStorage.getItem("vip");
 
 // Dynamic examples
-var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : true});
-var heading = $.flightIndicator('#heading', 'heading', {heading:150, size:200, showBox:true});
-var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:true});
-var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: true});
-var altimeter = $.flightIndicator('#altimeter', 'altimeter');
-var turn_coordinator = $.flightIndicator('#turn_coordinator', 'turn_coordinator', {turn:0});
+var attitude;
+var heading;
+var variometer;
+var airspeed;
+var altimeter;
+var turn_coordinator;
+
+var units_alt = 0;
+var units_airspeed = 0;
+var units_vario = 0;
 
 $(document).ready( function()
 {
@@ -16,14 +20,59 @@ $(document).ready( function()
 
 function freInitStatus()
 {
-	airspeed.setAirSpeed(0);
+	var jsondir = "http://" + ip + "/unitsCfg.json";
+	
+	$.getJSON(jsondir, function(jsonData) {
+		
+		console.log(jsonData);
+			
+		$.each(jsonData, function(index, obj) {
+			
+			if (obj.param == "units_alt")
+			{
+				units_alt = obj.value;
+				
+				if (units_alt == 0)
+					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'feet', {showBox: true});
+				else
+					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'meters', {showBox: true});
+				altimeter.setAltitude(0);
+				altimeter.setPressure(0);
+			}
+			
+			if (obj.param == "units_airspeed")
+			{
+				units_airspeed = obj.value;
+				
+				airspeed = $.flightIndicator('#airspeed', 'airspeed', '0', {showBox: true});
+				airspeed.setAirSpeed(0);
+			}
+			
+			if (obj.param == "units_vario")
+			{
+				units_vario = obj.value;
+				
+				variometer = $.flightIndicator('#variometer', 'variometer', '0', {vario:-5, showBox:true});
+				variometer.setVario(0);
+			}
+			
+			//if (obj.param == "units_temp")
+			//	units_temp = obj.value;
+		});
+	});
+	
+
+	
+	attitude = $.flightIndicator('#attitude', 'attitude', '0', {roll:50, pitch:-20, size:200, showBox : true});
 	attitude.setRoll(0);
 	attitude.setPitch(0);
-	altimeter.setAltitude(0);
-	altimeter.setPressure(0);
+
+	heading = $.flightIndicator('#heading', 'heading', '0', {heading:150, size:200, showBox:true});
 	heading.setHeading(0);
+	
+	turn_coordinator = $.flightIndicator('#turn_coordinator', 'turn_coordinator', '0', {turn:0});
 	turn_coordinator.setTurn(0);
-	variometer.setVario(0);
+	
 	$("#appInfo").html("<i class=\"fas fa-wifi\" style=\"color:red;\"></i> Connecting...");
 }
 
