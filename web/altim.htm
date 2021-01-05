@@ -8,6 +8,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <!-- Flight Indicators library styles -->
+  <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
+  
   <title>EFIS Altimeter</title>
 
   <!-- Bootstrap core CSS -->
@@ -15,8 +18,6 @@
 
   <!-- Custom styles for this template -->
   <link href="css/simple-sidebar.css" rel="stylesheet">
-
-  <script src="js/jquery.2.1.0.min.js"></script>
 
   <!-- Incons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -85,7 +86,17 @@
 					<label>altitude</label>
 					<div class="alert alert-secondary" id="altitude">...</div>
 				</div>
+				<div class="form-group">
+					<label>QNH</label>
+					<div class="alert alert-secondary" id="qnh">...</div>
+				</div>
 			</div>
+			
+			<div class="col-sm-3">
+				<div><label>altimeter</label></div>
+				<div><span id="altimeter"></span></div>
+			</div>
+			
 			</div>
 			</div>
 			
@@ -122,11 +133,16 @@
   </div>
   <!-- /#wrapper -->
   
+  <!-- Importing jQuery library -->
+  <script src="js/jquery.2.1.0.min.js"></script>
+  
+  <!-- Importing the FlightIndicators library -->
+  <script src="js/jquery.altimeter.js"></script>
+  
   <script type="text/javascript" src="js/_ip.js"></script>
   <script type="text/javascript" src="js/_altim.js"></script>
   
-  <!-- Bootstrap core JavaScript
-  <script src="jquery/jquery.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <!-- Menu Toggle Script -->

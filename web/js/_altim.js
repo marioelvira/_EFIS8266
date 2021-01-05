@@ -1,10 +1,37 @@
 var ip = localStorage.getItem("vip");
 
+var altimeter;
+var units_alt = 0;
+
 $(document).ready( function()
 {
+	freInitStatus();
 	fgetConfig();
 	frefreshStatus();
 });
+
+function freInitStatus()
+{
+	var jsondir = "http://" + ip + "/unitsCfg.json";
+	
+	$.getJSON(jsondir, function(jsonData) {
+			
+		$.each(jsonData, function(index, obj) {
+			
+			if (obj.param == "units_alt")
+			{
+				units_alt = obj.value;
+				
+				if (units_alt == 0)
+					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'feet', {showBox: true});
+				else
+					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'meters', {showBox: true});
+				altimeter.setAltitude(0);
+				altimeter.setPressure(0);
+			}
+		});
+	});
+}
 
 function frefreshStatus()
 {
@@ -31,7 +58,16 @@ function frefreshStatus()
 					$("#alt_press").html(obj.value);
 				
 				if (obj.param == "altitude")
+				{
 					$("#altitude").html(obj.value);
+					altimeter.setAltitude(obj.value);
+				}
+				
+				if (obj.param == "qnh")
+				{
+					$("#qnh").html(obj.value);
+					altimeter.setPressure(obj.value);
+				}
 			})
 		});
 

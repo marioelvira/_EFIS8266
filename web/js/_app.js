@@ -60,9 +60,7 @@ function freInitStatus()
 			//	units_temp = obj.value;
 		});
 	});
-	
-
-	
+		
 	attitude = $.flightIndicator('#attitude', 'attitude', '0', {roll:50, pitch:-20, size:200, showBox : true});
 	attitude.setRoll(0);
 	attitude.setPitch(0);
