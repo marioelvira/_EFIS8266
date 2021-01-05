@@ -36,6 +36,7 @@ function freInitStatus()
 					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'feet', {showBox: true});
 				else
 					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'meters', {showBox: true});
+				
 				altimeter.setAltitude(0);
 				altimeter.setPressure(0);
 			}
@@ -52,7 +53,11 @@ function freInitStatus()
 			{
 				units_vario = obj.value;
 				
-				variometer = $.flightIndicator('#variometer', 'variometer', '0', {vario:-5, showBox:true});
+				if (units_vario == 0)
+					variometer = $.flightIndicator('#variometer', 'variometer', 'feetpm', {vario:-5, showBox:true});
+				else
+					variometer = $.flightIndicator('#variometer', 'variometer', 'mpm', {vario:-5, showBox:true});
+				
 				variometer.setVario(0);
 			}
 			

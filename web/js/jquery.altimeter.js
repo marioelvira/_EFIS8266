@@ -6,7 +6,7 @@
 * https://github.com/sebmatton/jQuery-Flight-Indicators
 */
 (function($) {
-	function FlightIndicator( placeholder, type, units, options ) {
+	function jQAltimeterConstructor( placeholder, units, options ) {
 		// Initial configuration
 		var attitude = this;
 		var settings = $.extend({
@@ -18,20 +18,16 @@
 
 		// Creation of the instrument
 		placeholder.each(function(){
-			switch(type){
-				case 'altimeter':		
-					if (units == 'feet')
-						$(this).html('<div class="instrument altimeter"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><div class="pressure box"><img src="' + settings.img_directory + 'altitude_pressure.svg" class="box" alt="" /></div><img src="' + settings.img_directory + 'altitude_ticks_feet.svg" class="box" alt="" /><div class="needleSmall box"><img src="' + settings.img_directory + 'fi_needle_small.svg" class="box" alt="" /></div><div class="needle box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
-					else
-						$(this).html('<div class="instrument altimeter"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><div class="pressure box"><img src="' + settings.img_directory + 'altitude_pressure.svg" class="box" alt="" /></div><img src="' + settings.img_directory + 'altitude_ticks_meter.svg" class="box" alt="" /><div class="needleSmall box"><img src="' + settings.img_directory + 'fi_needle_small.svg" class="box" alt="" /></div><div class="needle box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
-					_setAltitude(settings.altitude);
-					_setPressure(settings.pressure);
+			switch(units){
+				case 'feet':		
+					$(this).html('<div class="instrument altimeter"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><div class="pressure box"><img src="' + settings.img_directory + 'altitude_pressure.svg" class="box" alt="" /></div><img src="' + settings.img_directory + 'altitude_ticks_feet.svg" class="box" alt="" /><div class="needleSmall box"><img src="' + settings.img_directory + 'fi_needle_small.svg" class="box" alt="" /></div><div class="needle box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
 					break;
-				default:
-					$(this).html('<div class="instrument attitude"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><div class="roll box"><img src="' + settings.img_directory + 'horizon_back.svg" class="box" alt="" /><div class="pitch box"><img src="' + settings.img_directory + 'horizon_ball.svg" class="box" alt="" /></div><img src="' + settings.img_directory + 'horizon_circle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'horizon_mechanics.svg" class="box" alt="" /><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
-					_setRoll(settings.roll);
-					_setPitch(settings.pitch);
+					
+				case 'meters':
+					$(this).html('<div class="instrument altimeter"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><div class="pressure box"><img src="' + settings.img_directory + 'altitude_pressure.svg" class="box" alt="" /></div><img src="' + settings.img_directory + 'altitude_ticks_meter.svg" class="box" alt="" /><div class="needleSmall box"><img src="' + settings.img_directory + 'fi_needle_small.svg" class="box" alt="" /></div><div class="needle box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
+					break;
 			}
+						
 			$(this).find('div.instrument').css({height : settings.size, width : settings.size});
 			$(this).find('div.instrument img.box.background').toggle(settings.showBox);
 		});
@@ -81,14 +77,14 @@
 	};
 
 	// Extension to jQuery
-	$.flightIndicator = function(placeholder, type, options){
-		var flightIndicator = new FlightIndicator($(placeholder), type, options)
-		return flightIndicator;
+	$.jQAltimeter = function(placeholder, type, options){
+		var jQAltimeter = new jQAltimeterConstructor($(placeholder), type, options)
+		return jQAltimeter;
 	}
 
-	$.fn.flightIndicator = function(data, type, options){
+	$.fn.jQAltimeter = function(data, type, options){
 		return this.each(function(){
-			$.flightIndicator(this, type, options);
+			$.jQAltimeter(this, type, options);
 		});
 	}
 }( jQuery ));

@@ -23,9 +23,9 @@ function freInitStatus()
 				units_alt = obj.value;
 				
 				if (units_alt == 0)
-					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'feet', {showBox: true});
+					altimeter = $.jQAltimeter('#altimeter', 'feet', {showBox: true});
 				else
-					altimeter = $.flightIndicator('#altimeter', 'altimeter', 'meters', {showBox: true});
+					altimeter = $.jQAltimeter('#altimeter', 'meters', {showBox: true});
 				altimeter.setAltitude(0);
 				altimeter.setPressure(0);
 			}
