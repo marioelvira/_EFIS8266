@@ -10,8 +10,7 @@ void _jsonAltCfg()
 
   json = json + "{ \"param\":\"altInfo\", \"value\":\"" + altInfo + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"QNH\", \"value\":\"" + altData.QNH + "\" }";
-    
+  json = json + "{ \"param\":\"cfg_qnh\", \"value\":\"" + altData.QNH + "\" }";
   json = json + "]";
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
@@ -195,15 +194,27 @@ void _jsonAltStatus()
     
   json = json + "{ \"param\":\"altStatus\", \"value\":\"" + jsonAltStatus + "\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"alt_temp\", \"value\":" + String(temp_event.temperature) + " }";
+  if (units.temp == TEMP_KELVIN)
+    json = json + "{ \"param\":\"alt_temp\", \"value\":\"" + String(temp_event.temperature + 273,15) + " K\" }";
+  else if (units.temp == TEMP_FARENHEIT)
+    json = json + "{ \"param\":\"alt_temp\", \"value\":\"" + String(((temp_event.temperature)* 9/5) + 32) + " ºF\" }";
+  else
+    json = json + "{ \"param\":\"alt_temp\", \"value\":\"" + String(temp_event.temperature) + " ºC\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"alt_humid\", \"value\":" + String(humidity_event.relative_humidity) + " }";
+  json = json + "{ \"param\":\"alt_humid\", \"value\":\"" + String(humidity_event.relative_humidity) + " %\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"alt_press\", \"value\":" + String(pressure_event.pressure) + " }";
+  json = json + "{ \"param\":\"alt_press\", \"value\":\"" + String(pressure_event.pressure) + " hPa\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitude\", \"value\":" + String(Altimeter) + " }";
+  if (units.alt == ALT_FEET)
+    json = json + "{ \"param\":\"alt_value\", \"value\":\"" + String(Altimeter) + " feet\" }";
+  else 
+    json = json + "{ \"param\":\"alt_value\", \"value\":\"" + String(Altimeter) + " meters\" }";
   json = json + ",";
-  json = json + "{ \"param\":\"qnh\", \"value\":" + String(altData.QNH) + " }";
+  json = json + "{ \"param\":\"qnh_value\", \"value\":\"" + String(altData.QNH) + " hPa\" }";
+  json = json + ",";
+  json = json + "{ \"param\":\"altimeter\", \"value\":" + String(Altimeter) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"QNH\", \"value\":" + String(altData.QNH) + " }";
   json = json + "]";
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
@@ -282,7 +293,7 @@ void _jsonDATA()
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
-  json = json + "{ \"param\":\"altitude\", \"value\":" + String(Altimeter) + " }";
+  json = json + "{ \"param\":\"altimeter\", \"value\":" + String(Altimeter) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"QNH\", \"value\":" + String(altData.QNH) + " }";
   json = json + ",";

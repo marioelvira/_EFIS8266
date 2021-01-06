@@ -73,8 +73,6 @@
 						<option value="0">feet</option>
 						<option value="1">meters</option>
 					</select>
-					<div class="valid-feedback">OK</div>
-					<div class="invalid-feedback">Error</div>
 				</div>
 				<div class="form-group">
 					<label>Airspeed</label>
@@ -82,19 +80,13 @@
 						<option value="0">knots</option>
 						<option value="1">km/h</option>
 					</select>
-					<div class="valid-feedback">OK</div>
-					<div class="invalid-feedback">Error</div>
 				</div>
 				<div class="form-group">
 					<label>Vario</label>
 					<select class="form-control" name="units_vario" id="units_vario">
-						<option value="0">feet/s</option>
-						<option value="1">meters/s</option>
-						<option value="2">feet/min</option>
-						<option value="3">meters/min</option>
+						<option value="0">feet/min</option>
+						<option value="1">meters/min</option>
 					</select>
-					<div class="valid-feedback">OK</div>
-					<div class="invalid-feedback">Error</div>
 				</div>
 				<div class="form-group">
 					<label>Temperature</label>
@@ -103,12 +95,10 @@
 						<option value="1">Kelvin</option>
 						<option value="2">Farenheit</option>
 					</select>
-					<div class="valid-feedback">OK</div>
-					<div class="invalid-feedback">Error</div>
 				</div>
 			</div>
 			</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary" onclick="fsetConfig()" >Submit</button>
 			</form>
 			</div>
 	

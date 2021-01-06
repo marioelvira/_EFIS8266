@@ -114,7 +114,7 @@ void _readCONFIG (void)
 	  // Units
 	  units.alt = ALT_FEET;
     units.airspeed = AIRS_KMH;
-    units.vario = VARIO_FEETpS;
+    units.vario = VARIO_FEETpM;
     units.temp = TEMP_CELSIUS;
 	  EEPROM.put(EERPOM_ADD_UNITS_VAL, units);
 

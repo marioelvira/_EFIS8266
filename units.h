@@ -19,10 +19,10 @@ typedef struct
 #define AIRS_KNOTS		0
 #define AIRS_KMH		  1
 
-#define VARIO_FEETpS	0
-#define VARIO_MpS		  1
-#define VARIO_FEETpM	3
-#define VARIO_MpM		  4
+#define VARIO_FEETpM  0
+#define VARIO_MpM     1
+//#define VARIO_FEETpS  2
+//#define VARIO_MpS     3
 
 #define TEMP_CELSIUS	  0
 #define TEMP_KELVIN		  1

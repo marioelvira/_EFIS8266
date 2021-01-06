@@ -102,7 +102,7 @@ function frefreshStatus()
 				if (obj.param == "pitchAngle")
 					attitude.setPitch(obj.value);
 				
-				if (obj.param == "altitude")
+				if (obj.param == "altimeter")
 					altimeter.setAltitude(obj.value);
 
 				if (obj.param == "QNH")

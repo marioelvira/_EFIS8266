@@ -1,3 +1,36 @@
+void _phpResponseCfg(int i)
+{
+  String html = "";
+  
+  html = "<!DOCTYPE HTML><html>";
+  html = html + "<title>Config Saved</title>";
+  html = html + "<head>";
+  html = html + "<link rel=\"icon\" href=\"data:,\">";
+  html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
+  html = html + "</head>";
+
+  html = html + "<body>";
+
+  html = html + "<div class=\"myform\">";
+  if (i == 200)
+    html = html + "<h1>EFIS8266 project<span>Configuration saved</span></h1>";
+  else
+    html = html + "<h1>EFIS8266 project<span>Configuration error</span></h1>";
+
+  html = html + "<div class=\"button-section\">";
+  html = html + " <input type=\"submit\" onclick=\"goBack()\" value=\"Back\">";
+  html = html + "</div>";
+
+  html = html + "<script>";
+  html = html + "function goBack() { window.history.back(); }";
+  html = html + "</script>";
+
+  html = html + "</body> ";
+  html = html + "</html>";
+
+  httpServer.send (i, "text/html", html);
+}
+
 void _phpNetworkCfg()
 {
   String rwmode = httpServer.arg("wifimode");
@@ -233,17 +266,15 @@ void _phpNetworkCfg()
      // Error
      i = 404;
   }
+
+  _phpResponseCfg(i);
   
-  httpServer.sendHeader("Access-Control-Allow-Origin","*");
-  if (i = 200)
-    httpServer.send (i, "text/html", "OK"); // TODO
-  else
-    httpServer.send (i, "text/html", "Error"); // TODO
+  _phpResponseCfg(i);
 }
 
 void _phpAltCfg()
 { 
-  String qnh = httpServer.arg("QNH");
+  String qnh = httpServer.arg("cfg_qnh");
 
   altData.QNH = qnh.toInt();
 
@@ -260,8 +291,7 @@ void _phpAltCfg()
   // Read config from EEPROM
   _readCONFIG();
 
-  httpServer.sendHeader("Access-Control-Allow-Origin","*");
-  httpServer.send (200, "text/html", "OK");
+  _phpResponseCfg(200);
 }
 
 void _phpAnemoCfg()
@@ -311,8 +341,7 @@ void _phpAnemoCfg()
   // Read config from EEPROM
   _readCONFIG();
     
-  httpServer.sendHeader("Access-Control-Allow-Origin","*");
-  httpServer.send (200, "text/html", "OK");
+  _phpResponseCfg(200);
 }
 
 void _phpGyroCfg()
@@ -381,9 +410,8 @@ void _phpGyroCfg()
 
   // Read config from EEPROM
   _readCONFIG();
-    
-  httpServer.sendHeader("Access-Control-Allow-Origin","*");
-  httpServer.send (200, "text/html", "OK");
+
+  _phpResponseCfg(200);
 }
 
 void _phpUnitsCfg()
@@ -416,7 +444,6 @@ void _phpUnitsCfg()
 
   // Read config from EEPROM
   _readCONFIG();
-    
-  httpServer.sendHeader("Access-Control-Allow-Origin","*");
-  httpServer.send (200, "text/html", "OK");
+
+  _phpResponseCfg(200);
 }

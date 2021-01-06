@@ -34,7 +34,7 @@ void _serveNETWORK()
 
   html = html + "<body>";
   html = html + "<div class=\"myform\">";
-  html = html + "<h1>ESP8266+ #Network settings<span>myWEB project</span></h1>";
+  html = html + "<h1>EFIS8266 project<span>Network settings</span></h1>";
   //html = html + "<form method=\"post\">";
   html = html + "<form method='get' action='networSettings'>";
 

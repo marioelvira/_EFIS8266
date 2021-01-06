@@ -23,9 +23,13 @@ function freInitStatus()
 				units_alt = obj.value;
 				
 				if (units_alt == 0)
+				{
 					altimeter = $.jQAltimeter('#altimeter', 'feet', {showBox: true});
+				}
 				else
+				{
 					altimeter = $.jQAltimeter('#altimeter', 'meters', {showBox: true});
+				}
 				altimeter.setAltitude(0);
 				altimeter.setPressure(0);
 			}
@@ -57,17 +61,18 @@ function frefreshStatus()
 				if (obj.param == "alt_press")
 					$("#alt_press").html(obj.value);
 				
-				if (obj.param == "altitude")
-				{
-					$("#altitude").html(obj.value);
-					altimeter.setAltitude(obj.value);
-				}
+				if (obj.param == "alt_value")
+					$("#alt_value").html(obj.value);
 				
-				if (obj.param == "qnh")
-				{
-					$("#qnh").html(obj.value);
+				if (obj.param == "qnh_value")
+					$("#qnh_value").html(obj.value);
+
+				// Instrument
+				if (obj.param == "altimeter")
+					altimeter.setAltitude(obj.value);
+				
+				if (obj.param == "QNH")
 					altimeter.setPressure(obj.value);
-				}
 			})
 		});
 
@@ -91,8 +96,8 @@ function fgetConfig()
 			if (obj.param == "altInfo")
 				$("#altInfo").html(obj.value);
 				
-			if (obj.param == "QNH")
-				$("#QNH").val(obj.value);
+			if (obj.param == "cfg_qnh")
+				$("#cfg_qnh").val(obj.value);
 
 		});
 	});
