@@ -1,0 +1,60 @@
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+    <!-- Flight Indicators library styles -->
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
+	
+    <title>EFIS Main Pannel</title>
+	
+	  <!-- Custom styles for this template -->
+	<link href="css/simple-sidebar.css" rel="stylesheet">
+	
+	<style>
+	
+	body {
+        background: grey
+	}
+    section {
+		background-image: url("img/background_metal.jpg");
+		background-repeat;
+        border-radius: 1em;
+        padding: 1em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+	}
+	</style>
+  
+</head>
+
+<body>
+   
+	<section>
+	    <div>
+			<span id="airspeed"></span>
+			<span id="variometer"></span>
+			<span id="altimeter"></span>
+		</div><div>
+			<span id="attitude"></span>
+			<span id="heading"></span>
+			<span id="turn_coordinator"></span>
+		</div>
+	</section>
+
+<!-- Importing jQuery library -->
+<script src="js/jquery.2.1.0.min.js"></script>
+
+<!-- Importing the FlightIndicators library -->
+<script src="js/jquery.flightindicators.js"></script>
+
+<script type="text/javascript" src="js/_ip.js"></script>
+<script type="text/javascript" src="js/_app.js"></script>
+
+</body>
+</html>
