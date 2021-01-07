@@ -281,7 +281,8 @@ void _GyroSensorCalStatus(void)
 
 void _GyroCalculus (void)
 { 
-  float Gforce = 1.0;
+  float gforce = 1.0;
+  float ball = 1.0;
 
   gMag = gyroEvent.orientation.x + 0.5;
   
@@ -336,10 +337,12 @@ void _GyroCalculus (void)
   if (gPitch > 0)  
     sPitch += "D";
 
-  ///////////////////
-  // G-Force meter //
-  ///////////////////
+  //////////////////////
+  // G-Force and ball //
+  //////////////////////
   imu::Vector<3> acc = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  Gforce = acc.z();
-  iGforce = round(Gforce*10/9.8);
+  gforce = acc.z();
+  iGforce = round(gforce*10/9.8); 
+  ball = acc.x();
+  iBall = round(ball*100);
 }

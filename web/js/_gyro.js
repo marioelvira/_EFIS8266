@@ -51,6 +51,9 @@ function frefreshStatus()
 				if (obj.param == "coor_z")
 					$("#coor_z").html(obj.value);
 				
+				if (obj.param == "ball")
+					$("#ball").html(obj.value);
+				
 				if (obj.param == "gyro_mag")
 					$("#gyro_mag").html(obj.value);
 				

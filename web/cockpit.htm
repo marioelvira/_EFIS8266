@@ -10,9 +10,15 @@
 	
     <title>EFIS Main Pannel</title>
 	
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	
 	  <!-- Custom styles for this template -->
 	<link href="css/simple-sidebar.css" rel="stylesheet">
 	
+	<!-- Incons-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  	
 	<style>
 	
 	body {
@@ -36,6 +42,37 @@
 <body>
    
 	<section>
+		<div class="row">
+			<h4 class="mt-4"><i class="fas fa-tools"></i> Main Pannel</h4>
+		</div>
+		<div class="row">
+			<p class="my-1"><small id="appInfo" >...</small></p>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><span id="airspeed"></span></div>
+			<div class="col-sm-4"><span id="variometer"></span></div>
+			<div class="col-sm-4"><span id="altimeter"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><div class="alert alert-secondary" id="airspeedtxt"></div></div>
+			<div class="col-sm-4"><div class="alert alert-secondary" id="variometertxt"></div></div>
+			<div class="col-sm-4"><div class="alert alert-secondary" id="altimetertxt"></div></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><span id="attitude"></span></div>
+			<div class="col-sm-4"><span id="heading"></span></div>
+			<div class="col-sm-4"><span id="turn_coordinator"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><div class="alert alert-secondary" id="attitudetxt"></div></div>
+			<div class="col-sm-4"><div class="alert alert-secondary" id="headingtxt"></div></div>
+			<div class="col-sm-4"><div class="alert alert-secondary" id="turn_coordinatortxt"></div></div>
+		</div>
+	</section>
+
+    <!--
+	<section>
+	<div class="container">
 	    <div>
 			<span id="airspeed"></span>
 			<span id="variometer"></span>
@@ -45,8 +82,10 @@
 			<span id="heading"></span>
 			<span id="turn_coordinator"></span>
 		</div>
+	</div>
 	</section>
-
+	-->
+	
 <!-- Importing jQuery library -->
 <script src="js/jquery.2.1.0.min.js"></script>
 

@@ -134,6 +134,7 @@ int gMag, gRoll, gPitch;
 String sRoll;
 String sPitch;
 int iGforce;
+int iBall;
 
 ///////////////
 // Altimeter //

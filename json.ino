@@ -273,6 +273,8 @@ void _jsonGyroStatus()
   json = json + "{ \"param\":\"gyro_pitch\", \"value\":\"" + sPitch + "\" }";
   json = json + ",";
   json = json + "{ \"param\":\"gforce\", \"value\":" + String(iGforce/10.0) + " }";
+  json = json + ",";
+  json = json + "{ \"param\":\"ball\", \"value\":" + String(iBall) + " }";
   
   json = json + "]";
   
