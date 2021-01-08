@@ -13,16 +13,19 @@
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	
-	  <!-- Custom styles for this template -->
-	<link href="css/simple-sidebar.css" rel="stylesheet">
-	
+	<!-- Indicators core CSS -->
+	<link href="css/indicator.css" rel="stylesheet">
+
 	<!-- Incons-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  	
+	<!-- Font-->
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
+ 
 	<style>
 	
 	body {
-        background: grey
+        background: grey;
+		font-family: "Orbitron";
 	}
     section {
 		background-image: url("img/background_metal.jpg");
@@ -40,7 +43,7 @@
 </head>
 
 <body>
-   
+
 	<section>
 		<div class="row">
 			<h4 class="mt-4"><i class="fas fa-tools"></i> Main Pannel</h4>
@@ -54,9 +57,9 @@
 			<div class="col-sm-4"><span id="altimeter"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4"><div class="alert alert-secondary" id="airspeedtxt"></div></div>
-			<div class="col-sm-4"><div class="alert alert-secondary" id="variometertxt"></div></div>
-			<div class="col-sm-4"><div class="alert alert-secondary" id="altimetertxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="airspeedtxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="variometertxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="altimetertxt"></div></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-4"><span id="attitude"></span></div>
@@ -64,27 +67,11 @@
 			<div class="col-sm-4"><span id="turn_coordinator"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4"><div class="alert alert-secondary" id="attitudetxt"></div></div>
-			<div class="col-sm-4"><div class="alert alert-secondary" id="headingtxt"></div></div>
-			<div class="col-sm-4"><div class="alert alert-secondary" id="turn_coordinatortxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="attitudetxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="headingtxt"></div></div>
+			<div class="col-sm-4"><div class="indicator" id="turn_coordinatortxt"></div></div>
 		</div>
 	</section>
-
-    <!--
-	<section>
-	<div class="container">
-	    <div>
-			<span id="airspeed"></span>
-			<span id="variometer"></span>
-			<span id="altimeter"></span>
-		</div><div>
-			<span id="attitude"></span>
-			<span id="heading"></span>
-			<span id="turn_coordinator"></span>
-		</div>
-	</div>
-	</section>
-	-->
 	
 <!-- Importing jQuery library -->
 <script src="js/jquery.2.1.0.min.js"></script>
@@ -93,7 +80,7 @@
 <script src="js/jquery.flightindicators.js"></script>
 
 <script type="text/javascript" src="js/_ip.js"></script>
-<script type="text/javascript" src="js/_app.js"></script>
+<script type="text/javascript" src="js/_cockpit.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,10 @@
+
+div.indicator {
+  text-align: center;
+  color: white;
+  background-color: #a9a9a9;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin: 5;
+  line-height: 1;
+}

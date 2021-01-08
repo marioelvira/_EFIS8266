@@ -291,20 +291,46 @@ void _jsonDATA()
   
   json = json + "{ \"param\":\"airSpeed\", \"value\":" + String(AirSpeed) + " }";
   json = json + ",";
+  if (units.airspeed == AIRS_KNOTS)
+    json = json + "{ \"param\":\"airSpeedtxt\", \"value\":\"" + String(AirSpeed) + " knots\" }";
+  else 
+    json = json + "{ \"param\":\"airSpeedtxt\", \"value\":\"" + String(AirSpeed) + " km/h\" }";
+  json = json + ",";
+  
   json = json + "{ \"param\":\"rollAngle\", \"value\":" + String(gRoll) + " }";
   json = json + ",";
   json = json + "{ \"param\":\"pitchAngle\", \"value\":" + String(-1*gPitch) + " }";
   json = json + ",";
+  
   json = json + "{ \"param\":\"altimeter\", \"value\":" + String(Altimeter) + " }";
   json = json + ",";
+  if (units.alt == ALT_FEET)
+    json = json + "{ \"param\":\"altimetertxt\", \"value\":\"" + String(Altimeter) + " feet\" }";
+  else 
+    json = json + "{ \"param\":\"altimetertxt\", \"value\":\"" + String(Altimeter) + " meters\" }";
+  json = json + ",";
+  
   json = json + "{ \"param\":\"QNH\", \"value\":" + String(altData.QNH) + " }";
   json = json + ",";
+  
   json = json + "{ \"param\":\"turnAngle\", \"value\":" + String(-1*gRoll) + " }";
   json = json + ",";
+  json = json + "{ \"param\":\"turnAngletxt\", \"value\":\"" + sRoll + "\" }";
+  json = json + ",";
+
   json = json + "{ \"param\":\"heading\", \"value\":" + String(gMag) + " }";
   json = json + ",";
+  json = json + "{ \"param\":\"headingtxt\", \"value\":\"" + String(gMag) + "º\" }";
+  json = json + ",";
+  
   json = json + "{ \"param\":\"vario\", \"value\":" + String(Vario) + " }";
   json = json + ",";
+  if (units.vario == VARIO_FEETpM)
+    json = json + "{ \"param\":\"variotxt\", \"value\":\"" + String(Vario) + " feet/min\" }";
+  else
+    json = json + "{ \"param\":\"variotxt\", \"value\":\"" + String(Vario) + " m/min\" }";
+  json = json + ",";
+  
   json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }";
   
   json = json + "]";
