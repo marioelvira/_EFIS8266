@@ -11,6 +11,9 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
+#include <SPI.h>
+#include <SD.h>
+
 #include "main.h"
 
 #include "airspeed.h"
@@ -23,6 +26,7 @@
 #include "json.h"
 #include "php.h"
 #include "time.h"
+#include "sdcard.h"
 #include "units.h"
 #include "vario.h"
 #include "wdt.h"
@@ -198,6 +202,14 @@ unsigned long VarioPreviousTime = 0;
 ///////////
 Units  units;
 
+/////////////
+// SD Card //
+/////////////
+String        sdInfo;
+int           sdStatus;
+unsigned long sdTickReconnect;
+File          sdFile;
+
 //============//
 // MAIN SETUP //
 //============//
@@ -238,6 +250,9 @@ void setup(void)
 
   // Time Setup
   _TimeSetup();
+
+  // SD card Setup
+  _SDSetup();
 
   #if (_USE_WDT_ == 1)
   // Wdt Setup
@@ -312,6 +327,7 @@ void loop()
   _VarioLoop();
   _WifiLoop();
   _WifiLedLoop();
+  _SDLoop();
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
