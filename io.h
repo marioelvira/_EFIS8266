@@ -17,10 +17,10 @@ extern "C" {
  *         AS2 <-  GPIO9 -|      |- GPIO2  -> D4 -> LED
  *          S1 <-   MOSI -|      |- 3V
  *                    CS -|      |- G
- *          S0 <-   MISO -|      |- GPIO14 -> D5
- *          SK <-   SCLK -|      |- GPIO12 -> D6
- *                     G -|      |- GPIO13 -> D7
- *                    3V -|      |- GPIO15 -> D8
+ *          S0 <-   MISO -|      |- GPIO14 -> D5 -> SPI CLK
+ *          SK <-   SCLK -|      |- GPIO12 -> D6 -> SPI MISO
+ *                     G -|      |- GPIO13 -> D7 -> SPI MOSI
+ *                    3V -|      |- GPIO15 -> D8 -> SPI CS
  *                    EN -|      |- GPIO3  -> RX
  *                   RST -|      |- GPIO1  -> TX
  *                     G -|      |- G

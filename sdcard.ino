@@ -14,7 +14,7 @@ void _SDLoop(void)
   switch (sdStatus)
   {
     case SDCARD_DETECTION:
-      if (!SD.begin(10))
+      if (!SD.begin(sdCs))
       {
         sdStatus = SDCARD_NOT_DETECTED;
         sdTickReconnect = millis();
@@ -29,21 +29,36 @@ void _SDLoop(void)
 
         #if (_SDCARD_SERIAL_DEBUG_ == 1)
         Serial.println("SD Card detected...");
+        //printDirectory(sdFile, 0);
+        sdTickSaveRecord = millis();
+        sdCounter = 1;
         #endif
       }
       break;
 
     case SDCARD_DETECTED:
+      if (millis() - sdTickSaveRecord >= 5000)
+        sdStatus = SDCARD_SAVERECORD;
       break;
 
     case SDCARD_SAVERECORD:
-      // open the file
-      sdFile = SD.open("test.txt", FILE_WRITE);
-      if (sdFile)
+      if (sdSaveRecord(sdFile, String(sdCounter), "file.txt") == 0)
       {
-        // close the file
-        sdFile.close();
+        sdCounter ++;
+        sdStatus = SDCARD_DETECTED;
+        #if (_SDCARD_SERIAL_DEBUG_ == 1)
+        Serial.println("SD Card Save reccord...");
+        #endif
       }
+      else
+      {
+        sdStatus = SDCARD_DETECTION;
+        #if (_SDCARD_SERIAL_DEBUG_ == 1)
+        Serial.println("SD Card Save reccord ERROR...");
+        #endif
+      }
+
+      sdTickSaveRecord = millis();
       break;
 
     case SDCARD_NOT_DETECTED:
@@ -52,3 +67,49 @@ void _SDLoop(void)
       break;
   }
 }
+
+int sdSaveRecord(File dataFile, String dataString, String fileName)
+{
+  dataFile = SD.open(fileName, FILE_WRITE);
+
+  if (dataFile)
+  {
+    dataFile.println(dataString);
+    dataFile.close();
+    // print to the serial port too:
+    Serial.println(dataString);
+
+    return 0;
+  }
+  else
+    return -1;
+}
+
+#if (_SDCARD_SERIAL_DEBUG_ == 1)
+void printDirectory(File dir, int numTabs)
+{
+  // TODO
+  while (true)
+  {
+    File entry =  dir.openNextFile();
+    if (! entry) {
+      Serial.println("Empty");
+      break;
+    }
+    for (uint8_t i = 0; i < numTabs; i++) {
+      Serial.print('\t');
+    }
+    Serial.print(entry.name());
+    if (entry.isDirectory())
+    {
+      Serial.println("/");
+      printDirectory(entry, numTabs + 1);
+    } else {
+      // files have sizes, directories do not
+      Serial.print("\t\t");
+      Serial.println(entry.size(), DEC);
+    }
+    entry.close();
+  }
+}
+#endif

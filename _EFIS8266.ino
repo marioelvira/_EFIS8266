@@ -205,9 +205,12 @@ Units  units;
 /////////////
 // SD Card //
 /////////////
+int           sdCs = D8;
 String        sdInfo;
 int           sdStatus;
 unsigned long sdTickReconnect;
+unsigned long sdTickSaveRecord;
+int           sdCounter;
 File          sdFile;
 
 //============//
