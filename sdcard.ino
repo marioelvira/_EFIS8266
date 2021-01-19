@@ -25,24 +25,30 @@ void _SDLoop(void)
       }
       else
       {
-        sdStatus = SDCARD_DETECTED;
+        sdStatus = SDCARD_DIRECTORY;
 
         #if (_SDCARD_SERIAL_DEBUG_ == 1)
         Serial.println("SD Card detected...");
-        //printDirectory(sdFile, 0);
-        sdTickSaveRecord = millis();
-        sdCounter = 1;
         #endif
       }
       break;
 
     case SDCARD_DETECTED:
-      if (millis() - sdTickSaveRecord >= 5000)
-        sdStatus = SDCARD_SAVERECORD;
+      break;
+
+    case SDCARD_DIRECTORY:
+    
+      sdFile = SD.open("/");
+      printDirectory(sdFile, 0);
+      #if (_SDCARD_SERIAL_DEBUG_ == 1)
+      Serial.println("SD Directory detected...");
+      #endif
+      
+      sdStatus = SDCARD_DETECTED;
       break;
 
     case SDCARD_SAVERECORD:
-      if (sdSaveRecord(sdFile, String(sdCounter), "file.txt") == 0)
+      if (sdSaveRecord(sdFile, dLoggerString, "flight.csv") == 0)
       {
         sdCounter ++;
         sdStatus = SDCARD_DETECTED;
@@ -58,7 +64,7 @@ void _SDLoop(void)
         #endif
       }
 
-      sdTickSaveRecord = millis();
+      //sdTickSaveRecord = millis();
       break;
 
     case SDCARD_NOT_DETECTED:
@@ -70,15 +76,16 @@ void _SDLoop(void)
 
 int sdSaveRecord(File dataFile, String dataString, String fileName)
 {
+
+  if (!SD.begin(sdCs))
+   return -1;
+  
   dataFile = SD.open(fileName, FILE_WRITE);
 
   if (dataFile)
   {
     dataFile.println(dataString);
     dataFile.close();
-    // print to the serial port too:
-    Serial.println(dataString);
-
     return 0;
   }
   else

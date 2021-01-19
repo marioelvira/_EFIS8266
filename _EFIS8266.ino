@@ -19,6 +19,7 @@
 #include "airspeed.h"
 #include "altimeter.h"
 #include "e2prom.h"
+#include "dLogger.h"
 #include "gyro.h"
 #include "http.h"
 #include "io.h"
@@ -209,9 +210,29 @@ int           sdCs = D8;
 String        sdInfo;
 int           sdStatus;
 unsigned long sdTickReconnect;
-unsigned long sdTickSaveRecord;
+//unsigned long sdTickSaveRecord;
 int           sdCounter;
 File          sdFile;
+
+////////////////
+// Datalogger //
+////////////////
+int dLoggerStatus;
+String dLoggerString = "";
+unsigned long dLoggerCurrentTime = millis();
+unsigned long dLoggerPreviousTime = 0;
+int dLoggerNumberOfSamples = 0;
+
+int dLoggerSecTick;
+int dLoggerSampleRateSec = 10;  // TODO E2PROM
+int dLoggerRecordRateMin = 1;  // TODO E2PROM
+
+float dLAltimeter;
+float dLAirSpeed;
+int   dLgMag, dLgRoll, dLgPitch;
+int   dLiGforce;
+int   dLiBall;
+float dLVario;
 
 //============//
 // MAIN SETUP //
@@ -256,6 +277,9 @@ void setup(void)
 
   // SD card Setup
   _SDSetup();
+
+  // Datalogger Setup
+  _DLoggerSetup();
 
   #if (_USE_WDT_ == 1)
   // Wdt Setup
@@ -331,6 +355,7 @@ void loop()
   _WifiLoop();
   _WifiLedLoop();
   _SDLoop();
+  _DLoggerLoop();
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
