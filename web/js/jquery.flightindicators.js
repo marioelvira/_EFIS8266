@@ -26,8 +26,12 @@
 		var constants = {
 			pitch_bound:30,
 			vario_bound : 1.95,
-			airspeed_bound_l : 0,
-			airspeed_bound_h : 160
+			//airspeed_bound_l : 0,
+			//airspeed_bound_h : 160
+			//airspeed_bound_l : 25,
+			//airspeed_bound_h : 200
+			airspeed_bound_l : 10,
+			airspeed_bound_h : 360
 		}
 
 		// Creation of the instrument
@@ -53,7 +57,10 @@
 					break;
 					
 				case 'airspeed':
-					$(this).html('<div class="instrument airspeed"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><img src="' + settings.img_directory + 'speed_mechanics.svg" class="box" alt="" /><div class="speed box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
+					//$(this).html('<div class="instrument airspeed"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><img src="' + settings.img_directory + 'speed_ind_00_160_x20.svg" class="box" alt="" /><div class="speed box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
+					//$(this).html('<div class="instrument airspeed"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><img src="' + settings.img_directory + 'speed_ind_30_200_x20.svg" class="box" alt="" /><div class="speed box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
+					$(this).html('<div class="instrument airspeed"><img src="' + settings.img_directory + 'fi_box.svg" class="background box" alt="" /><img src="' + settings.img_directory + 'speed_ind_20_360_x10.svg" class="box" alt="" /><div class="speed box"><img src="' + settings.img_directory + 'fi_needle.svg" class="box" alt="" /></div><div class="mechanics box"><img src="' + settings.img_directory + 'fi_circle.svg" class="box" alt="" /></div></div>');
+					
 					_setAirSpeed(settings.airspeed);
 					break
 					
@@ -115,7 +122,9 @@
 		function _setAirSpeed(speed){
 			if(speed > constants.airspeed_bound_h){speed = constants.airspeed_bound_h;}
 			else if(speed < constants.airspeed_bound_l){speed = constants.airspeed_bound_l;}
-			speed = 90+speed*2;
+			//speed = 90 + speed*2;
+			//speed = 90 + (speed - 25)*2;
+			speed = 90 + (speed - 10);
 			placeholder.each(function(){
 				$(this).find('div.instrument.airspeed div.speed').css('transform', 'rotate(' + speed + 'deg)');
 			});	

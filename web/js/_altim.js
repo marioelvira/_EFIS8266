@@ -23,13 +23,10 @@ function freInitStatus()
 				units_alt = obj.value;
 				
 				if (units_alt == 0)
-				{
 					altimeter = $.jQAltimeter('#altimeter', 'feet', {showBox: true});
-				}
 				else
-				{
 					altimeter = $.jQAltimeter('#altimeter', 'meters', {showBox: true});
-				}
+
 				altimeter.setAltitude(0);
 				altimeter.setPressure(0);
 			}
