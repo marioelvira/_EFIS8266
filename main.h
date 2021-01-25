@@ -24,6 +24,7 @@ extern "C" {
 #define _IN_SERIAL_DEBUG_       0
 #define _MAIN_SERIAL_DEBUG_     0
 #define _PHP_SERIAL_DEBUG_      0
+#define _RTC_SERIAL_DEBUG_      1
 #define _SDCARD_SERIAL_DEBUG_   1
 #define _TICK_SERIAL_DEBUG_     0
 #define _WIFI_SERIAL_DEBUG_     1

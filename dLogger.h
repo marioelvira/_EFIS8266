@@ -7,6 +7,8 @@ extern "C" {
 
 #define DLOGGER_TICK       1000
 
+#define DLOGGER_SPEED_MPS   14    // 14 m/s aprox 50 km/h
+
 #define DLOGGER_START      0
 #define DLOGGER_RECORD     1
 

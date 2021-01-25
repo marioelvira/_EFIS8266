@@ -14,6 +14,10 @@ void _DLoggerLoop(void)
   int isec = 0;
   int imin = 0;
 
+  // Only record if flying...
+  if (AirSpeed_mps < DLOGGER_SPEED_MPS)
+    dLoggerStatus = DLOGGER_START;
+
   switch (dLoggerStatus)
   {
     case DLOGGER_START:

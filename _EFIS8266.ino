@@ -5,14 +5,14 @@
 
 #include <Wire.h>
 #include <SPI.h>
+#include <SD.h>
 #include <Adafruit_BME280.h>
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
-#include <SPI.h>
-#include <SD.h>
+#include <RtcDS3231.h>
 
 #include "main.h"
 
@@ -27,6 +27,7 @@
 #include "json.h"
 #include "php.h"
 #include "time.h"
+#include "rtc.h"
 #include "sdcard.h"
 #include "units.h"
 #include "vario.h"
@@ -168,6 +169,7 @@ sensors_event_t humidity_event;   // Humidity %
 // Airspeed //
 //////////////
 float AirSpeed;
+float AirSpeed_mps;
 
 float AirPressure;
 float Air_mVolts;
@@ -234,6 +236,16 @@ int   dLiGforce;
 int   dLiBall;
 float dLVario;
 
+////////////////
+// Datalogger //
+////////////////
+int RtcStatus;
+unsigned long RtcCurrentTime = millis();
+unsigned long RtcPreviousTime = 0;
+RtcDS3231<TwoWire> rtcObject(Wire);
+RtcDateTime RtcTime;
+char RtcTimeStr[20];
+
 //============//
 // MAIN SETUP //
 //============//
@@ -280,6 +292,9 @@ void setup(void)
 
   // Datalogger Setup
   _DLoggerSetup();
+
+  // Rtc Setup
+  _RtcSetup();
 
   #if (_USE_WDT_ == 1)
   // Wdt Setup
@@ -356,6 +371,7 @@ void loop()
   _WifiLedLoop();
   _SDLoop();
   _DLoggerLoop();
+  _RtcLoop();
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))

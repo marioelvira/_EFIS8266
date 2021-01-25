@@ -27,7 +27,7 @@ void _AirspeedSetup(void)
 void _AirspeedLoop(void)
 { 
   int airAcc = 0;
-  float airSpeed_mps = 0;
+  //float airSpeed_mps = 0;
 
   AirInArray[AirInPointer] = analogRead(PIN_AIR_IN);
   AirInPointer++;
@@ -50,17 +50,17 @@ void _AirspeedLoop(void)
 
   // https://www.vcalc.com/wiki/vCalc/Air+Speed
   if (AirPressure <= 0)
-    airSpeed_mps = 0;
+    AirSpeed_mps = 0;
   else 
-    airSpeed_mps = (float) sqrt(2*(float)AirPressure/(float)AIR_DENSITY);   // m/s
+    AirSpeed_mps = (float) sqrt(2*(float)AirPressure/(float)AIR_DENSITY);   // m/s
 
   //if (airSpeed_mps < 20)
   //  airSpeed_mps = 0; 
   
   if (units.airspeed == AIRS_KNOTS)
-    AirSpeed = (float)CONV_MPS_KNOTS * airSpeed_mps;
+    AirSpeed = (float)CONV_MPS_KNOTS * AirSpeed_mps;
   else 
-    AirSpeed = (float)CONV_MPS_KMH * airSpeed_mps;
+    AirSpeed = (float)CONV_MPS_KMH * AirSpeed_mps;
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   AirCurrentTime = millis();
