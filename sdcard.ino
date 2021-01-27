@@ -48,7 +48,7 @@ void _SDLoop(void)
       break;
 
     case SDCARD_SAVERECORD:
-      if (sdSaveRecord(sdFile, dLoggerString, "flight.csv") == 0)
+      if (sdSaveRecord(sdFile, dLoggerString, sdFileName) == 0)
       {
         sdCounter ++;
         sdStatus = SDCARD_DETECTED;

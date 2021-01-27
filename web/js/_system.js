@@ -17,8 +17,8 @@ function frefreshStatus()
     		
 			$.each(jsonData, function(index, obj) {
 				
-				if (obj.param == "uptime")
-					$("#uptime").html(obj.value);
+				if (obj.param == "date")
+					$("#datetxt").html(obj.value);
 				
 				if (obj.param == "outAux")
 					$("#outAux").html(obj.value);

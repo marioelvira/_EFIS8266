@@ -4,6 +4,7 @@
 void _DLoggerSetup(void)
 {
   dLoggerStatus = DLOGGER_START;
+  dloogerStart = 0;
 }
 
 ///////////////////////////
@@ -15,23 +16,52 @@ void _DLoggerLoop(void)
   int imin = 0;
 
   // Only record if flying...
-  if (AirSpeed_mps < DLOGGER_SPEED_MPS)
-    dLoggerStatus = DLOGGER_START;
+  if (AirSpeed_OnFly == 0)
+  {
+    dloogerStart = 0;
+    dLoggerStatus = DLOGGER_NORECORD;
+  }
+  else
+  {
+    if (dloogerStart == 0)
+    {
+      dloogerStart = 1;
+      dLoggerStatus = DLOGGER_START;
+    }
+  }
 
   switch (dLoggerStatus)
   {
+    case DLOGGER_NORECORD:
+      break;
+    
     case DLOGGER_START:
       // Read date...
-      //sdFileName;
-    
-      dLoggerResetSample();
-      dLoggerStatus = DLOGGER_RECORD;
+      RtcTime = rtcObject.GetDateTime();
 
+      sdFileName = "Rec_";
+      sdFileName = sdFileName + "_" + String(RtcTime.Year());
+      sdFileName = sdFileName + "_" + String(RtcTime.Month());
+      sdFileName = sdFileName + "_" + String(RtcTime.Day());
+      sdFileName = sdFileName + "_" + String(RtcTime.Hour());
+      sdFileName = sdFileName + "_" + String(RtcTime.Minute());
+      sdFileName = sdFileName + "_" + String(RtcTime.Second());
+      sdFileName = sdFileName + ".csv";
+
+      #if (_DLOGGER_SERIAL_DEBUG_ == 1)
+      Serial.println(sdFileName);
+      #endif
+          
+      dLoggerFileRecordHearder();
+      
+      dLoggerResetSample();
       dLoggerCurrentTime = millis();
       dLoggerPreviousTime = dLoggerCurrentTime;
+
+      dLoggerStatus = DLOGGER_ONRECORD;
       break;
 
-    case DLOGGER_RECORD:
+    case DLOGGER_ONRECORD:
 
       dLoggerCurrentTime = millis();
       if (dLoggerCurrentTime - dLoggerPreviousTime >= DLOGGER_TICK)
@@ -63,7 +93,7 @@ void _DLoggerLoop(void)
           Serial.println("Datalogger save record...");
           #endif
           dLoggerFileRecordSample();
-          dLoggerStatus = DLOGGER_START;
+          dLoggerResetSample();
         }
         
         dLoggerPreviousTime = dLoggerCurrentTime;
@@ -96,6 +126,37 @@ void dLoggerAddSample (void)
   dLiBall += iBall;
   
   dLoggerNumberOfSamples++;
+}
+
+void dLoggerFileRecordHearder (void)
+{ 
+  dLoggerString = "";
+  
+  dLoggerString += "date";
+  
+  dLoggerString += ",";
+  dLoggerString += "alt";
+  dLoggerString += ",";
+  dLoggerString += "airspeed";
+  dLoggerString += ",";
+  dLoggerString += "vario";
+  dLoggerString += ",";  
+  dLoggerString += "magnet";
+  dLoggerString += ",";
+  dLoggerString += "roll";
+  dLoggerString += ",";
+  dLoggerString += "pith";
+  dLoggerString += ",";
+  dLoggerString += "gforce";
+  dLoggerString += ",";
+  dLoggerString += "ball";
+
+  #if (_DLOGGER_SERIAL_DEBUG_ == 1)
+  Serial.println(dLoggerString);
+  #endif
+
+  if (sdStatus == SDCARD_DETECTED)
+    sdStatus = SDCARD_SAVERECORD;
 }
 
 void dLoggerFileRecordSample (void)

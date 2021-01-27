@@ -38,6 +38,8 @@ typedef struct
 #define AIR_SENS_V1               200   // 200 mV
 #define AIR_SENS_V2               4700  // 4700 mV
 
+#define AIR_SPEED_MPS_ONFLY       17    // 17 m/s aprox 60 km/h
+
 #endif // _AIRSEEP_H_
 
 #ifdef __cplusplus

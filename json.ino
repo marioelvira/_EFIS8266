@@ -140,9 +140,9 @@ void _jsonSystemStatus()
   json = "[";
 
   #if (_USE_RTC_ == 1)
-  json = json + "{ \"param\":\"uptime\", \"value\":\"" + RtcTimeStr + "\" }";
+  json = json + "{ \"param\":\"date\", \"value\":\"" + RtcDateStr + " " + RtcTimeStr+ "\" }";
   #else
-  json = json + "{ \"param\":\"uptime\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
+  json = json + "{ \"param\":\"date\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
   #endif
   json = json + ",";
   json = json + "{ \"param\":\"outAux\", \"value\":" + String(outAux) + " }";
@@ -334,7 +334,17 @@ void _jsonDATA()
   else
     json = json + "{ \"param\":\"variotxt\", \"value\":\"" + String(Vario) + " m/min\" }";
   json = json + ",";
-  
+
+  json = json + "{ \"param\":\"onfly\", \"value\":" + String(AirSpeed_OnFly) + " }";
+  json = json + ",";
+
+  #if (_USE_RTC_ == 1)
+  json = json + "{ \"param\":\"date\", \"value\":\"" + RtcDateStr + " " + RtcTimeStr+ "\" }";
+  #else
+  json = json + "{ \"param\":\"date\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
+  #endif
+  json = json + ",";
+
   json = json + "{ \"param\":\"ratio\", \"value\":" + String(timeMilisec - timeJSONMilisec) + " }";
   
   json = json + "]";

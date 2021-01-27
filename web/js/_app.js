@@ -76,7 +76,7 @@ function freInitStatus()
 	turn_coordinator = $.flightIndicator('#turn_coordinator', 'turn_coordinator', '0', {turn:0});
 	turn_coordinator.setTurn(0);
 	
-	$("#appInfo").html("<i class=\"fas fa-wifi\" style=\"color:red;\"></i> Connecting...");
+	$("#connect").html("<i class=\"fas fa-wifi\" style=\"color:red;\"></i> Connecting...");
 }
 
 function frefreshStatus()
@@ -91,7 +91,7 @@ function frefreshStatus()
 				
 			$.each(jsonData, function(index, obj) {
 
-				$("#appInfo").html("<i class=\"fas fa-wifi\" style=\"color:blue;\"></i> Connected");
+				$("#connect").html("<i class=\"fas fa-wifi\" style=\"color:blue;\"></i> Connected");				
 
 				if (obj.param == "airSpeed")
 					airspeed.setAirSpeed(obj.value);
@@ -113,6 +113,17 @@ function frefreshStatus()
 			
 				if (obj.param == "turnAngle")
 					turn_coordinator.setTurn(obj.value);
+				
+				if (obj.param == "onfly")
+				{
+					if (obj.value == 1)
+						$("#onfly").html(" On Fly ");
+					else
+						$("#onfly").html(" On Land ");
+				}
+				
+				if (obj.param == "date")
+					$("#datetxt").html(obj.value);
 				
 				if (obj.param == "vario")
 					variometer.setVario(obj.value);

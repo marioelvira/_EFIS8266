@@ -117,6 +117,8 @@ unsigned long timeTick = 0;
 RtcDS3231<TwoWire> rtcObject(Wire);
 RtcDateTime RtcTime;
 String RtcTimeStr;
+String RtcDateStr;
+
 #else
 int timeSec = 0;
 int timeMin = 0;
@@ -175,6 +177,7 @@ sensors_event_t humidity_event;   // Humidity %
 //////////////
 float AirSpeed;
 float AirSpeed_mps;
+int   AirSpeed_OnFly;
 
 float AirPressure;
 float Air_mVolts;
@@ -226,6 +229,7 @@ String        sdFileName;
 // Datalogger //
 ////////////////
 int dLoggerStatus;
+int dloogerStart;
 String dLoggerString = "";
 unsigned long dLoggerCurrentTime = millis();
 unsigned long dLoggerPreviousTime = 0;

@@ -17,6 +17,8 @@ void _AirspeedSetup(void)
 
   AirSpeed_m = (airsData.airSensPA2 - airsData.airSensPA1)/(airsData.airSensV2 - airsData.airSensV1);
   AirSpeed_b = airsData.airSensPA2 - AirSpeed_m*airsData.airSensV2;
+
+  AirSpeed_OnFly = 0;
   
   _AirSensorDetails();
 }
@@ -61,6 +63,11 @@ void _AirspeedLoop(void)
     AirSpeed = (float)CONV_MPS_KNOTS * AirSpeed_mps;
   else 
     AirSpeed = (float)CONV_MPS_KMH * AirSpeed_mps;
+
+  if (AirSpeed_mps < AIR_SPEED_MPS_ONFLY)
+    AirSpeed_OnFly = 0;
+  else
+    AirSpeed_OnFly = 1;
 
   #if (_AIR_SERIAL_DEBUG_ == 1)
   AirCurrentTime = millis();
