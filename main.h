@@ -31,6 +31,7 @@ extern "C" {
 #define _VARIO_SERIAL_DEBUG_    0
 
 #define _USE_WDT_               0
+#define _USE_RTC_               1
 
 #endif // _MAIN_H_
 

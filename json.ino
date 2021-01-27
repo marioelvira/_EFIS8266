@@ -138,8 +138,12 @@ void _jsonSystemStatus()
   String json = "";
 
   json = "[";
-  
+
+  #if (_USE_RTC_ == 1)
+  json = json + "{ \"param\":\"uptime\", \"value\":\"" + RtcTimeStr + "\" }";
+  #else
   json = json + "{ \"param\":\"uptime\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
+  #endif
   json = json + ",";
   json = json + "{ \"param\":\"outAux\", \"value\":" + String(outAux) + " }";
   json = json + ",";

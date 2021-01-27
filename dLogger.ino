@@ -21,6 +21,9 @@ void _DLoggerLoop(void)
   switch (dLoggerStatus)
   {
     case DLOGGER_START:
+      // Read date...
+      //sdFileName;
+    
       dLoggerResetSample();
       dLoggerStatus = DLOGGER_RECORD;
 
@@ -45,8 +48,13 @@ void _DLoggerLoop(void)
         }
 
         // If sample to record...
+        #if (_USE_RTC_ == 1)
+        isec = (int)RtcTime.Second();
+        imin = (int)RtcTime.Minute();
+        #else
         isec = timeSec;
         imin = timeMin;
+        #endif
 
         // Only in minute multiple and sec 0...
         if (((imin % dLoggerRecordRateMin) == 0) && (isec == 0))
@@ -102,11 +110,17 @@ void dLoggerFileRecordSample (void)
   dLiBall = dLiBall/dLoggerNumberOfSamples;
 
   dLoggerString = "";
+  
+  #if (_USE_RTC_ == 1)
+  dLoggerString += RtcTimeStr;
+  #else
   dLoggerString += timeHour;
   dLoggerString += ":";
   dLoggerString += timeMin;
   dLoggerString += ":";
   dLoggerString += timeSec;
+  #endif
+  
   dLoggerString += ",";
   dLoggerString += dLAltimeter;
   dLoggerString += ",";

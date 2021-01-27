@@ -27,7 +27,6 @@
 #include "json.h"
 #include "php.h"
 #include "time.h"
-#include "rtc.h"
 #include "sdcard.h"
 #include "units.h"
 #include "vario.h"
@@ -114,9 +113,15 @@ unsigned long timeJSONMilisec = 0;
 //////////
 unsigned long timeMilisec = 0;
 unsigned long timeTick = 0;
+#if (_USE_RTC_ == 1)
+RtcDS3231<TwoWire> rtcObject(Wire);
+RtcDateTime RtcTime;
+String RtcTimeStr;
+#else
 int timeSec = 0;
 int timeMin = 0;
 int timeHour = 0;
+#endif
 
 //////////
 // Gyro //
@@ -215,6 +220,7 @@ unsigned long sdTickReconnect;
 //unsigned long sdTickSaveRecord;
 int           sdCounter;
 File          sdFile;
+String        sdFileName;
 
 ////////////////
 // Datalogger //
@@ -235,16 +241,6 @@ int   dLgMag, dLgRoll, dLgPitch;
 int   dLiGforce;
 int   dLiBall;
 float dLVario;
-
-////////////////
-// Datalogger //
-////////////////
-int RtcStatus;
-unsigned long RtcCurrentTime = millis();
-unsigned long RtcPreviousTime = 0;
-RtcDS3231<TwoWire> rtcObject(Wire);
-RtcDateTime RtcTime;
-char RtcTimeStr[20];
 
 //============//
 // MAIN SETUP //
@@ -292,9 +288,6 @@ void setup(void)
 
   // Datalogger Setup
   _DLoggerSetup();
-
-  // Rtc Setup
-  _RtcSetup();
 
   #if (_USE_WDT_ == 1)
   // Wdt Setup
@@ -371,7 +364,6 @@ void loop()
   _WifiLedLoop();
   _SDLoop();
   _DLoggerLoop();
-  _RtcLoop();
 
   if ((wifiStatus == WIFI_ON_ACCESSPOINT) ||
       (wifiStatus == WIFI_STATION_CONNECTED))
