@@ -1,0 +1,351 @@
+attr	Template	"TEMPLATE15"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE13"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE7"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE28"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE0"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE8"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE19"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE23"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE25"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE21"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE1"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE22"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE17"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE16"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE18"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE27"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE26"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE10"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Template	"TEMPLATE24"
+	(	"ppp_is_plane"	"N"	)
+
+attr	Component	"D15"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"Q1"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C62"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"Q5"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C59"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R122"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R52"
+	(	"plc_height"	"2mm"	)
+
+attr	Component	"Q8"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C60"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C58"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C31"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"J7"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C32"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R118"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"C61"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R36"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"R31"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"L2"
+	(	"plc_height"	"1.90000"	)
+
+attr	Component	"C4"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"SW4"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"R50"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C25"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R45"
+	(	"plc_height"	"2mm"	)
+
+attr	Component	"D5"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R48"
+	(	"plc_height"	"2mm"	)
+
+attr	Component	"C29"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R30"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"C5"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R37"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"ISC1"
+	(	"plc_height"	"10.00000"	)
+
+attr	Component	"Q9"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"D1"
+	(	"plc_height"	"15.24000"	)
+
+attr	Component	"C57"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"J5"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"K1"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"U9"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"Q7"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R121"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R27"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"U6"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"Q3"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R109"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R113"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"K2"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"SW1"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"C7"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C10"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C26"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R120"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"L3"
+	(	"plc_height"	"1.90000"	)
+
+attr	Component	"D6"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R117"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"C28"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"Q2"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"Q10"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R46"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"U12"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"C6"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"R103"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"J3"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C24"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"D2"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"DS6"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"U10"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"R49"
+	(	"plc_height"	"2mm"	)
+
+attr	Component	"U8"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"K3"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"K6"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"C20"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"U7"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C30"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"K5"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"K4"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"C22"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"SW3"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"C23"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"J4"
+	(	"plc_height"	"13.00000"	)
+
+attr	Component	"C65"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"C64"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R110"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"D14"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R32"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"R35"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"R26"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"DS1"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"J11"
+	(	"plc_height"	"13.40000"	)
+
+attr	Component	"R119"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"U1"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C27"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"R108"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"C2"
+	(	"plc_height"	"2.00000"	)
+
+attr	Component	"U2"
+	(	"plc_height"	"4.57000"	)
+
+attr	Component	"C63"
+	(	"plc_height"	"1.00000"	)
+
+attr	Component	"D13"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"U11"
+	(	"plc_height"	"3.50000"	)
+
+attr	Component	"Q4"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"Q6"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R116"
+	(	"plc_height"	"1.00000"	)
+

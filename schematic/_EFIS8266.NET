@@ -1,0 +1,191 @@
+.HEA
+.APP "Cadstar RINF Output - Version 2.3"
+.UNI INCH 1000.0 in
+.TYP FULL 
+.JOB "_EFIS8266"
+
+.ADD_COM C1 "0805_"
+.ADD_COM C2 "0805_"
+.ADD_COM C3 "0805_"
+.ADD_COM C4 "1210_"
+.ADD_COM C5 "0805_"
+.ADD_COM C6 "0805_"
+.ADD_COM C7 "0805_"
+.ADD_COM D1 "SMA"
+.ADD_COM DS1 "0805_LED"
+.ADD_COM DS2 "0805_LED"
+.ADD_COM DS3 "0805_LED"
+.ADD_COM FID1 "FIDUCIAL-D1.5"
+.ADD_COM FID2 "FIDUCIAL-D1.5"
+.ADD_COM L1 "1210_"
+.ADD_COM R10 "0805_"
+.ADD_COM R11 "0805_"
+.ADD_COM R12 "0805_"
+.ADD_COM R13 "0805_"
+.ADD_COM R14 "0805_"
+.ADD_COM R15 "0805_"
+.ADD_COM R16 "0805_"
+.ADD_COM R2 "0805_"
+.ADD_COM R3 "0805_"
+.ADD_COM R4 "0805_"
+.ADD_COM R5 "0805_"
+.ADD_COM R6 "0805_"
+.ADD_COM R7 "0805_"
+.ADD_COM R8 "0805_"
+.ADD_COM R9 "0805_"
+.ADD_COM SW1 "mini_switch"
+.ADD_COM TP4 "PT-INS-D1.60-T1.00"
+.ADD_COM U1 "ESP8266_Lolin"
+.ADD_COM U2 "BNO055"
+.ADD_COM U3 "CJMCU-280"
+.ADD_COM U4 "USDCARD"
+.ADD_COM U5 "XGZP6897A"
+.ADD_COM U6 "RTC"
+.ADD_COM U7 "SOT-23-5"
+.ADD_COM U8 "SO-8-POWERPAD"
+
+
+.ADD_TER  R3 2 "+3.3V"
+.TER      R4 2 
+          L1 2 
+          TP4 1 
+          R10 1 
+          C3 2 
+          U7 5 
+          DS2 1 
+          U2 1 
+          U3 1 
+          C7 1 
+
+.ADD_TER  U1 11 "3V3"
+.TER      U1 16 
+          U1 25 
+          U4 2 
+          U6 5 
+
+.ADD_TER  U1 1 "A0"
+.TER      R7 1 
+          R8 2 
+          C1 1 
+
+.ADD_TER  U1 2 "DGND"
+.TER      U1 10 
+          U1 14 
+          U1 17 
+          U1 24 
+          U5 8 
+          R8 1 
+          C1 2 
+          C4 1 
+          C6 1 
+          R11 2 
+          R13 2 
+          D1 1 
+          R12 1 
+          U8 9 
+          U8 7 
+          U8 10 
+          U8 11 
+          U8 12 
+          U8 13 
+          U8 14 
+          U8 15 
+          C3 1 
+          C5 1 
+          SW1 1 
+          U7 2 
+          R15 1 
+          R16 1 
+          U2 2 
+          U3 2 
+          R2 1 
+          U4 1 
+          C7 2 
+          U6 6 
+
+.ADD_TER  U1 29 "I2C_SCL"
+.TER      R3 1 
+          U2 3 
+          U3 4 
+          U6 3 
+
+.ADD_TER  U1 28 "I2C_SDA"
+.TER      R4 1 
+          U2 4 
+          U3 3 
+          U6 4 
+
+.ADD_TER  U1 26 "LED_WIFI"
+.TER      DS3 1 
+
+.ADD_TER  U5 2 "N11091"
+.TER      R7 2 
+
+.ADD_TER  C2 2 "N12679"
+.TER      U8 1 
+
+.ADD_TER  L1 1 "N12687"
+.TER      D1 2 
+          C2 1 
+          U8 8 
+
+.ADD_TER  R13 1 "N12915"
+.TER      R10 2 
+          U8 5 
+
+.ADD_TER  R11 1 "N12941"
+.TER      R9 2 
+          U8 3 
+
+.ADD_TER  R14 1 "N12979"
+.TER      U8 6 
+          C5 2 
+
+.ADD_TER  R12 2 "N13025"
+.TER      U8 4 
+
+.ADD_TER  C6 2 "N13191"
+.TER      R14 2 
+
+.ADD_TER  SW1 2 "N16761370"
+.TER      U7 4 
+
+.ADD_TER  DS1 2 "N167618181"
+.TER      R15 2 
+
+.ADD_TER  DS2 2 "N167619981"
+.TER      R16 2 
+
+.ADD_TER  U1 13 "N16763853"
+.TER      R6 1 
+
+.ADD_TER  R5 1 "N16764790"
+.TER      U2 8 
+
+.ADD_TER  DS3 2 "N167652241"
+.TER      R2 2 
+
+.ADD_TER  U7 1 "RESET"
+.TER      R6 2 
+          R5 2 
+
+.ADD_TER  U1 23 "SPI_CLK"
+.TER      U4 5 
+
+.ADD_TER  U1 20 "SPI_CS"
+.TER      U4 6 
+
+.ADD_TER  U1 22 "SPI_MISO"
+.TER      U4 4 
+
+.ADD_TER  U1 21 "SPI_MOSI"
+.TER      U4 3 
+
+.ADD_TER  U1 15 "VCC_5V"
+.TER      U5 3 
+          C4 2 
+          R9 1 
+          U8 2 
+          DS1 1 
+
+.END
