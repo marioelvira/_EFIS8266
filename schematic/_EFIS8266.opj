@@ -1,6 +1,6 @@
 (ExpressProject "_EFIS8266"
   (ProjectVersion "19981106")
-  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[02/25/21]")
+  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[03/07/21]")
   (ProjectType "PCB")
   (Folder "Design Resources"
     (Folder "Library")
@@ -42,7 +42,8 @@
     (Annotate_type "Default")
     (width_pages "100")
     (width_start "80")
-    (width_End "80"))
+    (width_End "80")
+    (Display_Online_DRC_Results "FALSE"))
   (Folder "Layout")
   (Folder "Outputs"
     (File ".\_efis8266.net"
@@ -61,35 +62,19 @@
   (GlobalState
     (FileView
       (Path "Design Resources")
-      (Path "Design Resources" ".\_efis8266.dsn")
-      (Path "Design Resources" ".\_efis8266.dsn" "SCHEMATIC1")
+      (Path "Design Resources"
+         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn")
+      (Path "Design Resources"
+         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn"
+         "SCHEMATIC1")
       (Path "Outputs")
-      (Select "Design Resources" ".\_efis8266.dsn"))
+      (Select "Design Resources"
+         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -1 -1 0 200 0 693"))
-      (Tab 0))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 5 24 5 1674 24 711")
-        (Scroll "-333 0")
-        (Zoom "100")
-        (Occurrence "/"))
-      (Path "D:\_INFORMACION\_VARIOS\__GITUB\_EFIS8266\SCHEMATIC\_EFIS8266.DSN")
-      (Schematic "SCHEMATIC1")
-      (Page "02. POWER"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 5 24 5 1674 24 711")
-        (Scroll "-333 0")
-        (Zoom "100")
-        (Occurrence "/"))
-      (Path "D:\_INFORMACION\_VARIOS\__GITUB\_EFIS8266\SCHEMATIC\_EFIS8266.DSN")
-      (Schematic "SCHEMATIC1")
-      (Page "01. MAIN")))
+        (Placement "44 0 1 -1 -1 -1 -1 0 200 0 571"))
+      (Tab 0)))
   (MPSSessionName "mario.elvira")
   (ISPCBBASICLICENSE "false"))
