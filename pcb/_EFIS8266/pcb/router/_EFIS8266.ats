@@ -7,14 +7,20 @@ attr	Component	"EXT1"
 attr	Component	"J2"
 	(	"plc_height"	"3.00000"	)
 
-attr	Component	"R4"
+attr	Component	"R8"
 	(	"plc_height"	"2.00000"	)
 
 attr	Component	"RTC"
 	(	"plc_height"	"3.00000"	)
 
-attr	Component	"CJMCU280"
+attr	Component	"ESP8266"
 	(	"plc_height"	"3.00000"	)
+
+attr	Component	"EXT2"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"R2"
+	(	"plc_height"	"2.00000"	)
 
 attr	Component	"L5V"
 	(	"plc_height"	"2.00000"	)
@@ -22,48 +28,51 @@ attr	Component	"L5V"
 attr	Component	"L3V3"
 	(	"plc_height"	"2.00000"	)
 
-attr	Component	"R2"
+attr	Component	"R3"
 	(	"plc_height"	"2.00000"	)
 
 attr	Component	"USDCARD"
 	(	"plc_height"	"3.00000"	)
 
-attr	Component	"R3"
-	(	"plc_height"	"2.00000"	)
-
-attr	Component	"J3"
-	(	"plc_height"	"3.00000"	)
-
-attr	Component	"ESP8266"
-	(	"plc_height"	"3.00000"	)
-
-attr	Component	"XGZP6897A"
-	(	"plc_height"	"3.00000"	)
-
-attr	Component	"C1"
+attr	Component	"R7"
 	(	"plc_height"	"2.00000"	)
 
 attr	Component	"BNO055"
 	(	"plc_height"	"3.00000"	)
 
-attr	Component	"J1"
+attr	Component	"J3"
 	(	"plc_height"	"3.00000"	)
+
+attr	Component	"C1"
+	(	"plc_height"	"2.00000"	)
 
 attr	Component	"WIFI"
 	(	"plc_height"	"2.00000"	)
 
+attr	Component	"CJMCU280"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"XGZP6897A"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"GYADS1115"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"J1"
+	(	"plc_height"	"3.00000"	)
+
+attr	Component	"J4"
+	(	"plc_height"	"3.00000"	)
+
 attr	Component	"R16"
 	(	"plc_height"	"2.00000"	)
 
-attr	Component	"EXT2"
+attr	Component	"J5"
 	(	"plc_height"	"3.00000"	)
 
 attr	Component	"R15"
 	(	"plc_height"	"2.00000"	)
 
-attr	Component	"R7"
-	(	"plc_height"	"2.00000"	)
-
-attr	Component	"R8"
+attr	Component	"R4"
 	(	"plc_height"	"2.00000"	)
 

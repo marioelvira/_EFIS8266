@@ -1,6 +1,6 @@
 (ExpressProject "_EFIS8266"
   (ProjectVersion "19981106")
-  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[03/07/21]")
+  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[03/11/21]")
   (ProjectType "PCB")
   (Folder "Design Resources"
     (Folder "Library")
@@ -62,14 +62,10 @@
   (GlobalState
     (FileView
       (Path "Design Resources")
-      (Path "Design Resources"
-         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn")
-      (Path "Design Resources"
-         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn"
-         "SCHEMATIC1")
+      (Path "Design Resources" ".\_efis8266.dsn")
+      (Path "Design Resources" ".\_efis8266.dsn" "SCHEMATIC1")
       (Path "Outputs")
-      (Select "Design Resources"
-         "d:\_informacion\_varios\__gitub\_efis8266\schematic\_efis8266.dsn"))
+      (Select "Design Resources" ".\_efis8266.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")

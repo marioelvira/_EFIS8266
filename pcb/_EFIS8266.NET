@@ -6,19 +6,51 @@
 
 .ADD_COM BNO055 "BNO055"
 .ADD_COM C1 "0805_"
+.ADD_COM C2 "0603_"
+.ADD_COM C3 "0603_"
+.ADD_COM C4 "0603_"
+.ADD_COM C5 "0603_"
 .ADD_COM CJMCU280 "CJMCU-280"
+.ADD_COM D1 "SMA-2"
+.ADD_COM D2 "SMA-2"
+.ADD_COM D3 "SMA-2"
+.ADD_COM D4 "SMA-2"
 .ADD_COM ESP8266 "ESP8266_Lolin"
 .ADD_COM EXT1 "TIRA_8_PINES"
 .ADD_COM EXT2 "TIRA_8_PINES"
+.ADD_COM GYADS1115 "TIRA_10_PINES"
 .ADD_COM J1 "CON4-3.5MM"
 .ADD_COM J2 "CON4-3.5MM"
 .ADD_COM J3 "CON4-3.5MM"
+.ADD_COM J4 "CON4-3.5MM"
+.ADD_COM J5 "CON4-3.5MM"
 .ADD_COM L3V3 "0805_P"
 .ADD_COM L5V "0805_P"
 .ADD_COM R15 "0805_"
 .ADD_COM R16 "0805_"
+.ADD_COM R17 "0603_"
+.ADD_COM R18 "0603_"
+.ADD_COM R19 "0603_"
 .ADD_COM R2 "0805_"
+.ADD_COM R20 "0603_"
+.ADD_COM R21 "0603_"
+.ADD_COM R22 "0603_"
+.ADD_COM R23 "0603_"
+.ADD_COM R24 "0603_"
+.ADD_COM R25 "0603_"
+.ADD_COM R26 "0603_"
+.ADD_COM R27 "0603_"
+.ADD_COM R28 "0603_"
+.ADD_COM R29 "0603_"
 .ADD_COM R3 "0805_"
+.ADD_COM R30 "0603_"
+.ADD_COM R31 "0603_"
+.ADD_COM R32 "0603_"
+.ADD_COM R33 "0603_"
+.ADD_COM R34 "0603_"
+.ADD_COM R35 "0603_"
+.ADD_COM R36 "0603_"
+.ADD_COM R37 "0603_"
 .ADD_COM R4 "0805_"
 .ADD_COM R7 "0805_"
 .ADD_COM R8 "0805_"
@@ -40,9 +72,48 @@
           R4 2 
           R3 2 
           J2 1 
-          EXT1 7 
+          EXT1 8 
+          R18 1 
+          GYADS1115 10 
+          R25 2 
 
-.ADD_TER  R7 1 "A0"
+.ADD_TER  R21 1 "A0"
+.TER      C2 1 
+          R20 2 
+          GYADS1115 1 
+
+.ADD_TER  D1 2 "A0_IN"
+.TER      R19 1 
+          J4 1 
+
+.ADD_TER  GYADS1115 2 "A1"
+.TER      R27 2 
+          C3 1 
+          R28 1 
+
+.ADD_TER  J4 3 "A1_IN"
+.TER      R26 1 
+          D2 2 
+
+.ADD_TER  GYADS1115 3 "A2"
+.TER      C5 1 
+          R33 2 
+          R35 1 
+
+.ADD_TER  J5 1 "A2_IN"
+.TER      D4 2 
+          R32 1 
+
+.ADD_TER  GYADS1115 4 "A3"
+.TER      R31 2 
+          R34 1 
+          C4 1 
+
+.ADD_TER  J5 3 "A3_IN"
+.TER      R30 1 
+          D3 2 
+
+.ADD_TER  R7 1 "AIR"
 .TER      R8 2 
           C1 1 
           ESP8266 1 
@@ -69,6 +140,25 @@
           J2 4 
           J3 4 
           EXT1 1 
+          D1 1 
+          C2 2 
+          R24 2 
+          GYADS1115 9 
+          R22 2 
+          R23 2 
+          J4 2 
+          J4 4 
+          J5 2 
+          J5 4 
+          D2 1 
+          C3 2 
+          R29 2 
+          D4 1 
+          C5 2 
+          R37 2 
+          D3 1 
+          C4 2 
+          R36 2 
 
 .ADD_TER  ESP8266 18 "GPIO1"
 .TER      J3 1 
@@ -96,6 +186,7 @@
           ESP8266 29 
           R3 1 
           EXT2 3 
+          GYADS1115 8 
 
 .ADD_TER  BNO055 4 "I2C_SDA"
 .TER      CJMCU280 3 
@@ -103,9 +194,14 @@
           ESP8266 28 
           R4 1 
           EXT2 2 
+          GYADS1115 7 
 
 .ADD_TER  ESP8266 26 "LED_WIFI"
 .TER      WIFI 1 
+
+.ADD_TER  XGZP6897A 3 "N10788"
+.TER      R17 2 
+          R18 2 
 
 .ADD_TER  XGZP6897A 2 "N11091"
 .TER      R7 2 
@@ -118,6 +214,37 @@
 
 .ADD_TER  R2 2 "N167775241"
 .TER      WIFI 2 
+
+.ADD_TER  R19 2 "N16784087"
+.TER      R20 1 
+
+.ADD_TER  R21 2 "N16784117"
+.TER      R24 1 
+
+.ADD_TER  GYADS1115 5 "N167843632"
+.TER      R23 1 
+
+.ADD_TER  GYADS1115 6 "N16784401"
+.TER      R22 1 
+          R25 1 
+
+.ADD_TER  R26 2 "N16785562"
+.TER      R27 1 
+
+.ADD_TER  R29 1 "N16785601"
+.TER      R28 2 
+
+.ADD_TER  R32 2 "N16785828"
+.TER      R33 1 
+
+.ADD_TER  R37 1 "N16785867"
+.TER      R35 2 
+
+.ADD_TER  R30 2 "N16786381"
+.TER      R31 1 
+
+.ADD_TER  R34 2 "N16786420"
+.TER      R36 1 
 
 .ADD_TER  USDCARD 5 "SPI_CLK"
 .TER      ESP8266 23 
@@ -135,10 +262,10 @@
 .TER      ESP8266 21 
           EXT2 6 
 
-.ADD_TER  XGZP6897A 3 "VCC_5V"
-.TER      L5V 1 
-          J1 1 
+.ADD_TER  L5V 1 "VCC_5V"
+.TER      J1 1 
           ESP8266 15 
-          EXT1 8 
+          EXT1 7 
+          R17 1 
 
 .END

@@ -13,7 +13,7 @@ autoneck             no
 move_comp            yes
 effort               10
 width_type	typed
-width_val            40000
+width_val            60000
 angle                45
 passes               6
 spiviaseparation     0
@@ -172,7 +172,7 @@ default_layer_pair_colour	colour_16	invis	colour_16	vis
 1-4	colour_16	invis	colour_3	vis
 
 .window
-1260822 6271738 7746401 9366566
+-7071018 -359934 15813137 10560072
 
 .debug
 break	none
@@ -292,77 +292,77 @@ testpCentreSpace     0
 testpUsablePadsList
 
 .attribs
-GROUP	PIN_PAIR	no
-net_width
-net_opt_width
-GROUP	DIFFERENTIAL_PAIR	no
-GROUP	TEARDROP	no
-tear_length
-tear_width
-tear_angle
-tear_offset
-GROUP	PAD_CODE	no
-pin_neck_width
-pad_backoff
-teargenrule
-drill_class
-GROUP	MATERIAL	no
-GROUP	LAYER	no
-lay_embed
-lay_thickness
-lay_ppp
-lay_mixed
-GROUP	PIN_CLASS	no
-GROUP	AREA	no
-space_any_any
-space_trk_trk
-space_trk_via
-space_trk_internalvia
-GROUP	PART_PIN	no
-pin_swap
-pin_exit_dirs
-ppp_pad_relief
-ppp_con_width
-GROUP	PART	no
-ppp_pad_relief
-ppp_con_width
-ppp_clearance
-Package
-GROUP	COMPONENT	no
-ppp_pad_relief
-ppp_con_width
-ppp_clearance
-plc_areas
-GROUP	TEMPLATE	no
-ppp_con_width
-ppp_clearance
-ppp_pad_relief
-ppp_via_relief
-GROUP	BOARD	no
-ppp_con_width
-ppp_clearance
-ppp_pad_relief
-ppp_via_relief
-GROUP	SPACING	no
-space_any_any
-space_trk_trk
-space_trk_via
-space_trk_internalvia
-GROUP	NET_CLASS	no
-space_any_any
-space_trk_trk
-space_trk_via
-space_trk_internalvia
-GROUP	PIN	no
-pin_routing
-pin_swap
-pin_test
-pin_neck_width
 GROUP	NET	yes
 net_class
 spacing_class
 net_testpoints
 net_width
+GROUP	PIN	no
+pin_routing
+pin_swap
+pin_test
+pin_neck_width
+GROUP	NET_CLASS	no
+space_any_any
+space_trk_trk
+space_trk_via
+space_trk_internalvia
+GROUP	SPACING	no
+space_any_any
+space_trk_trk
+space_trk_via
+space_trk_internalvia
+GROUP	BOARD	no
+ppp_con_width
+ppp_clearance
+ppp_pad_relief
+ppp_via_relief
+GROUP	TEMPLATE	no
+ppp_con_width
+ppp_clearance
+ppp_pad_relief
+ppp_via_relief
+GROUP	COMPONENT	no
+ppp_pad_relief
+ppp_con_width
+ppp_clearance
+plc_areas
+GROUP	PART	no
+ppp_pad_relief
+ppp_con_width
+ppp_clearance
+Package
+GROUP	PART_PIN	no
+pin_swap
+pin_exit_dirs
+ppp_pad_relief
+ppp_con_width
+GROUP	AREA	no
+space_any_any
+space_trk_trk
+space_trk_via
+space_trk_internalvia
+GROUP	PIN_CLASS	no
+GROUP	LAYER	no
+lay_embed
+lay_thickness
+lay_ppp
+lay_mixed
+GROUP	MATERIAL	no
+GROUP	PAD_CODE	no
+pin_neck_width
+pad_backoff
+teargenrule
+drill_class
+GROUP	TEARDROP	no
+tear_length
+tear_width
+tear_angle
+tear_offset
+GROUP	DIFFERENTIAL_PAIR	no
+GROUP	PIN_PAIR	no
+net_width
+net_opt_width
 hidespacing	yes
 .attribs_end
 
