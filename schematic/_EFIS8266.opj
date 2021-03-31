@@ -1,6 +1,6 @@
 (ExpressProject "_EFIS8266"
   (ProjectVersion "19981106")
-  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[03/11/21]")
+  (SoftwareVersion "17.4-2019 P001 (3823098) [10/7/2019]-[03/31/21]")
   (ProjectType "PCB")
   (Folder "Design Resources"
     (Folder "Library")
@@ -70,7 +70,7 @@
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -1 -1 0 200 0 571"))
+        (Placement "44 0 1 -1 -1 -1 -1 0 264 0 857"))
       (Tab 0)))
   (MPSSessionName "mario.elvira")
   (ISPCBBASICLICENSE "false"))
