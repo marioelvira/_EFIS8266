@@ -131,6 +131,6 @@ function frefreshStatus()
 
 		});
 			
-	}, 100);
+	}, 750);
 }
 

@@ -94,6 +94,9 @@ void _DLoggerLoop(void)
           #endif
           dLoggerFileRecordSample();
           dLoggerResetSample();
+          #if (_DLOGGER_SERIAL_DEBUG_ == 1)
+          Serial.println("Datalogger sample reseted...");
+          #endif
         }
         
         dLoggerPreviousTime = dLoggerCurrentTime;
@@ -112,6 +115,8 @@ void dLoggerResetSample (void)
   dLgPitch = 0;
   dLiGforce = 0;
   dLiBall = 0;
+
+  dLoggerNumberOfSamples = 0;
 }
 
 void dLoggerAddSample (void)
@@ -160,7 +165,15 @@ void dLoggerFileRecordHearder (void)
 }
 
 void dLoggerFileRecordSample (void)
-{ 
+{
+  if (dLoggerNumberOfSamples == 0)
+  {
+    #if (_DLOGGER_SERIAL_DEBUG_ == 1)
+    Serial.println("Nothing lo LOG...");
+    #endif
+    return;
+  }
+    
   dLAltimeter = dLAltimeter/dLoggerNumberOfSamples;
   dLAirSpeed = dLAirSpeed/dLoggerNumberOfSamples;
   dLVario = dLVario/dLoggerNumberOfSamples;

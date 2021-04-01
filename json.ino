@@ -15,6 +15,10 @@ void _jsonAltCfg()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/altimCfg.json");
+  #endif
 }
 
 void _jsonAnemoCfg()
@@ -44,6 +48,10 @@ void _jsonAnemoCfg()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/anemoCfg.json");
+  #endif
 }
 
 void _jsonGyroCfg()
@@ -80,6 +88,10 @@ void _jsonGyroCfg()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/gyroCfg.json");
+  #endif
 }
 
 void _jsonUnitsCfg()
@@ -100,6 +112,10 @@ void _jsonUnitsCfg()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/unitsCfg.json");
+  #endif
 }
 
 void _jsonNetworkCfg()
@@ -128,6 +144,10 @@ void _jsonNetworkCfg()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/networkCfg.json");
+  #endif
 }
 
 ////////////
@@ -153,6 +173,10 @@ void _jsonSystemStatus()
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+  
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/systemStatus.json");
+  #endif
 }
 
 void _jsonAnemoStatus()
@@ -175,6 +199,10 @@ void _jsonAnemoStatus()
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/anemoStatus.json");
+  #endif
 }
 
 void _jsonAltStatus()
@@ -223,6 +251,10 @@ void _jsonAltStatus()
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/altimStatus.json");
+  #endif
 }
 
 void _jsonGyroStatus()
@@ -284,6 +316,10 @@ void _jsonGyroStatus()
   
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/gyroStatus.json");
+  #endif
 }
 
 // Json data main
@@ -339,7 +375,7 @@ void _jsonDATA()
   json = json + ",";
 
   #if (_USE_RTC_ == 1)
-  json = json + "{ \"param\":\"date\", \"value\":\"" + RtcDateStr + " " + RtcTimeStr+ "\" }";
+  json = json + "{ \"param\":\"date\", \"value\":\"" + RtcDateStr + " " + RtcTimeStr + "\" }";
   #else
   json = json + "{ \"param\":\"date\", \"value\":\"" + String(timeHour) + " : " + String(timeMin) + " : " + String(timeSec) + "\" }";
   #endif
@@ -351,6 +387,10 @@ void _jsonDATA()
 
   httpServer.sendHeader("Access-Control-Allow-Origin","*");
   httpServer.send (200, "application/json", json);
+
+  #if (_HTTP_SERIAL_DEBUG_ == 1)
+  Serial.println("/data.json");
+  #endif
 
   timeJSONMilisec = timeMilisec;
 }

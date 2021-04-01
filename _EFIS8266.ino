@@ -3,19 +3,20 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 
+#include <RtcDS3231.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <SD.h>
-#include <Adafruit_BME280.h>
 
 #include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
 #include <Adafruit_BNO055.h>
+#include <Adafruit_ADS1X15.h>
 #include <utility/imumaths.h>
-
-#include <RtcDS3231.h>
 
 #include "main.h"
 
+#include "adci2c.h"
 #include "airspeed.h"
 #include "altimeter.h"
 #include "e2prom.h"
@@ -141,7 +142,7 @@ uint8_t                   system_status, system_selftest, system_error;
 uint8_t                   sys, gyro, accel, mag;
 
 // I2C device address (by default address is 0x29 or 0x28)
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x29);
+Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO_I2C_ADDRESS);
 
 int gMag, gRoll, gPitch;
 String sRoll;
@@ -208,6 +209,18 @@ float VarioPreviousAtlitude;
 unsigned long VarioCurrentTime = millis();
 unsigned long VarioPreviousTime = 0;
 
+/////////////
+// ADC I2C //
+/////////////
+String adsInfo;
+int    adsNConnec;
+
+unsigned long adsTickReconnect;
+int           adsStatus;
+
+Adafruit_ADS1015 ads1015;           // Default address: 0x48
+//Adafruit_ADS1115 ads1115(0x49);   // Address: 0x49
+
 ///////////
 // Units //
 ///////////
@@ -228,12 +241,12 @@ String        sdFileName;
 ////////////////
 // Datalogger //
 ////////////////
-int dLoggerStatus;
-int dloogerStart;
-String dLoggerString = "";
+int           dLoggerStatus;
+int           dloogerStart;
+String        dLoggerString = "";
 unsigned long dLoggerCurrentTime = millis();
 unsigned long dLoggerPreviousTime = 0;
-int dLoggerNumberOfSamples = 0;
+int           dLoggerNumberOfSamples = 0;
 
 int dLoggerSecTick;
 int dLoggerSampleRateSec = 10;  // TODO E2PROM
@@ -277,6 +290,9 @@ void setup(void)
 
   // Vario setup
   _VarioSetup();
+
+  // ADC setup
+  _ADCI2CSetup();
   
   // Wi-Fi setup
   _WifiSetup();
@@ -364,6 +380,7 @@ void loop()
   _AirspeedLoop();
   _AltimeterLoop();
   _VarioLoop();
+  _ADCI2CLoop();
   _WifiLoop();
   _WifiLedLoop();
   _SDLoop();

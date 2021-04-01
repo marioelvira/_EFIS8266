@@ -6,8 +6,7 @@ void _AirspeedSetup(void)
 {
   airInfo = "";
 
-  // TODO read form E2PROM
-  AirPressure = 0;  
+  AirPressure = 0;
   AirInValue = 0;
 
   for (int i = 0; i < AIR_ARRAY_SIZE; i++)

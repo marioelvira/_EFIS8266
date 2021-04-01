@@ -39,8 +39,9 @@ void _SDLoop(void)
     case SDCARD_DIRECTORY:
     
       sdFile = SD.open("/");
-      printDirectory(sdFile, 0);
+
       #if (_SDCARD_SERIAL_DEBUG_ == 1)
+      printDirectory(sdFile, 0);
       Serial.println("SD Directory detected...");
       #endif
       
@@ -48,7 +49,7 @@ void _SDLoop(void)
       break;
 
     case SDCARD_SAVERECORD:
-      if (sdSaveRecord(sdFile, dLoggerString, sdFileName) == 0)
+      if ((sdFile, dLoggerString, sdFileName) == 0)
       {
         sdCounter ++;
         sdStatus = SDCARD_DETECTED;

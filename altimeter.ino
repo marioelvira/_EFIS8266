@@ -21,6 +21,7 @@ void _AltimeterLoop(void)
    switch (altStatus)
   {
     case ALT_DETECTION:
+      //if (!bme.begin(BNE_I2C_ADDRESS))
       if (!bme.begin())
       {
         #if (_ALT_SERIAL_DEBUG_ == 1)
