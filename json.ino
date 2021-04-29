@@ -260,27 +260,10 @@ void _jsonAltStatus()
 void _jsonGyroStatus()
 {
   String json= "";
-  String jsonGyroStatus = "...";
-
-  switch (gyroStatus)
-  {
-    case GYRO_DETECTION:
-      jsonGyroStatus = "Detecting..."; break;
-    case GYRO_DETECTED:
-      jsonGyroStatus = "Detected"; break;
-    case GYRO_CALIBRATED:
-      jsonGyroStatus = "Calibrated"; break;
-    case GYRO_IN_CALIBRATION:
-      jsonGyroStatus = "In Calibration"; break;
-    case GYRO_WORKING:
-      jsonGyroStatus = "Working"; break;
-    case GYRO_NOT_DETECTED:
-      jsonGyroStatus = "Not Detected"; break;
-  }
 
   json = "[";
     
-  json = json + "{ \"param\":\"gyroStatus\", \"value\":\"" + jsonGyroStatus + "\" }";
+  json = json + "{ \"param\":\"gyroStatus\", \"value\":\"" + gyroStatusStr + "\" }";
   json = json + ",";
   json = json + "{ \"param\":\"system_status\", \"value\":" + String(system_status) + " }";
   json = json + ",";

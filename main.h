@@ -20,7 +20,7 @@ extern "C" {
 #define _ALT_SERIAL_DEBUG_      0
 #define _DLOGGER_SERIAL_DEBUG_  1
 #define _EEPROM_SERIAL_DEBUG_   1
-#define _GYRO_SERIAL_DEBUG_     0
+#define _GYRO_SERIAL_DEBUG_     1
 #define _HTTP_SERIAL_DEBUG_     1
 #define _IN_SERIAL_DEBUG_       0
 #define _MAIN_SERIAL_DEBUG_     0

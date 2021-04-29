@@ -13,10 +13,9 @@ typedef struct
 
 #define GYRO_DETECTION              0
 #define GYRO_DETECTED               1
-#define GYRO_CALIBRATED             2
-#define GYRO_IN_CALIBRATION         3
-#define GYRO_WORKING                4
-#define GYRO_NOT_DETECTED           5
+#define GYRO_IN_CALIB               2
+#define GYRO_WORKING                3
+#define GYRO_WAIT_MS                4
 
 #define GYRO_SAMPLERATE_DELAY_MS    100
 

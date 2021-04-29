@@ -130,9 +130,12 @@ int timeHour = 0;
 // Gyro //
 //////////
 String                    gyroInfo;
+String                    gyroStatusStr = "...";
 int                       gyroNConnec;
-unsigned long             gyroTickReconnect;
 int                       gyroStatus;
+int                       gyroNextStatus;
+unsigned long             gyroTickStatus;
+unsigned long             gyroTicksWait;
 GyroData                  gyroData;
 adafruit_bno055_offsets_t gyroCalVal;
 sensor_t                  gyroSensor;
