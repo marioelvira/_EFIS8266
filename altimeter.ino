@@ -9,6 +9,7 @@ void _AltimeterSetup(void)
   altNConnec = 0;
 
   altInfo = "";
+  altStatusStr = "...";
 
   Altitude_m = 0;
 }
@@ -24,15 +25,21 @@ void _AltimeterLoop(void)
       //if (!bme.begin(BNE_I2C_ADDRESS))
       if (!bme.begin())
       {
+        altStatusStr = "Detecting...";
+        
         #if (_ALT_SERIAL_DEBUG_ == 1)
-        Serial.println(F("Could not find a valid BME280 sensor, check wiring!"));
+        Serial.println("Alt BME280 Not detected ... Check your wiring or I2C ADDR!");
         #endif
 
-        altStatus = ALT_NOT_DETECTED;
-        altTickReconnect = millis();
+        altStatus = ALT_WAIT_MS;
+        altNextStatus = ALT_DETECTION;
+        altTicksWait = 1000;
+        altTickStatus = millis();
       }
       else
       {
+        altStatusStr = "Detected...";
+        
         #if (_ALT_SERIAL_DEBUG_ == 1)
         Serial.println("Alt BME280 detected...");
         #endif
@@ -58,9 +65,13 @@ void _AltimeterLoop(void)
       
     case ALT_WORKING:
 
+      altStatusStr = "Working??...";
+
       // Porsia...
       if (bme.isReadingCalibration())
        break;
+
+      altStatusStr = "Working...";
 
       bme_temp->getEvent(&temp_event);
       bme_pressure->getEvent(&pressure_event);
@@ -83,13 +94,16 @@ void _AltimeterLoop(void)
       #endif
 
       // Wait the specified delay before requesting new data
-      delay(ALT_SAMPLERATE_DELAY_MS);
+      altStatus = ALT_WAIT_MS;
+      altNextStatus = ALT_WORKING;
+      altTicksWait = 100;
+      altTickStatus = millis();
     
       break;
       
-    case ALT_NOT_DETECTED:
-      if (millis() - altTickReconnect >= 1000)
-        altStatus = ALT_DETECTION;
+    case ALT_WAIT_MS:
+      if (millis() - altTickStatus >= altTicksWait)
+        altStatus = altNextStatus;
          
       break;
   }

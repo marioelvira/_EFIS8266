@@ -13,9 +13,9 @@ typedef struct
 #define ALT_DETECTION      0
 #define ALT_DETECTED       1
 #define ALT_WORKING        2
-#define ALT_NOT_DETECTED   3
+#define ALT_WAIT_MS        3
 
-#define ALT_SAMPLERATE_DELAY_MS    100
+//#define ALT_SAMPLERATE_DELAY_MS    100
 
 #define QNH_ISA           1023
 

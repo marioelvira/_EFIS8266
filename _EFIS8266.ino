@@ -161,9 +161,13 @@ float     Altitude_m;
 
 sensor_t      altSensor;
 String        altInfo;
-int           altStatus;
+String        altStatusStr = "...";
 int           altNConnec;
-unsigned long altTickReconnect;
+int           altStatus;
+int           altNextStatus;
+
+unsigned long   altTicksWait;
+unsigned long   altTickStatus;
 
 AltData   altData;
 

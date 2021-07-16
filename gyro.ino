@@ -30,7 +30,7 @@ void _GyroLoop()
         gyroStatusStr = "Detecting...";
         
         #if (_GYRO_SERIAL_DEBUG_ == 1)
-        Serial.print("Gyro BNO055 Not detected ... Check your wiring or I2C ADDR!");
+        Serial.println("Gyro BNO055 Not detected ... Check your wiring or I2C ADDR!");
         #endif
         gyroData.detected = 0;
         
@@ -117,6 +117,12 @@ void _GyroLoop()
         
         // Wait the specified delay before requesting new data
         delay(GYRO_SAMPLERATE_DELAY_MS);
+        /*
+        gyroStatus = GYRO_WAIT_MS;
+        gyroNextStatus = GYRO_IN_CALIB;
+        gyroTicksWait = 500;
+        gyroTickStatus = millis();
+        */
       }
       else
       {

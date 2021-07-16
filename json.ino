@@ -208,23 +208,11 @@ void _jsonAnemoStatus()
 void _jsonAltStatus()
 {
   String json= "";
-  String jsonAltStatus = "...";
-
-  switch (altStatus)
-  {
-    case ALT_DETECTION:
-      jsonAltStatus = "Detecting..."; break;
-    case ALT_DETECTED:
-      jsonAltStatus = "Detected"; break;
-    case ALT_WORKING:
-      jsonAltStatus = "Working"; break;
-    case ALT_NOT_DETECTED:
-      jsonAltStatus = "Not Detected"; break;
-  }
 
   json = "[";
     
-  json = json + "{ \"param\":\"altStatus\", \"value\":\"" + jsonAltStatus + "\" }";
+  json = json + "{ \"param\":\"altStatus\", \"value\":\"" + altStatusStr + "\" }";
+    
   json = json + ",";
   if (units.temp == TEMP_KELVIN)
     json = json + "{ \"param\":\"alt_temp\", \"value\":\"" + String(temp_event.temperature + 273,15) + " K\" }";

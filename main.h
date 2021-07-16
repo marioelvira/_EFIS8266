@@ -17,8 +17,8 @@ extern "C" {
 
 #define _ADCI2C_SERIAL_DEBUG_   0
 #define _AIR_SERIAL_DEBUG_      0
-#define _ALT_SERIAL_DEBUG_      0
-#define _DLOGGER_SERIAL_DEBUG_  1
+#define _ALT_SERIAL_DEBUG_      1
+#define _DLOGGER_SERIAL_DEBUG_  0
 #define _EEPROM_SERIAL_DEBUG_   1
 #define _GYRO_SERIAL_DEBUG_     1
 #define _HTTP_SERIAL_DEBUG_     1
@@ -41,6 +41,16 @@ extern "C" {
 #define ADS_I2C_ADDRESS   0x48
 #define RTC_I2C_ADDRESS   0x68
 #define BNE_I2C_ADDRESS   0x77
+
+/*
+08:26:31.345 -> Scanning...
+08:26:31.345 -> I2C device found at address 0x29  // BNO_I2C_ADDRESS
+08:26:31.345 -> I2C device found at address 0x48  // ADS_I2C_ADDRESS
+08:26:31.379 -> I2C device found at address 0x57  // AT24C32_I2C_ADDRESS E2PORM
+08:26:31.379 -> I2C device found at address 0x68  // DS3231_I2C_ADDRESS  RTC
+08:26:31.379 -> I2C device found at address 0x76  // BNE_I2C_ADDRESS
+08:26:31.379 -> done
+*/
 
 #endif // _MAIN_H_
 
