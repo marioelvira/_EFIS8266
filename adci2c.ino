@@ -47,6 +47,8 @@ void _ADCI2CLoop(void)
 
     case ADS_WORKING:
 
+      delay(50); // 50 ms ??
+
       if (millis() - adsTickReconnect >= 1000)
       {
         adc0 = ads1015.readADC_SingleEnded(0);

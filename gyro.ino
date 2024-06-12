@@ -96,6 +96,8 @@ void _GyroLoop()
       break;
 
     case GYRO_IN_CALIB:
+
+      delay(50); // 50 ms ??
       
       bno.getEvent(&gyroEvent);
 
@@ -162,13 +164,15 @@ void _GyroLoop()
     case GYRO_WORKING:
 
       gyroStatusStr = "Working...";
+
+      delay(50); // 50 ms ??
     
       bno.getEvent(&gyroEvent);
 
       // Calculus
       _GyroCalculus();
-      
-      #if (_GYRO_SERIAL_DEBUG_ == 1)
+
+      #if (_GYRO_SERIAL_DEBUG_ == 1)     
       // Display calibration status
       _GyroSensorCalStatusSerialDebug();
 

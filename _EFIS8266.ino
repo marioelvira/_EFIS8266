@@ -387,7 +387,7 @@ void loop()
   _AirspeedLoop();
   _AltimeterLoop();
   _VarioLoop();
-  _ADCI2CLoop();
+  //_ADCI2CLoop();
   _WifiLoop();
   _WifiLedLoop();
   _SDLoop();
@@ -399,7 +399,7 @@ void loop()
     _HttpLoop();
   }
   
-  _TimeLoop();
+  //_TimeLoop();
   _ConfigLoop();
 
   #if (_USE_WDT_ == 1)

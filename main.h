@@ -40,7 +40,7 @@ extern "C" {
 #define BNO_I2C_ADDRESS   0x29
 #define ADS_I2C_ADDRESS   0x48
 #define RTC_I2C_ADDRESS   0x68
-#define BNE_I2C_ADDRESS   0x77
+#define BNE_I2C_ADDRESS   0x76
 
 /*
 08:26:31.345 -> Scanning...

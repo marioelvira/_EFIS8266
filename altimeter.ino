@@ -22,8 +22,9 @@ void _AltimeterLoop(void)
    switch (altStatus)
   {
     case ALT_DETECTION:
-      //if (!bme.begin(BNE_I2C_ADDRESS))
-      if (!bme.begin())
+
+      if (! bme.begin(BNE_I2C_ADDRESS, &Wire))
+      //if (!bme.begin())
       {
         altStatusStr = "Detecting...";
         
@@ -42,7 +43,16 @@ void _AltimeterLoop(void)
         
         #if (_ALT_SERIAL_DEBUG_ == 1)
         Serial.println("Alt BME280 detected...");
+        Serial.println("normal mode, 16x pressure / 2x temperature / 1x humidity oversampling,");
+        Serial.println("0.5ms standby period, filter 16x");
         #endif
+    
+        bme.setSampling(Adafruit_BME280::MODE_NORMAL,
+                        Adafruit_BME280::SAMPLING_X2,  // temperature
+                        Adafruit_BME280::SAMPLING_X16, // pressure
+                        Adafruit_BME280::SAMPLING_X1,  // humidity
+                        Adafruit_BME280::FILTER_X16,
+                        Adafruit_BME280::STANDBY_MS_0_5 );
 
         altStatus = ALT_DETECTED;
         altNConnec++;
@@ -73,6 +83,7 @@ void _AltimeterLoop(void)
 
       altStatusStr = "Working...";
 
+      delay(50); // 50 ms ??
       bme_temp->getEvent(&temp_event);
       bme_pressure->getEvent(&pressure_event);
       bme_humidity->getEvent(&humidity_event);
@@ -133,7 +144,10 @@ void _AltSensorDetails(void)
 
 void _FromQHN2Altitude (void)
 { 
-  Altitude_m = (float)T0_DIV_L * (1.0 - pow(((float)(pressure_event.pressure)/((float) altData.QNH)), LR_DIV_Mg));
+  if (pressure_event.pressure > 0)
+    Altitude_m = (float)T0_DIV_L * (1.0 - pow(((float)(pressure_event.pressure)/((float) altData.QNH)), LR_DIV_Mg));
+  else
+    Altitude_m = 0;
 
   if (units.alt == ALT_FEET)
     Altimeter = CONV_METERS_TO_FEET * Altitude_m;
